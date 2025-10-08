@@ -70,7 +70,7 @@
             <div class="row mb-2">
                 <div class="col-xl-6 mb-1">
                     <label class="form-label">
-                        Password (opsional) :
+                        Password (Opsional) :
                     </label>
                     <input type="password" 
                            name="password" 
