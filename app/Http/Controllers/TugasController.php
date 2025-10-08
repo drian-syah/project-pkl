@@ -134,7 +134,7 @@ class TugasController extends Controller
                 'jam' => now()->format('H.i.s'),
             );
             $pdf = Pdf::loadView('admin/tugas/pdf', $data);
-            return $pdf->setPaper('a4', 'landscape')->download('DataTugas_'.$filename.'.pdf');
+            return $pdf->setPaper('a4', 'landscape')->stream('DataTugas_'.$filename.'.pdf');
         } else {
             $data = array(
                 'tanggal' => now()->format('d-m-y'),
@@ -148,5 +148,7 @@ class TugasController extends Controller
 
        
     }
+
+  
 
 }
