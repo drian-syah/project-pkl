@@ -7,7 +7,9 @@
 
 <div class="card">
     <div class="card-header bg-primary">
-           
+        <a href="{{ route('tugas') }}" class="text-white">
+            <i class="fas fa-arrow-left mr-2"></i>
+            Kembali</a>
         </div>
         <div class="card-body">
 
@@ -72,10 +74,7 @@
                 @enderror
                 </div>
             </div>
-            <div class="d-flex justify-content-between">
-            <a href="{{ route('tugas') }}" class="btn btn-sm btn-secondary">
-                <i class="fas fa-arrow-left mr-2"></i>
-                Kembali</a>
+            <div class="d-flex">
             <button type="submit" class="btn btn-sm btn-primary mr-2">
                 <i class="fas fa-save"></i>
                 Simpan

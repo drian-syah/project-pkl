@@ -6,8 +6,8 @@
     {{ $title }}</h1>
 
 <div class="card">
-    <div class="card-header bg-warning">
-            <a href="{{ route('tugas') }}" class="btn btn-sm btn-success">
+    <div class="card-header bg-primary">
+            <a href="{{ route('tugas') }}" class="text-white">
                 <i class="fas fa-arrow-left mr-2"></i>
                 Kembali</a>
         </div>
