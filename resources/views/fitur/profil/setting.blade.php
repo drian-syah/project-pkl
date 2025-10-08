@@ -11,6 +11,10 @@
 
 <div class="card">
     <div class="card-header bg-primary">
+        <a href="{{ route('dashboard') }}" class="text-white">
+            <i class="fas fa-arrow-left mr-2"></i>
+            Kembali
+        </a>
        
     </div>
     <div class="card-body">
@@ -90,10 +94,7 @@
 
 
             <div class="d-flex justify-content-between">
-                <a href="{{ route('dashboard') }}" class="btn btn-sm btn-secondary">
-                    <i class="fas fa-arrow-left mr-2"></i>
-                    Kembali
-                </a>
+                
             <button type="submit" class="btn btn-sm btn-primary mr-2">
                 <i class="fas fa-edit"></i> Simpan
             </button>
