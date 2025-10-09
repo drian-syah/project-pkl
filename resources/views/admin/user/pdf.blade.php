@@ -126,8 +126,8 @@
         <div class="kop-teks">
             <h2><strong>PEMERINTAH KOTA CIREBON</strong></h2>
             <h3><strong>DINAS KOMUNIKASI INFORMATIKA DAN STATISTIK</strong></h3>
-            <p>Alamat: . Telp.</p>
-            <p>Website</p>
+            <p>Jalan DR. Sudarsono No 40, Kelurahan Kesambi, Kec Kesambi. Telp: 0231-8804620</p>
+            <p>Website: https://dkis.cirebonkota.go.id/</p>
         </div>
     </div>
     <hr class="tebal">
@@ -185,7 +185,7 @@
         <p>Mengetahui,</p>
         <p><strong>Kepala Dinas Komunikasi Informatika Dan Statistik</strong></p>
         <br><br><br>
-        <p><u><strong>Nama</strong></u></p>
+        <p><u><strong>Ma'ruf Nuryasa</strong></u></p>
         <p>NIP.</p>
     </div>
 </body>
