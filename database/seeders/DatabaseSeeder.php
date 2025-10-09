@@ -41,10 +41,10 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::create([
-            'nama' => 'Andhika Dimas Adhari',
-            'email' => 'dimas@gmail.com',
+            'nama' => 'Dhonan',
+            'email' => 'dhonan@gmail.com',
             'jabatan' => 'Karyawan',
-            'password' => Hash::make('123123123'),
+            'password' => Hash::make('Dhonan1256'),
             'is_tugas' => false,
         ]);
     }
