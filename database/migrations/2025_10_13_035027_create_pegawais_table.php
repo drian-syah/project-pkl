@@ -6,22 +6,54 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('pegawais', function (Blueprint $table) {
+        Schema::create('pegawai', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+
+            // Relasi ke users dan bidang
+            $table->foreignId('user_id')
+                ->nullable()
+                ->constrained('users')
+                ->nullOnDelete(); // ON DELETE SET NULL
+
+            $table->string('nip', 50)->unique();
+            $table->string('nama', 100);
+            $table->string('jabatan', 100)->nullable();
+
+            $table->foreignId('bidang_id')
+                ->nullable()
+                ->constrained('bidang')
+                ->nullOnDelete();
+
+            // Audit trail
+            $table->timestamp('created_date')->useCurrent();
+            $table->foreignId('created_id')
+                ->nullable()
+                ->constrained('users')
+                ->nullOnDelete();
+
+            $table->foreignId('updated_id')
+                ->nullable()
+                ->constrained('users')
+                ->nullOnDelete();
+
+            $table->timestamp('updated_date')->nullable();
+
+            $table->foreignId('deleted_id')
+                ->nullable()
+                ->constrained('users')
+                ->nullOnDelete();
+
+            $table->timestamp('deleted_date')->nullable();
+
+            $table->boolean('is_active')->default(true);
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('pegawais');
+        Schema::dropIfExists('pegawai');
     }
 };
+

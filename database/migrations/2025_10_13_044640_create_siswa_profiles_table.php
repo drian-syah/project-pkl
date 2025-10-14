@@ -6,22 +6,57 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('siswa_profiles', function (Blueprint $table) {
+        Schema::create('siswa_profile', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+
+            // Relasi ke tabel users
+            $table->foreignId('user_id')
+                ->nullable()
+                ->constrained('users')
+                ->nullOnDelete();
+
+            // Relasi ke pengajuan_pklmagang
+            $table->foreignId('pengajuan_id')
+                ->nullable()
+                ->constrained('pengajuan_pklmagang')
+                ->nullOnDelete();
+
+            $table->string('nama', 100);
+            $table->string('nisn', 30)->nullable();
+            $table->string('kelas', 50)->nullable();
+            $table->string('jurusan', 100)->nullable();
+            $table->string('foto', 255)->nullable();
+
+            // Kolom audit trail
+            $table->timestamp('created_date')->useCurrent();
+
+            $table->foreignId('created_id')
+                ->nullable()
+                ->constrained('users')
+                ->nullOnDelete();
+
+            $table->foreignId('updated_id')
+                ->nullable()
+                ->constrained('users')
+                ->nullOnDelete();
+
+            $table->timestamp('updated_date')->nullable();
+
+            $table->foreignId('deleted_id')
+                ->nullable()
+                ->constrained('users')
+                ->nullOnDelete();
+
+            $table->timestamp('deleted_date')->nullable();
+
+            $table->boolean('is_active')->default(true);
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('siswa_profiles');
+        Schema::dropIfExists('siswa_profile');
     }
 };
