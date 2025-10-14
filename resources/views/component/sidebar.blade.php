@@ -21,7 +21,7 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
             
-            @if (auth()->user()->jabatan == 'Admin')
+            @if (auth()->user()->role == 'Admin')
                 <!-- Heading -->
             <div class="sidebar-heading">
                 MENU ADMIN
@@ -48,7 +48,7 @@
             </div>
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item {{ $menuKaryawanTugas ?? '' }}">
+            <li class="nav-item {{ $menuPembimbingTugas ?? '' }}">
                 <a class="nav-link" href="{{ route('tugas') }}">
                     <i class="fas fa-fw fa-tasks"></i>
                     <span>Data Tugas</span></a>

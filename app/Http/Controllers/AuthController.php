@@ -7,6 +7,30 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+
+    public function showRegisterForm()
+    {
+        return view('auth.register');
+    }
+
+    public function register(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:100',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6|confirmed',
+        ]);
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'role' => 'siswa', // default role
+            'password' => Hash::make($request->password),
+        ]);
+
+        return redirect('/login')->with('success', 'Akun berhasil dibuat, silakan login.');
+    }
+
     public function login()
     {
         return view('auth/login');

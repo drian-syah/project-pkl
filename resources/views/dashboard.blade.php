@@ -6,7 +6,7 @@
 
     <div class="row">
 
-        @if (auth()->user()->jabatan== 'Admin')
+        @if (auth()->user()->role== 'Admin')
             <!-- Earnings (Monthly) Card Example -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-primary shadow h-100 py-2">
@@ -49,7 +49,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                 TOTAL KARYAWAN</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $jumlahKaryawan }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $jumlahPembimbing }}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-user fa-2x text-gray-300"></i>
@@ -94,7 +94,7 @@
         </div>
         @endif
 
-        @if (auth()->user()->jabatan == 'Karyawan' && auth()->user()->is_tugas == true)
+        @if (auth()->user()->role == 'Pembimbing' && auth()->user()->is_tugas == true)
         <div class="col-xl-6 col-md-6 mb-4">
             <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
@@ -117,7 +117,7 @@
         </div>
         @endif
 
-        @if (auth()->user()->jabatan == 'Karyawan' && auth()->user()->is_tugas == false)
+        @if (auth()->user()->role == 'Pembimbing' && auth()->user()->is_tugas == false)
         <div class="col-xl-6 col-md-6 mb-4">
             <div class="card border-left-danger shadow h-100 py-2">
                 <div class="card-body">

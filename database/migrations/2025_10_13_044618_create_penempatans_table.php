@@ -25,19 +25,29 @@ return new class extends Migration
             $table->unsignedBigInteger('bidang_id')->nullable();
             $table->foreign('bidang_id')
                   ->references('id')
-                  ->on('bidang')
+                  ->on('bidangs')
                   ->onDelete('cascade');
 
             $table->timestamp('created_date')->nullable();
-            $table->unsignedBigInteger('created_id')->nullable();
+            $table->foreignId('created_id')
+                ->nullable()
+                ->constrained('users')
+                ->nullOnDelete();
 
-            $table->unsignedBigInteger('updated_id')->nullable();
+            $table->foreignId('updated_id')
+                ->nullable()
+                ->constrained('users')
+                ->nullOnDelete();
             $table->timestamp('updated_date')->nullable();
 
-            $table->unsignedBigInteger('deleted_id')->nullable();
+            $table->foreignId('deleted_id')
+                ->nullable()
+                ->constrained('users')
+                ->nullOnDelete();
             $table->timestamp('deleted_date')->nullable();
 
             $table->boolean('is_active')->default(true);
+            $table->timestamps();
         });
     }
 

@@ -34,7 +34,7 @@
                         <th>No</th>
                         <th>Nama</th>
                         <th>Email</th>
-                        <th>Jabatan</th>
+                        <th>Role</th>
                         <th>Status</th>
                         <th><i class="fas fa-cog"></i></th>
                     </tr>
@@ -46,10 +46,10 @@
                             <td>{{ $item->nama }}</td>
                             <td>{{ $item->email }}</td>
                             <td class="text-center">
-                                @if ($item->jabatan == 'Admin')
-                                    <span class="badge badge-dark">{{ $item->jabatan }}</span>
+                                @if ($item->role == 'Admin')
+                                    <span class="badge badge-dark">{{ $item->role }}</span>
                                 @else
-                                    <span class="badge badge-info">{{ $item->jabatan }}</span>
+                                    <span class="badge badge-info">{{ $item->role }}</span>
                                 @endif
                             </td>
                             <td class="text-center">

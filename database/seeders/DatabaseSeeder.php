@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         User::create([
             'nama' => 'ProLight',
             'email' => 'aung@gmail.com',
-            'jabatan' => 'Admin',
+            'role' => 'Admin',
             'password' => Hash::make('ProLight1256'),
             'is_tugas' => false,
         ]);
@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
         User::create([
             'nama' => 'Tono',
             'email' => 'tonokaryawan@gmail.com',
-            'jabatan' => 'Karyawan',
+            'role' => 'Pembimbing',
             'password' => Hash::make('123123123'),
             'is_tugas' => false,
         ]);
@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
         User::create([
             'nama' => 'Bagus',
             'email' => 'baguskaryawan@gmail.com',
-            'jabatan' => 'Karyawan',
+            'role' => 'Siswa',
             'password' => Hash::make('123123123'),
             'is_tugas' => false,
         ]);
@@ -43,7 +43,7 @@ class DatabaseSeeder extends Seeder
         User::create([
             'nama' => 'Dhonan',
             'email' => 'dhonan@gmail.com',
-            'jabatan' => 'Karyawan',
+            'role' => 'Siswa',
             'password' => Hash::make('Dhonan1256'),
             'is_tugas' => false,
         ]);

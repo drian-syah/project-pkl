@@ -17,7 +17,7 @@ class UserController extends Controller
         $data = array(
             'title' => 'Data User',
             'menuAdminUser' => 'active',
-            'user' => User::orderBy('jabatan', 'asc')->get(),
+            'user' => User::orderBy('role', 'asc')->get(),
         );
         return view('admin/user/index', $data);
     }
@@ -36,13 +36,13 @@ class UserController extends Controller
         $request->validate([
             'nama'     => 'required',
             'email'    => 'required|unique:users,email',
-            'jabatan'  => 'required',
+            'role'  => 'required',
             'password' => ['required', 'confirmed', Password::min(8)->mixedCase(),],
         ],[
             'nama.required'     => 'Nama Tidak Boleh Kosong',
             'email.required'    => 'Email Tidak Boleh Kosong',
             'email.unique'      => 'Email Sudah Ada',
-            'jabatan.required'  => 'Jabatan Harus Dipilih',
+            'role.required'  => 'Status Anda Harus Dipilih',
             'password.required' => 'Password Tidak Boleh Kosong',
             'password.confirmed'=> 'Password Konfirmasi Tidak Sama',
             'password.min'      => 'Password Minimal 8 Karakter',
@@ -52,7 +52,7 @@ class UserController extends Controller
         $user = new User;
         $user->nama     = $request->nama;
         $user->email    = $request->email;
-        $user->jabatan  = $request->jabatan;
+        $user->role  = $request->role;
         $user->password = Hash::make($request->password);
         $user->is_tugas = false;
         $user->save();
@@ -75,13 +75,13 @@ class UserController extends Controller
         $request->validate([
             'nama'     => 'required',
             'email'    => 'required|unique:users,email,' .$id,
-            'jabatan'  => 'required',
+            'role'  => 'required',
             'password' => ['nullable', 'confirmed', Password::min(8)->mixedCase()],
         ],[
             'nama.required'     => 'Nama Tidak Boleh Kosong',
             'email.required'    => 'Email Tidak Boleh Kosong',
             'email.unique'      => 'Email Sudah Ada',
-            'jabatan.required'  => 'Jabatan Harus Dipilih',
+            'role.required'  => 'Status Anda Harus Dipilih',
             'password.required' => 'Password Tidak Boleh Kosong',
             'password.confirmed'=> 'Password Konfirmasi Tidak Sama',
             'password.min'      => 'Password Minimal 8 Karakter',
@@ -91,8 +91,8 @@ class UserController extends Controller
         $user = User::with('tugas')->findOrFail($id) ;
         $user->nama     = $request->nama;
         $user->email    = $request->email;
-        $user->jabatan  = $request->jabatan;
-        if ($request->jabatan == 'Admin') {
+        $user->role  = $request->role;
+        if ($request->role == 'Admin') {
             $user->is_tugas = false;
             $user->tugas()->delete();
         }

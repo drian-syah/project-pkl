@@ -11,6 +11,9 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
+Route::post('/register', [AuthController::class, 'register'])->name('register');
+
 Route::middleware('isLogin')->group(function(){
     // login 
 Route::get('login', [AuthController::class, 'login'])->name('login');

@@ -11,10 +11,10 @@ class DashboardController extends Controller
             "title" => "Dashboard",
             "menuDashboard" => "active",
             'jumlahUser' => User::count(),
-            'jumlahAdmin' => User::where('jabatan', 'Admin')->count(),
-            'jumlahKaryawan' => User::where('jabatan', 'Karyawan')->count(),
-            'jumlahDitugaskan' => User::where('Jabatan', 'Karyawan')->where('is_tugas', true)->count(),
-            'jumlahBelumDitugaskan' => User::where('Jabatan', 'Karyawan')->where('is_tugas', false)->count(),
+            'jumlahAdmin' => User::where('role', 'Admin')->count(),
+            'jumlahPembimbing' => User::where('role', 'Pembimbing')->count(),
+            'jumlahDitugaskan' => User::where('role', 'Karyawan')->where('is_tugas', true)->count(),
+            'jumlahBelumDitugaskan' => User::where('role', 'Karyawan')->where('is_tugas', false)->count(),
         );
         return view('dashboard', $data);   
     }

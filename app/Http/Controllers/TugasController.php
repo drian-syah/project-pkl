@@ -17,7 +17,7 @@ class TugasController extends Controller
     {
         $user = Auth::user();
 
-        if($user->jabatan=='Admin')
+        if($user->role=='Admin')
         {
             $data = array(
                 'title' => 'Data Tugas',
@@ -28,10 +28,10 @@ class TugasController extends Controller
         }else{
             $data = array(
                 'title' => 'Data Tugas',
-                'menuKaryawanTugas' => 'active',
+                'menuPembimbingTugas' => 'active',
                 'tugas' => Tugas::with('user')->where('user_id', $user->id)->first(),
             );
-            return view('karyawan.tugas.index', $data);
+            return view('pembimbing.tugas.index', $data);
         }
         
     }
@@ -41,7 +41,7 @@ class TugasController extends Controller
         $data = array(
             'title' => 'Tambah Data Tugas',
             'menuAdminTugas' => 'active',
-            'user' => User::where('jabatan', 'karyawan')->where('is_tugas', false)->get(),
+            'user' => User::where('role', 'pembimbing')->where('is_tugas', false)->get(),
         );
         return view('admin/tugas/create', $data);
     }
@@ -127,7 +127,7 @@ class TugasController extends Controller
         $user = Auth::user();
         $filename = now()->format('d-m-Y H.i.s');
 
-        if ($user->jabatan=='Admin') {
+        if ($user->role=='Admin') {
             $data = array(
                 'tugas' => Tugas::with('user')->get(),
                 'tanggal' => now()->format('d-m-y'),
@@ -141,7 +141,7 @@ class TugasController extends Controller
                 'jam' => now()->format('H.i.s'),
                 'tugas' => Tugas::with('user')->where('user_id', $user->id)->first(),
             );
-            $pdf = Pdf::loadView('karyawan/tugas/pdf', $data);
+            $pdf = Pdf::loadView('pembimbing/tugas/pdf', $data);
             return $pdf->setPaper('a4', 'potrait')->stream('DataTugas_'.$filename.'.pdf');
         }
         

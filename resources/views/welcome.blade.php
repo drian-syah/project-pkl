@@ -56,7 +56,7 @@
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-
+      
       @auth
       <a class="btn-getstarted" href="{{ route('dashboard') }}">Dashboard</a>
       @else
@@ -80,7 +80,7 @@
               @auth
               <a href="{{ route('dashboard') }}" class="btn-get-started">Dashboard</a>
               @else
-              <a href="{{ route('login') }}" class="btn-get-started">Login</a>
+              <a href="{{ route('register') }}" class="btn-get-started">Register</a>
               @endauth
             </div>
           </div>

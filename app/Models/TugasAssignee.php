@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class daily_report extends Model
+class TugasAssignee extends Model
 {
     //
 }

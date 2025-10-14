@@ -8,32 +8,26 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('pengajuan_pklmagang', function (Blueprint $table) {
+        Schema::create('pegawai', function (Blueprint $table) {
             $table->id();
 
-            $table->string('no_surat', 50)->nullable();
-            $table->date('tgl_surat')->nullable();
-
-            // Relasi ke tabel sekolah
-            $table->foreignId('sekolah_id')
+            // Relasi ke users dan bidang
+            $table->foreignId('user_id')
                 ->nullable()
-                ->constrained('sekolah')
+                ->constrained('users')
                 ->nullOnDelete(); // ON DELETE SET NULL
 
-            $table->integer('jumlah_siswa')->nullable();
-            $table->date('periode_mulai')->nullable();
-            $table->date('periode_selesai')->nullable();
+            $table->string('nip', 50)->unique();
+            $table->string('nama', 100);
+            $table->string('jabatan', 100)->nullable();
 
-            // ENUM status
-            $table->enum('status', ['draft', 'diproses', 'diterima', 'ditolak', 'selesai'])
-                ->default('draft');
+            $table->foreignId('bidang_id')
+                ->nullable()
+                ->constrained('bidangs')
+                ->nullOnDelete();
 
-            $table->string('file_surat_path', 255)->nullable();
-            $table->text('catatan')->nullable();
-
-            // Kolom audit trail
+            // Audit trail
             $table->timestamp('created_date')->useCurrent();
-
             $table->foreignId('created_id')
                 ->nullable()
                 ->constrained('users')
@@ -59,6 +53,7 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('pengajuan_pklmagang');
+        Schema::dropIfExists('pegawai');
     }
 };
+
