@@ -12,13 +12,25 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama');
-            $table->string('email');
-            $table->enum('jabatan', ['Admin', 'Karyawan']);
-            $table->string('password');
+            $table->id(); // primary key auto increment
+            $table->string('nama', 100);
+            $table->string('email', 100)->unique();
+            $table->enum('role', ['Admin', 'Pembimbing', 'Siswa']);
+            $table->string('password', 255);
             $table->boolean('is_tugas')->default(false);
             $table->rememberToken();
+
+            // === Tambahan tracking aktivitas ===
+            $table->timestamp('created_date')->nullable();
+            $table->unsignedBigInteger('created_id')->nullable();
+            $table->unsignedBigInteger('updated_id')->nullable();
+            $table->timestamp('updated_date')->nullable();
+            $table->unsignedBigInteger('deleted_id')->nullable();
+            $table->timestamp('deleted_date')->nullable();
+
+            $table->boolean('is_active')->default(true);
+
+            // === Timestamp bawaan Laravel ===
             $table->timestamps();
         });
 
