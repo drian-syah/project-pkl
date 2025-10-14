@@ -13,6 +13,17 @@ return new class extends Migration
     {
         Schema::create('bidangs', function (Blueprint $table) {
             $table->id();
+            $table->string('nama', 100);
+            $table->string('kode', 20);
+
+            $table->timestamp('created_date')->nullable();
+            $table->unsignedBigInteger('created_id')->nullable();
+            $table->unsignedBigInteger('updated_id')->nullable();
+            $table->timestamp('updated_date')->nullable();
+            $table->unsignedBigInteger('deleted_id')->nullable();
+            $table->timestamp('deleted_date')->nullable();
+
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }
