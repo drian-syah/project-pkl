@@ -4,9 +4,9 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('welcome') }}">
                 <div class="sidebar-brand-icon">
-                    <i class="fas fa-tasks"></i>
+                    <i class="fas fa-clipboard-list"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">M-Tugas</div>
+                <div class="sidebar-brand-text mx-3" style="font-size: 13px">Aplikasi Pengajuan Pkl Magang</div>
             </a>
 
             <!-- Divider -->
@@ -36,8 +36,8 @@
                 
                 <!-- Nav Item - Tables -->
                 <li class="nav-item {{ $menuAdminPenempatan ?? '' }}">
-                    <a class="nav-link" href="{{ route('tugas') }}">
-                        <i class="fas fa-fw fa-map-marker-alt"></i>
+                    <a class="nav-link" href="{{ route('penempatan') }}">
+                        <i class="fas fa-fw fa-tasks"></i>
                         <span>Menu Penempatan</span></a>
 
                     </li>
@@ -49,7 +49,7 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item {{ $menuPembimbingTugas ?? '' }}">
-                <a class="nav-link" href="{{ route('tugas') }}">
+                <a class="nav-link" href="{{ route('pembimbing') }}">
                     <i class="fas fa-fw fa-tasks"></i>
                     <span>Data Tugas</span></a>
             </li>

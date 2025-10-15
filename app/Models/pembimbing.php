@@ -13,7 +13,10 @@ class Pembimbing extends Model
 
 public function pengajuan()
 {
+
     return $this->belongsTo(PengajuanPklMagang::class, 'pengajuan_id');
 }
+
+protected $table = 'pembimbing';
 
 }

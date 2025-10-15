@@ -2,153 +2,64 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Penempatan;
+use App\Models\Bidang;
 use App\Models\User;
-use App\Models\Tugas;
-use App\Exports\TugasExport;
 use Illuminate\Http\Request;
-use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Auth;
-use Maatwebsite\Excel\Facades\Excel;
 
 class PenempatanController extends Controller
 {
     public function index()
     {
-        $user = Auth::user();
+        $data = [
+            'title' => 'Data Penempatan',
+            'menuAdminPenempatan' => 'active',
+            'penempatan' => Penempatan::with(['bidang', 'pembimbing'])->get(),
+        ];
 
-        if($user->role=='Admin')
-        {
-            $data = array(
-                'title' => 'Data Tugas',
-                'menuAdminTugas' => 'active',
-                'tugas' => Tugas::with('user')->get(),
-            );
-            return view('admin.tugas.index', $data);
-        }else{
-            $data = array(
-                'title' => 'Data Tugas',
-                'menuPembimbingTugas' => 'active',
-                'tugas' => Tugas::with('user')->where('user_id', $user->id)->first(),
-            );
-            return view('pembimbing.tugas.index', $data);
-        }
-        
+        return view('admin.penempatan.index', $data);
     }
 
     public function create()
     {
-        $data = array(
-            'title' => 'Tambah Data Tugas',
-            'menuAdminTugas' => 'active',
-            'user' => User::where('role', 'pembimbing')->where('is_tugas', false)->get(),
-        );
-        return view('admin/tugas/create', $data);
+        $data = [
+            'title' => 'Tambah Penempatan',
+            'menuAdminPenempatan' => 'active',
+            'bidang' => Bidang::all(),
+            'penempatan' => User::where('role', 'Penempatan')->get(),
+        ];
+
+        return view('admin.penempatan.create', $data);
     }
 
     public function store(Request $request)
     {
+        // validasi dulu
         $request->validate([
-            'user_id' => 'required',
-            'tugas' => 'required',
-            'tanggal_mulai' => 'required',
-            'tanggal_selesai' => 'required',
+            'bidang_id' => 'required|exists:bidang,id',
+            'pembimbing_id' => 'required|array',
+            'pembimbing_id.*' => 'exists:users,id',
         ],[
-            'user_id.required'     => 'Nama Tidak Boleh Kosong',
-            'tugas.required'     => 'Tugas Tidak Boleh Kosong',
-            'tanggal_mulai.required'     => 'Tanggal Mulai Tidak Boleh Kosong',
-            'tanggal_selesai.required'     => 'Tanggal Selesai Tidak Boleh Kosong',
-        ]); 
+            'bidang_id.required' => 'Bidang harus dipilih',
+            'pembimbing_id.required' => 'Pilih minimal satu pembimbing',
+        ]);
 
-        $user = User::findOrFail($request->user_id);
-        $tugas = new Tugas;
-        $tugas->user_id = $request->user_id;
-        $tugas->tugas = $request->tugas;
-        $tugas->tanggal_mulai = $request->tanggal_mulai;
-        $tugas->tanggal_selesai = $request->tanggal_selesai;
-        $tugas->save();
-        $user->is_tugas = true;
-        $user->save();
+        // Simpan relasi banyak pembimbing ke bidang
+        foreach ($request->pembimbing_id as $id_pembimbing) {
+            Penempatan::create([
+                'bidang_id' => $request->bidang_id,
+                'pembimbing_id' => $id_pembimbing,
+            ]);
+        }
 
-        return redirect()->route('tugas')->with('success', 'Tugas Berhasil Ditambahkan');
-    }
-
-    public function edit($id)
-    {
-        $data = array(
-            'title' => 'Edit Data',
-            'menuAdminTugas' => 'active',
-            'tugas' => Tugas::with('user')->findOrFail($id),
-        );
-        return view('admin/tugas/update', $data);
-    }
-
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'tugas' => 'required',
-            'tanggal_mulai' => 'required',
-            'tanggal_selesai' => 'required',
-        ],[
-            'tugas.required'     => 'Tugas Tidak Boleh Kosong',
-            'tanggal_mulai.required'     => 'Tanggal Mulai Tidak Boleh Kosong',
-            'tanggal_selesai.required'     => 'Tanggal Selesai Tidak Boleh Kosong',
-        ]); 
-
-        $tugas = Tugas::findOrFail($id);
-        $tugas->tugas = $request->tugas;
-        $tugas->tanggal_mulai = $request->tanggal_mulai;
-        $tugas->tanggal_selesai = $request->tanggal_selesai;
-        $tugas->save();
-
-        return redirect()->route('tugas')->with('success', 'Tugas Berhasil Di Edit');
+        return redirect()->route('penempatan.index')->with('success', 'Penempatan berhasil disimpan.');
     }
 
     public function destroy($id)
     {
-        $tugas = Tugas::findOrFail($id);
-        $tugas->delete();
-        $user = User::where('id', $tugas->user_id)->first();
-        $user->is_tugas = false;
-        $user->save();
+        $penempatan = Penempatan::findOrFail($id);
+        $penempatan->delete();
 
-        return redirect()->route('tugas')->with('success', 'Data Berhasil Di Hapus');
-
+        return redirect()->route('penempatan.index')->with('success', 'Penempatan berhasil dihapus.');
     }
-
-    public function excel()
-    {
-        $filename = now()->format('d-m-Y H.i.s');
-        return Excel::download(new TugasExport, 'DataTugas_'.$filename.'.xlsx');
-    }
-
-    public function pdf()
-    {
-        $user = Auth::user();
-        $filename = now()->format('d-m-Y H.i.s');
-
-        if ($user->role=='Admin') {
-            $data = array(
-                'tugas' => Tugas::with('user')->get(),
-                'tanggal' => now()->format('d-m-y'),
-                'jam' => now()->format('H.i.s'),
-            );
-            $pdf = Pdf::loadView('admin/tugas/pdf', $data);
-            return $pdf->setPaper('a4', 'landscape')->stream('DataTugas_'.$filename.'.pdf');
-        } else {
-            $data = array(
-                'tanggal' => now()->format('d-m-y'),
-                'jam' => now()->format('H.i.s'),
-                'tugas' => Tugas::with('user')->where('user_id', $user->id)->first(),
-            );
-            $pdf = Pdf::loadView('pembimbing/tugas/pdf', $data);
-            return $pdf->setPaper('a4', 'potrait')->stream('DataTugas_'.$filename.'.pdf');
-        }
-        
-
-       
-    }
-
-  
-
 }

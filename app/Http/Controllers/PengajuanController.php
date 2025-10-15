@@ -29,7 +29,7 @@ class PengajuanController extends Controller
             'title' => 'Tambah Data Pengajuan',
             'menuAdminPengajuan' => 'active',
         );
-        return view('admin/user/create', $data);
+        return view('admin/pengajuan/create', $data);
     }
 
     public function store(Request $request)
@@ -58,7 +58,7 @@ class PengajuanController extends Controller
         $user->is_tugas = false;
         $user->save();
 
-        return redirect()->route('user')->with('success', 'Data Berhasil Ditambahkan');
+        return redirect()->route('pengajuan')->with('success', 'Data Berhasil Ditambahkan');
     }
 
     public function edit($id)

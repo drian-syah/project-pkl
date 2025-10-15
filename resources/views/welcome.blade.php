@@ -45,7 +45,7 @@
       <a href="#" class="logo d-flex align-items-center me-auto">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
-        <h1 class="sitename">M-Tugas</h1>
+        <h1 class="sitename" style="font-size: 25px">Aplikasi Pengajuan Pkl Magang</h1>
       </a>
 
       <nav id="navmenu" class="navmenu">
@@ -74,8 +74,7 @@
       <div class="container">
         <div class="row gy-4">
           <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center" data-aos="fade-up">
-            <h1>M-Tugas</h1>
-            <p>Aplikasi Manajemen Tugas</p>
+            <h1 class="mb-3">Aplikasi Pengajuan Pkl Magang</h1>
             <div class="d-flex">
               @auth
               <a href="{{ route('dashboard') }}" class="btn-get-started">Dashboard</a>
