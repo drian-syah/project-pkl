@@ -11,7 +11,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
-class TugasController extends Controller
+class PenempatanController extends Controller
 {
     public function index()
     {

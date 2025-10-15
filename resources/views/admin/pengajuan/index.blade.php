@@ -9,17 +9,17 @@
 <div class="card">
     <div class="card-header d-flex flex-wrap justify-content-center justify-content-xl-between">
         <div class="mb-1 mr-2">
-            <a href="{{ route('userCreate') }}" class="btn btn-sm btn-primary">
+            <a href="{{ route('pengajuanCreate') }}" class="btn btn-sm btn-primary">
                 <i class="fas fa-plus mr-2"></i>
                 Tambah Data
             </a>
         </div>
         <div>
-            <a href="{{ route('userExcel') }}" class="btn btn-sm btn-success">
+            <a href="{{ route('pengajuanExcel') }}" class="btn btn-sm btn-success">
                 <i class="fas fa-file-excel mr-2"></i>
                 Excel
             </a>
-            <a href="{{ route('userPdf') }}" class="btn btn-sm btn-danger" target='__blank'>
+            <a href="{{ route('pengajuanPdf') }}" class="btn btn-sm btn-danger" target='__blank'>
                 <i class="fas fa-file-pdf mr-2"></i>
                 PDF
             </a>
@@ -40,7 +40,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($user as $item)
+                    @foreach ($pengajuan as $item)
                         <tr>
                             <td class="text-center">{{ $loop->iteration }}</td>
                             <td>{{ $item->nama }}</td>

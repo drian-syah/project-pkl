@@ -96,7 +96,7 @@
                                 <a class="dropdown-item" href="#">
                                     {{-- <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> --}}
                                     <div class="badge badge-success justify-content-center d-flex">
-                                        {{ auth()->user()->jabatan }}
+                                        {{ auth()->user()->role }}
                                     </div>
                                 </a>
                                 

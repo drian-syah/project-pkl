@@ -28,23 +28,23 @@
             </div>
             
             <!-- Nav Item - Charts -->
-            <li class="nav-item {{ $menuAdminUser ?? '' }}">
-                <a class="nav-link" href="{{ route('user') }}">
-                    <i class="fas fa-user"></i>
-                    <span>Data User</span></a>
+            <li class="nav-item {{ $menuAdminPengajuan ?? '' }}">
+                <a class="nav-link" href="{{ route('pengajuan') }}">
+                    <i class="fas fa-clipboard-list"></i>
+                    <span>Pengajuan Pkl Magang</span></a>
                 </li>
                 
                 <!-- Nav Item - Tables -->
-                <li class="nav-item {{ $menuAdminTugas ?? '' }}">
+                <li class="nav-item {{ $menuAdminPenempatan ?? '' }}">
                     <a class="nav-link" href="{{ route('tugas') }}">
-                        <i class="fas fa-fw fa-tasks"></i>
-                        <span>Data Tugas</span></a>
+                        <i class="fas fa-fw fa-map-marker-alt"></i>
+                        <span>Menu Penempatan</span></a>
 
                     </li>
                     @else
                      <!-- Heading -->
             <div class="sidebar-heading">
-                MENU KARYAWAN
+                MENU PEMBIMBING
             </div>
 
             <!-- Nav Item - Tables -->
