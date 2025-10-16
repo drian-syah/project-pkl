@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\TugasController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SiswaController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -51,7 +52,6 @@ Route::get('user/pdf', [UserController::class, 'pdf'])->name('userPdf');
 Route::resource('users', UserController::class);
 
 
-
 // tugas
 Route::get('tugas/create', [TugasController::class, 'create'])->name('tugasCreate');
 Route::post('tugas/store', [TugasController::class, 'store'])->name('tugasStore');
@@ -61,4 +61,12 @@ Route::delete('tugas/destroy/{id}', [TugasController::class, 'destroy'])->name('
 Route::get('tugas/excel', [TugasController::class, 'excel'])->name('tugasExcel');
 
 });
+
+Route::middleware(['auth', 'siswa'])->group(function () {
+    Route::get('/siswa/dashboard', [SiswaController::class, 'index'])->name('siswa.dashboard');
+    Route::get('/siswa/tugas', [SiswaController::class, 'tugas'])->name('siswa.tugas');
+    Route::get('/siswa/presensi', [SiswaController::class, 'presensi'])->name('siswa.presensi');
 });
+
+});
+

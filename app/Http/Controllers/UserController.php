@@ -16,8 +16,8 @@ class UserController extends Controller
     {
         $data = array(
             'title' => 'Data User',
-            'menuAdminUser' => 'active',
-            'user' => User::orderBy('role', 'asc')->get(),
+            'menuAdminPresensi' => 'active',
+            'user' => SiswaProfil::orderBy('role', 'asc')->get(),
         );
         return view('admin/user/index', $data);
     }

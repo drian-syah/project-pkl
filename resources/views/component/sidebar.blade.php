@@ -24,28 +24,24 @@
             @if (auth()->user()->role == 'Admin')
                 <!-- Heading -->
             <div class="sidebar-heading">
-                MENU ADMIN
+                MENU SISWA
             </div>
             
             <!-- Nav Item - Charts -->
-            <li class="nav-item {{ $menuAdminUser ?? '' }}">
+            <li class="nav-item {{ $menuSiswaPresensi ?? '' }}">
                 <a class="nav-link" href="{{ route('user') }}">
                     <i class="fas fa-user"></i>
-                    <span>Data User</span></a>
+                    <span>Presensi</span></a>
                 </li>
                 
                 <!-- Nav Item - Tables -->
                 <li class="nav-item {{ $menuAdminTugas ?? '' }}">
                     <a class="nav-link" href="{{ route('tugas') }}">
                         <i class="fas fa-fw fa-tasks"></i>
-                        <span>Data Tugas</span></a>
+                        <span>Tugas</span></a>
 
                     </li>
                     @else
-                     <!-- Heading -->
-            <div class="sidebar-heading">
-                MENU KARYAWAN
-            </div>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item {{ $menuPembimbingTugas ?? '' }}">
