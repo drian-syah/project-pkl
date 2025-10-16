@@ -24,7 +24,7 @@ class User extends Authenticatable
         return $this->hasOne(Tugas::class);
     }
 
-    // 🔽 Tambahkan di sini
+    // Tambahkan di sini
     public function isSiswa()
     {
         return $this->role === 'siswa';

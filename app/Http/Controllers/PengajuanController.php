@@ -16,15 +16,9 @@ class PengajuanController extends Controller
     public function index()
     {
         $data = array(
-<<<<<<< HEAD:app/Http/Controllers/UserController.php
-            'title' => 'Data User',
-            'menuAdminPresensi' => 'active',
-            'user' => SiswaProfil::orderBy('role', 'asc')->get(),
-=======
             'title' => 'Data Pengajuan',
             'menuAdminPengajuan' => 'active',
             'pengajuan' => PengajuanPklmagang::orderBy('id', 'asc')->get(),
->>>>>>> 5a9c8ddb0d22b419765c924d0c897a0395579294:app/Http/Controllers/PengajuanController.php
         );
         return view('admin/pengajuan/index', $data);
     }

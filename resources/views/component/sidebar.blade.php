@@ -21,19 +21,15 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
             
-            @if (auth()->user()->role == 'Admin')
+            @can('isAdmin')
                 <!-- Heading -->
-            <div class="sidebar-heading">
-                MENU SISWA
-            </div>
+                <div class="sidebar-heading">
+                    MENU Admin
+                </div>
             
             <!-- Nav Item - Charts -->
 
-            <li class="nav-item {{ $menuSiswaPresensi ?? '' }}">
-                <a class="nav-link" href="">
-                    <i class="fas fa-user"></i>
-                    <span>Presensi</span></a>
-
+            
             <li class="nav-item {{ $menuAdminPengajuan ?? '' }}">
                 <a class="nav-link" href="{{ route('pengajuan') }}">
                     <i class="fas fa-clipboard-list"></i>
@@ -47,12 +43,14 @@
                         <span>Menu Penempatan</span></a>
 
                     </li>
-                    @else
+            @endcan
+            @can('isPembimbing')
                      <!-- Heading -->
             <div class="sidebar-heading">
                 MENU PEMBIMBING
             </div>
 
+            
             <!-- Nav Item - Tables -->
             <li class="nav-item {{ $menuPembimbingTugas ?? '' }}">
                 <a class="nav-link" href="{{ route('pembimbing') }}">
@@ -60,7 +58,22 @@
                     <span>Data Tugas</span></a>
             </li>
 
-            @endif
+            @endcan
+
+            @can('isSiswa')
+            <div class="sidebar-heading">
+                MENU SISWA
+            </div>
+
+            <li class="nav-item {{ $menuSiswaPresensi ?? '' }}">
+                <a class="nav-link" href="">
+                    <i class="fas fa-user"></i>
+                    <span>Presensi</span></a>
+            @endcan
+
+
+
+
             
                     
 
