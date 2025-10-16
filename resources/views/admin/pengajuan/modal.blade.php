@@ -45,7 +45,7 @@
           <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">
             <i class="fas fa-times"></i> Tutup
           </button>
-          <form action="{{ route('userDestroy', $item->id) }}" method="post">
+          <form action="{{ route('pengajuanDestroy', $item->id) }}" method="post">
             @csrf
             @method('delete')
           <button type="submit" class="btn btn-danger btn-sm">

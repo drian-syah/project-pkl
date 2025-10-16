@@ -7,13 +7,13 @@
 
 <div class="card">
     <div class="card-header bg-primary">
-        <a href="{{ route('tugas') }}" class="text-white">
+        <a href="{{ route('penempatan') }}" class="text-white">
             <i class="fas fa-arrow-left mr-2"></i>
             Kembali</a>
         </div>
         <div class="card-body">
 
-            <form action="{{ route('tugasStore') }}" method="post">
+            <form action="{{ route('penempatanStore') }}" method="post">
                 @csrf
 
                 <div class="row mb-2">
@@ -23,7 +23,7 @@
                             Nama :</label>
                             <select name="user_id" class="form-control @error('user_id') is-invalid @enderror">
                             <option selected disabled>--Pilih Nama--</option>
-                            @foreach ($user as $item)
+                            @foreach ($penempatan as $item)
                             <option value="{{ $item->id }}">{{ $item->nama }}</option>
                             @endforeach
                         </select>

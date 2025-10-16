@@ -7,7 +7,7 @@
 
 <div class="card">
     <div class="card-header bg-primary">
-        <a href="{{ route('user') }}" class="btn text-white">
+        <a href="{{ route('pengajuan') }}" class="btn text-white">
             <i class="fas fa-arrow-left mr-2"></i>
             Kembali</a>
     </div>

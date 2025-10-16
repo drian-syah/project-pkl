@@ -23,7 +23,7 @@
     </tr>
     </thead>
     <tbody>
-        @foreach ($user as $item)
+        @foreach ($pengajuan_pklmagang as $item)
             <tr>
                 <td align="center">{{ $loop->iteration }}</td>
                 <td>{{ $item->nama }}</td>

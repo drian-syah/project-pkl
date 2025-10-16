@@ -2,11 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\TugasController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\DashboardController;
+
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\PengajuanController;
+use App\Http\Controllers\PembimbingController;
+use App\Http\Controllers\PenempatanController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -33,32 +35,35 @@ Route::middleware('auth')->group(function(){
     Route::get('profil/setting', [SettingController::class, 'index'])->name('index');
     Route::put('profil/setting', [SettingController::class, 'update'])->name('updateSetting');
 });
-    Route::get('tugas', [TugasController::class, 'index'])->name('tugas');
-    Route::get('tugas/pdf', [TugasController::class, 'pdf'])->name('tugasPdf');
+    Route::get('penempatan', [PenempatanController::class, 'index'])->name('penempatan');
+    Route::get('penempatan/pdf', [PenempatanController::class, 'pdf'])->name('penempatanPdf');
+
+    Route::get('pembimbing', [PembimbingController::class, 'index'])->name('pembimbing');
    
 Route::middleware('isAdmin')->group(function(){
 
 
 
-// user 
-Route::get('user', [UserController::class, 'index'])->name('user');
-Route::get('user/create', [UserController::class, 'create'])->name('userCreate');
-Route::post('user/store', [UserController::class, 'store'])->name('userStore');
-Route::get('user/edit/{id}', [UserController::class, 'edit'])->name('userEdit');
-Route::post('user/update/{id}', [UserController::class, 'update'])->name('userUpdate');
-Route::delete('user/destroy/{id}', [UserController::class, 'destroy'])->name('userDestroy');
-Route::get('user/excel', [UserController::class, 'excel'])->name('userExcel');
-Route::get('user/pdf', [UserController::class, 'pdf'])->name('userPdf');
-Route::resource('users', UserController::class);
+// pengajuan 
+Route::get('pengajuan', [PengajuanController::class, 'index'])->name('pengajuan');
+Route::get('pengajuan/create', [PengajuanController::class, 'create'])->name('pengajuanCreate');
+Route::post('pengajuan/store', [PengajuanController::class, 'store'])->name('pengajuanStore');
+Route::get('pengajuan/edit/{id}', [PengajuanController::class, 'edit'])->name('pengajuanEdit');
+Route::post('pengajuan/update/{id}', [PengajuanController::class, 'update'])->name('pengajuanUpdate');
+Route::delete('pengajuan/destroy/{id}', [PengajuanController::class, 'destroy'])->name('pengajuanDestroy');
+Route::get('pengajuan/excel', [PengajuanController::class, 'excel'])->name('pengajuanExcel');
+Route::get('pengajuan/pdf', [PengajuanController::class, 'pdf'])->name('pengajuanPdf');
+Route::resource('users', PengajuanController::class);
 
 
-// tugas
-Route::get('tugas/create', [TugasController::class, 'create'])->name('tugasCreate');
-Route::post('tugas/store', [TugasController::class, 'store'])->name('tugasStore');
-Route::get('tugas/edit/{id}', [TugasController::class, 'edit'])->name('tugasEdit');
-Route::post('tugas/update/{id}', [TugasController::class, 'update'])->name('tugasUpdate');
-Route::delete('tugas/destroy/{id}', [TugasController::class, 'destroy'])->name('tugasDestroy');
-Route::get('tugas/excel', [TugasController::class, 'excel'])->name('tugasExcel');
+
+// penempatan
+Route::get('penempatan/create', [PenempatanController::class, 'create'])->name('penempatanCreate');
+Route::post('penempatan/store', [PenempatanController::class, 'store'])->name('penempatanStore');
+Route::get('penempatan/edit/{id}', [PenempatanController::class, 'edit'])->name('penempatanEdit');
+Route::post('penempatan/update/{id}', [PenempatanController::class, 'update'])->name('tugaspenempatanUpdate');
+Route::delete('penempatan/destroy/{id}', [PenempatanController::class, 'destroy'])->name('penempatanDestroy');
+Route::get('penempatan/excel', [PenempatanController::class, 'excel'])->name('penempatanExcel');
 
 });
 

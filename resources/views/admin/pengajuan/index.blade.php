@@ -9,17 +9,17 @@
 <div class="card">
     <div class="card-header d-flex flex-wrap justify-content-center justify-content-xl-between">
         <div class="mb-1 mr-2">
-            <a href="{{ route('userCreate') }}" class="btn btn-sm btn-primary">
+            <a href="{{ route('pengajuanCreate') }}" class="btn btn-sm btn-primary">
                 <i class="fas fa-plus mr-2"></i>
                 Tambah Data
             </a>
         </div>
         <div>
-            <a href="{{ route('userExcel') }}" class="btn btn-sm btn-success">
+            <a href="{{ route('pengajuanExcel') }}" class="btn btn-sm btn-success">
                 <i class="fas fa-file-excel mr-2"></i>
                 Excel
             </a>
-            <a href="{{ route('userPdf') }}" class="btn btn-sm btn-danger" target='__blank'>
+            <a href="{{ route('pengajuanPdf') }}" class="btn btn-sm btn-danger" target='__blank'>
                 <i class="fas fa-file-pdf mr-2"></i>
                 PDF
             </a>
@@ -32,26 +32,24 @@
                 <thead class="bg-primary text-white">
                     <tr class="text-center">
                         <th>No</th>
-                        <th>Nama</th>
-                        <th>Email</th>
-                        <th>Role</th>
+                        <th>No Surat</th>
+                        <th>Tanggal Surat</th>
+                        <th>Sekolah</th>
+                        <th>Periode Mulai</th>
+                        <th>Periode Selesai</th>
                         <th>Status</th>
                         <th><i class="fas fa-cog"></i></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($user as $item)
+                    @foreach ($pengajuan as $item)
                         <tr>
                             <td class="text-center">{{ $loop->iteration }}</td>
-                            <td>{{ $item->nama }}</td>
-                            <td>{{ $item->email }}</td>
-                            <td class="text-center">
-                                @if ($item->role == 'Admin')
-                                    <span class="badge badge-dark">{{ $item->role }}</span>
-                                @else
-                                    <span class="badge badge-info">{{ $item->role }}</span>
-                                @endif
-                            </td>
+                            <td>{{ $item->no_surat }}</td>
+                            <td>{{ $item->tgl_surat }}</td>
+                            <td class="text-center">{{ $item->sekolah_id }}</td>
+                            <td class="text-center">{{ $item->periode_mulai }}</td>
+                            <td class="text-center">{{ $item->periode_selesai }}</td>
                             <td class="text-center">
                                 @if ($item->is_tugas == false)
                                     <span class="badge badge-danger">Belum Ditugaskan</span>
@@ -60,7 +58,7 @@
                                 @endif
                             </td>
                             <td class="text-center">
-                                <a href="{{ route('userEdit', $item->id) }}" class="btn btn-sm btn-warning">
+                                <a href="{{ route('pengajuanEdit', $item->id) }}" class="btn btn-sm btn-warning">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal{{ $item->id }}">

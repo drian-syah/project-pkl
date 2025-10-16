@@ -9,12 +9,12 @@
 
 <div class="card">
     <div class="card-header bg-primary text-white">
-        <a href="{{ route('user') }}" class="btn text-white">
+        <a href="{{ route('pengajuan') }}" class="btn text-white">
             <i class="fas fa-arrow-left mr-2"></i>
             Kembali</a>
     </div>
     <div class="card-body">
-        <form action="{{ route('userStore') }}" method="post">
+        <form action="{{ route('pengajuanStore') }}" method="post">
             @csrf
 
             <div class="row mb-3">
