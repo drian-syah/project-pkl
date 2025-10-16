@@ -2,10 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\DashboardController;
 
-use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\PengajuanController;
 use App\Http\Controllers\PembimbingController;
 use App\Http\Controllers\PenempatanController;
@@ -39,6 +39,7 @@ Route::middleware('auth')->group(function(){
     Route::get('penempatan/pdf', [PenempatanController::class, 'pdf'])->name('penempatanPdf');
 
     Route::get('pembimbing', [PembimbingController::class, 'index'])->name('pembimbing');
+    Route::get('siswa', [SiswaController::class, 'index'])->name('siswa');
    
 Route::middleware('isAdmin')->group(function(){
 
