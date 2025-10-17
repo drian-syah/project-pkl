@@ -66,12 +66,12 @@ Route::post('penempatan/update/{id}', [PenempatanController::class, 'update'])->
 Route::delete('penempatan/destroy/{id}', [PenempatanController::class, 'destroy'])->name('penempatanDestroy');
 Route::get('penempatan/excel', [PenempatanController::class, 'excel'])->name('penempatanExcel');
 
-});
+// pembimbing
+// Menu Tugas
+Route::get('pembimbing/tugas/index', [PembimbingController::class, 'index'])->name('tugas');
+Route::get('pembimbing/tugas', [PembimbingController::class, 'tugasAdmin'])->name('pembimbingTugas');
+        Route::get('pembimbing/penilaian', [PembimbingController::class, 'penilaian'])->name('pembimbing.penilaian');
 
-Route::middleware(['auth', 'siswa'])->group(function () {
-    Route::get('/siswa/dashboard', [SiswaController::class, 'index'])->name('siswa.dashboard');
-    Route::get('/siswa/tugas', [SiswaController::class, 'tugas'])->name('siswa.tugas');
-    Route::get('/siswa/presensi', [SiswaController::class, 'presensi'])->name('siswa.presensi');
 });
 
 });
