@@ -9,11 +9,15 @@ class PembimbingController extends Controller
 {
     public function index()
     {
-        $data = array(
+        $data = [
             'title' => 'Data Pengajuan',
             'menuPembimbingTugas' => 'active',
             'pembimbing' => Pembimbing::orderBy('id', 'asc')->get(),
-        );
-        return view('pembimbing/tugas/index', $data);
+        ];
+
+        return view('pembimbing.tugas.index', $data);
     }
+
+    
 }
+

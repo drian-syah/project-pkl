@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 
 use App\Http\Controllers\PengajuanController;
 use App\Http\Controllers\PembimbingController;
+use App\Http\Controllers\AdminPembimbingTugasController;
 use App\Http\Controllers\PenempatanController;
 
 Route::get('/', function () {
@@ -79,9 +80,11 @@ Route::post('penempatan/update/{id}', [PenempatanController::class, 'update'])->
 Route::delete('penempatan/destroy/{id}', [PenempatanController::class, 'destroy'])->name('penempatanDestroy');
 Route::get('penempatan/excel', [PenempatanController::class, 'excel'])->name('penempatanExcel');
 
+// pembimbing
+// Menu Tugas
+Route::get('pembimbing/tugas/index', [AdminPembimbingTugasController::class, 'index'])->name('tugas');
+Route::get('pembimbing/tugas', [AdminPembimbingTugasController::class, 'tugasAdmin'])->name('pembimbingTugas');
+        Route::get('pembimbing/penilaian', [AdminPembimbingTugasController::class, 'penilaian'])->name('pembimbingPenilaian');
+
+
 });
-
-
-   
-});
-
