@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 
 use App\Http\Controllers\PengajuanController;
 use App\Http\Controllers\PembimbingController;
+use App\Http\Controllers\AdminPembimbingTugasController;
 use App\Http\Controllers\PenempatanController;
 
 Route::get('/', function () {
@@ -68,11 +69,11 @@ Route::get('penempatan/excel', [PenempatanController::class, 'excel'])->name('pe
 
 // pembimbing
 // Menu Tugas
-Route::get('pembimbing/tugas/index', [PembimbingController::class, 'index'])->name('tugas');
-Route::get('pembimbing/tugas', [PembimbingController::class, 'tugasAdmin'])->name('pembimbingTugas');
-        Route::get('pembimbing/penilaian', [PembimbingController::class, 'penilaian'])->name('pembimbing.penilaian');
+Route::get('pembimbing/tugas/index', [AdminPembimbingTugasController::class, 'index'])->name('tugas');
+Route::get('pembimbing/tugas', [AdminPembimbingTugasController::class, 'tugasAdmin'])->name('pembimbingTugas');
+        Route::get('pembimbing/penilaian', [AdminPembimbingTugasController::class, 'penilaian'])->name('pembimbingPenilaian');
 
-});
+
 
 });
 
