@@ -66,7 +66,7 @@
             </div>
 
             <li class="nav-item {{ $menuSiswaPresensi ?? '' }}">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="{{ route('presensi') }}">
                     <i class="fas fa-user"></i>
                     <span>Presensi</span></a>
             @endcan

@@ -35,12 +35,25 @@ Route::middleware('auth')->group(function(){
     Route::get('profil/setting', [SettingController::class, 'index'])->name('index');
     Route::put('profil/setting', [SettingController::class, 'update'])->name('updateSetting');
 });
+
+    // penempatan
     Route::get('penempatan', [PenempatanController::class, 'index'])->name('penempatan');
     Route::get('penempatan/pdf', [PenempatanController::class, 'pdf'])->name('penempatanPdf');
 
+    // pembimbing
     Route::get('pembimbing', [PembimbingController::class, 'index'])->name('pembimbing');
-    Route::get('siswa', [SiswaController::class, 'index'])->name('siswa');
-   
+    
+    // siswa
+    Route::get('presensi', [SiswaController::class, 'index'])->name('presensi');
+    Route::post('presensi', [SiswaController::class, 'store'])->name('presensiStore');
+    // Form presensi pulang
+    Route::get('presensi/pulang', [SiswaController::class, 'pulang'])->name('presensiPulang');
+
+// Submit presensi pulang
+    Route::post('presensi/pulang', [SiswaController::class, 'pulangStore'])->name('presensiPulangStore');
+
+
+    
 Route::middleware('isAdmin')->group(function(){
 
 
@@ -68,11 +81,7 @@ Route::get('penempatan/excel', [PenempatanController::class, 'excel'])->name('pe
 
 });
 
-Route::middleware(['auth', 'siswa'])->group(function () {
-    Route::get('/siswa/dashboard', [SiswaController::class, 'index'])->name('siswa.dashboard');
-    Route::get('/siswa/tugas', [SiswaController::class, 'tugas'])->name('siswa.tugas');
-    Route::get('/siswa/presensi', [SiswaController::class, 'presensi'])->name('siswa.presensi');
-});
 
+   
 });
 
