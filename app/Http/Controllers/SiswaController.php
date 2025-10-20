@@ -18,6 +18,14 @@ class SiswaController extends Controller
         return view('siswa/presensi/index', $data);
     }
 
+    public function masuk()
+    {
+        $data = array(
+            'title' => 'Menu Presensi Masuk'
+        );
+        return view('siswa.presensi.masuk', $data);
+    }
+
     public function store(Request $request)
     {
         $request->validate([

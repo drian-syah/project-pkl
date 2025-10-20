@@ -52,15 +52,15 @@
 
 
                     <!-- Nav Item - Tables -->
-                    <li class="nav-item {{ $menuPembimbingTugas ?? '' }}">
-                        <a class="nav-link" href="{{ route('pembimbing') }}">
+                    <li class="nav-item {{ $menuAdminPembimbingTugas ?? '' }}">
+                        <a class="nav-link" href="{{ route('tugas') }}">
                             <i class="fas fa-fw fa-tasks"></i>
                             <span>MENU TUGAS</span>
                         </a>
                     </li>
 
-                    <li class="nav-item {{ $menuPembimbingPenilaian ?? '' }}">
-                        <a class="nav-link" href="{{ route('pembimbing.penilaian') }}">
+                    <li class="nav-item {{ $menuAdminPembimbingPenilaian ?? '' }}">
+                        <a class="nav-link" href="{{ route('pembimbingPenilaian') }}">
                             <i class="fas fa-fw fa-tasks"></i>
                             <span>MENU PENILAIAN</span>
                         </a>
@@ -79,26 +79,22 @@
                             <i class="fas fa-fw fa-tasks"></i>
                             <span>Data Tugas</span></a>
                     </li>
+                    {{-- <li class="nav-item {{ $menuSiswaPresensi ?? '' }}">
+                        <a class="nav-link" href="{{ route('presensi') }}">
+                            <i class="fas fa-user"></i>
+                            <span>Presensi</span></a> --}}
                 @endcan
 
-<<<<<<< HEAD
-            <li class="nav-item {{ $menuSiswaPresensi ?? '' }}">
-                <a class="nav-link" href="{{ route('presensi') }}">
-                    <i class="fas fa-user"></i>
-                    <span>Presensi</span></a>
-            @endcan
-=======
-                @can('isSiswa')
+                @can('isSiswa') 
                     <div class="sidebar-heading">
                         MENU SISWA
                     </div>
 
                     <li class="nav-item {{ $menuSiswaPresensi ?? '' }}">
-                        <a class="nav-link" href="">
+                        <a class="nav-link" href="{{ route('presensi') }}">
                             <i class="fas fa-user"></i>
                             <span>Presensi</span></a>
                     @endcan
->>>>>>> 4e0c095ee5edf4a11154cee1f8a9eedeb61b167f
 
 
 

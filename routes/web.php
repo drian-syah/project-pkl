@@ -8,8 +8,9 @@ use App\Http\Controllers\DashboardController;
 
 use App\Http\Controllers\PengajuanController;
 use App\Http\Controllers\PembimbingController;
-use App\Http\Controllers\AdminPembimbingTugasController;
 use App\Http\Controllers\PenempatanController;
+use App\Http\Controllers\AdminPembimbingTugasController;
+use App\Http\Controllers\AdminPembimbingPenilaianController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,24 +19,24 @@ Route::get('/', function () {
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 
-Route::middleware('isLogin')->group(function(){
+Route::middleware('isLogin')->group(function () {
     // login 
-Route::get('login', [AuthController::class, 'login'])->name('login');
-Route::post('login', [AuthController::class, 'loginProses'])->name('loginProses');
+    Route::get('login', [AuthController::class, 'login'])->name('login');
+    Route::post('login', [AuthController::class, 'loginProses'])->name('loginProses');
 });
 
 
 // logout
 
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
-Route::middleware('checkLogin')->group(function(){
+Route::middleware('checkLogin')->group(function () {
 
     // dashboard 
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::middleware('auth')->group(function(){
-    Route::get('profil/setting', [SettingController::class, 'index'])->name('index');
-    Route::put('profil/setting', [SettingController::class, 'update'])->name('updateSetting');
-});
+    Route::middleware('auth')->group(function () {
+        Route::get('profil/setting', [SettingController::class, 'index'])->name('index');
+        Route::put('profil/setting', [SettingController::class, 'update'])->name('updateSetting');
+    });
 
     // penempatan
     Route::get('penempatan', [PenempatanController::class, 'index'])->name('penempatan');
@@ -43,48 +44,54 @@ Route::middleware('auth')->group(function(){
 
     // pembimbing
     Route::get('pembimbing', [PembimbingController::class, 'index'])->name('pembimbing');
-    
+
     // siswa
     Route::get('presensi', [SiswaController::class, 'index'])->name('presensi');
     Route::post('presensi', [SiswaController::class, 'store'])->name('presensiStore');
+    // form presensi masuk
+    Route::get('presensi/masuk', [SiswaController::class, 'masuk'])->name('presensiMasuk');
+
     // Form presensi pulang
     Route::get('presensi/pulang', [SiswaController::class, 'pulang'])->name('presensiPulang');
 
-// Submit presensi pulang
+    // Submit presensi pulang
     Route::post('presensi/pulang', [SiswaController::class, 'pulangStore'])->name('presensiPulangStore');
 
 
-    
-Route::middleware('isAdmin')->group(function(){
+
+    Route::middleware('isAdmin')->group(function () {
 
 
 
-// pengajuan 
-Route::get('pengajuan', [PengajuanController::class, 'index'])->name('pengajuan');
-Route::get('pengajuan/create', [PengajuanController::class, 'create'])->name('pengajuanCreate');
-Route::post('pengajuan/store', [PengajuanController::class, 'store'])->name('pengajuanStore');
-Route::get('pengajuan/edit/{id}', [PengajuanController::class, 'edit'])->name('pengajuanEdit');
-Route::post('pengajuan/update/{id}', [PengajuanController::class, 'update'])->name('pengajuanUpdate');
-Route::delete('pengajuan/destroy/{id}', [PengajuanController::class, 'destroy'])->name('pengajuanDestroy');
-Route::get('pengajuan/excel', [PengajuanController::class, 'excel'])->name('pengajuanExcel');
-Route::get('pengajuan/pdf', [PengajuanController::class, 'pdf'])->name('pengajuanPdf');
-Route::resource('users', PengajuanController::class);
+        // pengajuan 
+        Route::get('pengajuan', [PengajuanController::class, 'index'])->name('pengajuan');
+        Route::get('pengajuan/create', [PengajuanController::class, 'create'])->name('pengajuanCreate');
+        Route::post('pengajuan/store', [PengajuanController::class, 'store'])->name('pengajuanStore');
+        Route::get('pengajuan/edit/{id}', [PengajuanController::class, 'edit'])->name('pengajuanEdit');
+        Route::post('pengajuan/update/{id}', [PengajuanController::class, 'update'])->name('pengajuanUpdate');
+        Route::delete('pengajuan/destroy/{id}', [PengajuanController::class, 'destroy'])->name('pengajuanDestroy');
+        Route::get('pengajuan/excel', [PengajuanController::class, 'excel'])->name('pengajuanExcel');
+        Route::get('pengajuan/pdf', [PengajuanController::class, 'pdf'])->name('pengajuanPdf');
+        Route::resource('users', PengajuanController::class);
 
 
 
-// penempatan
-Route::get('penempatan/create', [PenempatanController::class, 'create'])->name('penempatanCreate');
-Route::post('penempatan/store', [PenempatanController::class, 'store'])->name('penempatanStore');
-Route::get('penempatan/edit/{id}', [PenempatanController::class, 'edit'])->name('penempatanEdit');
-Route::post('penempatan/update/{id}', [PenempatanController::class, 'update'])->name('tugaspenempatanUpdate');
-Route::delete('penempatan/destroy/{id}', [PenempatanController::class, 'destroy'])->name('penempatanDestroy');
-Route::get('penempatan/excel', [PenempatanController::class, 'excel'])->name('penempatanExcel');
+        // penempatan
+        Route::get('penempatan/create', [PenempatanController::class, 'create'])->name('penempatanCreate');
+        Route::post('penempatan/store', [PenempatanController::class, 'store'])->name('penempatanStore');
+        Route::get('penempatan/edit/{id}', [PenempatanController::class, 'edit'])->name('penempatanEdit');
+        Route::post('penempatan/update/{id}', [PenempatanController::class, 'update'])->name('tugaspenempatanUpdate');
+        Route::delete('penempatan/destroy/{id}', [PenempatanController::class, 'destroy'])->name('penempatanDestroy');
+        Route::get('penempatan/excel', [PenempatanController::class, 'excel'])->name('penempatanExcel');
 
-// pembimbing
-// Menu Tugas
-Route::get('pembimbing/tugas/index', [AdminPembimbingTugasController::class, 'index'])->name('tugas');
-Route::get('pembimbing/tugas', [AdminPembimbingTugasController::class, 'tugasAdmin'])->name('pembimbingTugas');
-        Route::get('pembimbing/penilaian', [AdminPembimbingTugasController::class, 'penilaian'])->name('pembimbingPenilaian');
+        // pembimbing
+        // Menu Tugas
+        Route::get('pembimbing/tugas/index', [AdminPembimbingTugasController::class, 'index'])->name('tugas');
+        Route::post('pembimbing/tugas', [AdminPembimbingTugasController::class, 'tugasAdmin'])->name('pembimbingTugas');
+        
+        // penilaian
+        Route::get('pembimbing/penilaian', [AdminPembimbingPenilaianController::class, 'penilaian'])->name('pembimbingPenilaian');
 
 
+    });
 });

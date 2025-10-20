@@ -1,105 +1,200 @@
-@include('component.app')
+@extends('component/app')
 
 @section('content')
-<div class="container">
-    <h4 class="mb-3">Daftar Tugas Pembimbing</h4>
+<h1 class="h3 mb-4 text-gray-800">
+    <i class="fas fa-tasks mr-2"></i>
+    {{ $title }}
+</h1>
 
-    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalTambahTugas">
-        <i class="fas fa-plus"></i> Tambah Tugas
-    </button>
-
-    <div class="card shadow-sm">
-        <div class="card-header bg-primary text-white">
-            <strong>Daftar Tugas</strong>
+@can('isAdmin')
+<div class="card">
+    <div class="card-header d-flex flex-wrap justify-content-center justify-content-xl-between">
+        <div class="mb-1 mr-2">
         </div>
-        <div class="card-body p-0">
-            <table class="table table-striped mb-0">
-                <thead class="table-light">
-                    <tr>
-                        <th>No</th>
-                        <th>Judul</th>
-                        <th>Tenggat</th>
-                        <th>Status</th>
-                        <th>Progress Submit</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Laporan Harian Minggu 1</td>
-                        <td>2025-10-20</td>
-                        <td><span class="badge bg-success">Aktif</span></td>
-                        <td>5/8 Siswa</td>
-                        <td>
-                            <a href="#" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
-                            <a href="#" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
-                            <a href="#" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Laporan Akhir</td>
-                        <td>2025-11-01</td>
-                        <td><span class="badge bg-secondary">Selesai</span></td>
-                        <td>8/8 Siswa</td>
-                        <td>
-                            <a href="#" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
-                            <a href="#" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
-                            <a href="#" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div>
+            @if (auth()->user()->is_tugas == true)
+            <a href="{{ route('tugasPdf') }}" class="btn btn-sm btn-danger">
+                <i class="fas fa-file-pdf mr-2"></i>
+                PDF
+            </a>
+            @endif
         </div>
-    </div>
+        </div>
+    
 
- 
-    <div class="modal fade" id="modalTambahTugas" tabindex="-1" aria-labelledby="modalTambahTugasLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <form action="{{ route('tugas') }}" method="POST">
-                    @csrf
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalTambahTugasLabel">Tambah Tugas Baru</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
+    <div class="card-body">
+        
+        @if (auth()->user()->is_tugas==true)
+        <div class="row">
+            <div class="col-6">
+                Nama
+            </div>
+            <div class="col-6">
+                : {{ $tugas->user->nama}}
 
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="judul" class="form-label">Judul Tugas</label>
-                            <input type="text" name="judul" id="judul" class="form-control" required placeholder="Masukkan judul tugas">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="deskripsi" class="form-label">Deskripsi Tugas</label>
-                            <textarea name="deskripsi" id="deskripsi" class="form-control" rows="4" required placeholder="Tuliskan deskripsi tugas"></textarea>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="target_siswa" class="form-label">Target Siswa</label>
-                            <select name="target_siswa[]" id="target_siswa" class="form-select" multiple required>
-                                <option value="1">Ahmad Dhonan</option>
-                                <option value="2">Teguh Adriansyah</option>
-                                <option value="3">Rizky Saputra</option>
-                            </select>
-                            <small class="text-muted">Tekan CTRL atau CMD untuk memilih lebih dari satu siswa.</small>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="tenggat" class="form-label">Tenggat Waktu</label>
-                            <input type="date" name="tenggat" id="tenggat" class="form-control" required>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary">Simpan Tugas</button>
-                    </div>
-                </form>
             </div>
         </div>
-    </div>
 
+        <div class="row">
+            <div class="col-6">
+                Email
+            </div>
+            <div class="col-6">
+                :
+                <span class="badge badge-primary">
+                     {{ $tugas->user->email}}
+                </span>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                Tugas
+            </div>
+            <div class="col-6">
+                : {{ $tugas->tugas}}
+
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-6">
+                Tanggal Mulai
+            </div>
+            <div class="col-6">
+                : 
+                <span class="badge badge-info">
+                    {{ $tugas->tanggal_mulai}}
+               </span>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                Tanggal Selesai
+            </div>
+            <div class="col-6">
+                : 
+                <span class="badge badge-info">
+                    {{ $tugas->tanggal_selesai}}
+               </span>
+
+            </div>
+        </div>
+
+        @else
+            <div class="row">
+                <div class="col-6">
+                    Status
+                </div>
+                <div class="col-6">
+                    <span class="badge badge-danger">
+                        Belum Ditugaskan
+                    </span>
+                </div>
+            </div>
+        @endif
+
+
+    </div>
 </div>
+@endcan
+
+@can('isPembimbing')
+<div class="card">
+    <div class="card-header d-flex flex-wrap justify-content-center justify-content-xl-between">
+        <div class="mb-1 mr-2">
+        </div>
+        <div>
+            @if (auth()->user()->is_tugas == true)
+            <a href="{{ route('tugasPdf') }}" class="btn btn-sm btn-danger">
+                <i class="fas fa-file-pdf mr-2"></i>
+                PDF
+            </a>
+            @endif
+        </div>
+        </div>
+    
+
+    <div class="card-body">
+        
+        @if (auth()->user()->is_tugas==true)
+        <div class="row">
+            <div class="col-6">
+                Nama
+            </div>
+            <div class="col-6">
+                : {{ $tugas->user->nama}}
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                Email
+            </div>
+            <div class="col-6">
+                :
+                <span class="badge badge-primary">
+                     {{ $tugas->user->email}}
+                </span>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                Tugas
+            </div>
+            <div class="col-6">
+                : {{ $tugas->tugas}}
+
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-6">
+                Tanggal Mulai
+            </div>
+            <div class="col-6">
+                : 
+                <span class="badge badge-info">
+                    {{ $tugas->tanggal_mulai}}
+               </span>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                Tanggal Selesai
+            </div>
+            <div class="col-6">
+                : 
+                <span class="badge badge-info">
+                    {{ $tugas->tanggal_selesai}}
+               </span>
+
+            </div>
+        </div>
+
+        @else
+            <div class="row">
+                <div class="col-6">
+                    Status
+                </div>
+                <div class="col-6">
+                    <span class="badge badge-danger">
+                        Belum Ditugaskan
+                    </span>
+                </div>
+            </div>
+        @endif
+
+
+    </div>
+</div>
+@endcan
 @endsection
