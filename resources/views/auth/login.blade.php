@@ -40,7 +40,7 @@
                                 <div class="p-5">
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4"><i class="fas fa-tasks mr-2"></i>
-                                        M-Tugas | Login</h1>
+                                        Pengajuan Pkl Magang | Login</h1>
                                     </div>
                                     <form class="user" method="POST" action="{{ route('loginProses') }}">
                                         @csrf

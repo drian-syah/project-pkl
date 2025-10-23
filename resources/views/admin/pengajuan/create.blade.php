@@ -20,19 +20,19 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label class="form-label">
-                        <span class="text-danger">*</span> Nama
+                        <span class="text-danger">*</span> No Surat
                     </label>
-                    <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama') }}">
-                    @error('nama')
+                    <input type="number" name="no_surat" class="form-control @error('no_surat') is-invalid @enderror" value="{{ old('no_surat') }}">
+                    @error('no_surat')
                         <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">
-                        <span class="text-danger">*</span> Email
+                        <span class="text-danger">*</span> Sekolah
                     </label>
-                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}">
-                    @error('email')
+                    <input type="text" name="sekolah" class="form-control @error('sekolah') is-invalid @enderror" value="{{ old('sekolah') }}">
+                    @error('sekolah')
                         <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>

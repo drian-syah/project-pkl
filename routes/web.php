@@ -3,9 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\SettingController;
-use App\Http\Controllers\DashboardController;
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PengajuanController;
 use App\Http\Controllers\PembimbingController;
 use App\Http\Controllers\PenempatanController;
@@ -16,7 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('registerForm');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 
 Route::middleware('isLogin')->group(function () {
@@ -84,14 +85,23 @@ Route::middleware('checkLogin')->group(function () {
         Route::delete('penempatan/destroy/{id}', [PenempatanController::class, 'destroy'])->name('penempatanDestroy');
         Route::get('penempatan/excel', [PenempatanController::class, 'excel'])->name('penempatanExcel');
 
+    });
+
+    Route::middleware(['can:isPembimbing'])->group(function () {
         // pembimbing
         // Menu Tugas
         Route::get('pembimbing/tugas/index', [AdminPembimbingTugasController::class, 'index'])->name('tugas');
         Route::post('pembimbing/tugas', [AdminPembimbingTugasController::class, 'tugasAdmin'])->name('pembimbingTugas');
-        
+
         // penilaian
         Route::get('pembimbing/penilaian', [AdminPembimbingPenilaianController::class, 'penilaian'])->name('pembimbingPenilaian');
-
-
     });
+
+    Route::middleware(['can:isSekolah'])->group(function () {
+        // sekolah
+        Route::get('sekolah', [SekolahController::class, 'index'])->name('sekolah');
+    });
+    Route::get('pengajuan/create', [SekolahController::class, 'create'])->name('pengajuanCreate');
+    Route::post('pengajuan/create', [SekolahController::class, 'Store'])->name('SekolahPengajuan');
+
 });

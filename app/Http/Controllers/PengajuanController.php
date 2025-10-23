@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Exports\UserExport;
+use App\Http\Requests\StorePengajuanRequest;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\PengajuanPklmagang;
@@ -20,21 +21,21 @@ class PengajuanController extends Controller
             'menuAdminPengajuan' => 'active',
             'pengajuan' => PengajuanPklmagang::orderBy('id', 'asc')->get(),
         );
-        return view('admin/pengajuan/index', $data);
+        return view('admin.pengajuan.index', $data);
     }
 
     public function create()
     {
-        $data = array(
+        $data = [
             'title' => 'Tambah Data Pengajuan',
             'menuAdminPengajuan' => 'active',
-        );
-        return view('admin/pengajuan/create', $data);
+        ];
+        return view('admin.pengajuan.create', $data);
     }
 
-    public function store(Request $request)
+    public function store(StorePengajuanRequest $request)
     {
-        $request->validate([
+        $validate = $request([
             'nama'     => 'required',
             'email'    => 'required|unique:users,email',
             'role'  => 'required',

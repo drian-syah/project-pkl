@@ -29,7 +29,6 @@ return new class extends Migration
                 ->default('draft');
 
             $table->string('file_surat_path', 255)->nullable();
-            $table->text('catatan')->nullable();
 
             // Kolom audit trail
             $table->timestamp('created_date')->useCurrent();

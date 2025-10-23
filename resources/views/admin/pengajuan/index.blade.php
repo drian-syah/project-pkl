@@ -38,7 +38,7 @@
                         <th>Periode Mulai</th>
                         <th>Periode Selesai</th>
                         <th>Status</th>
-                        <th><i class="fas fa-cog"></i></th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -59,7 +59,7 @@
                             </td>
                             <td class="text-center">
                                 <a href="{{ route('pengajuanEdit', $item->id) }}" class="btn btn-sm btn-warning">
-                                    <i class="fas fa-edit"></i>
+                                    <i class="fas fa-check"></i>
                                 </a>
                                 <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal{{ $item->id }}">
                                     <i class="fas fa-trash"></i>

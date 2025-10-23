@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id(); // primary key auto increment
             $table->string('nama', 100);
             $table->string('email', 100)->unique();
-            $table->enum('role', ['Admin', 'Pembimbing', 'Siswa']);
+            $table->enum('role', ['Admin', 'Pembimbing', 'Siswa', 'Sekolah']);
             $table->string('password', 255);
             $table->boolean('is_tugas')->default(false);
             $table->rememberToken();

@@ -12,9 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('sekolahs', function (Blueprint $table) {
+
             $table->id();
             $table->string('nama', 150);
-            $table->string('npsn', 50);
+            $table->string('npsn', 50)->unique();
             $table->string('alamat', 150);
             $table->string('kontak', 100);
 
@@ -35,14 +36,16 @@ return new class extends Migration
             $table->timestamp('deleted_date')->nullable();
 
             $table->boolean('is_active')->default(true);
+
+            $table->timestamps();
         });
-    }
+    }   
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('sekolahs');
+        Schema::dropIfExists('sekolah');
     }
 };

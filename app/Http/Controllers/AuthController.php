@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Sekolah;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -16,15 +19,29 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:100',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6|confirmed',
+            'nama' => 'required|string|max:100',
+            'npsn' => 'required|string|max:50|unique:sekolahs,npsn',
+            'alamat' => 'required|string|max:150',
+            'kontak' => 'required|string|max:100',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:8|confirmed',
+        ]);
+
+        $sekolah = Sekolah::create([
+            'nama' => $request['nama'],
+            'npsn' => $request['npsn'],
+            'alamat' => $request['alamat'],
+            'kontak' => $request['kontak'],
+            'is_active' => true,
         ]);
 
         User::create([
-            'name' => $request->name,
+            'nama' => $request->nama,
+            'npsn' => $request->npsn,
+            'alamat' => $request->alamat,
+            'kontak' => $request->kontak,
             'email' => $request->email,
-            'role' => 'siswa', // default role
+            'role' => 'sekolah', // default role
             'password' => Hash::make($request->password),
         ]);
 
@@ -40,11 +57,10 @@ class AuthController extends Controller
     {   
         $request->validate([
             'email' => 'required',
-            'password' => 'required|min:8'
+            'password' => 'required'
         ],[
             'email.required' => 'Email Tidak Boleh Kosong',
             'password.required' => 'Password Tidak Boleh Kosong',
-            'password.min' => 'Password Minimal 8 Karakter',
         ]);
 
         $data = array(

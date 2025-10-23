@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Tugas;
+use App\Models\Sekolah;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -15,7 +16,6 @@ class User extends Authenticatable
         'nama',
         'email',
         'role',
-        'is_tugas',
         'password',
     ];
 
@@ -23,6 +23,12 @@ class User extends Authenticatable
     {
         return $this->hasOne(Tugas::class);
     }
+
+    public function sekolah()
+    {
+    return $this->belongsTo(Sekolah::class, 'sekolah_id');
+    }
+
 
     // Tambahkan di sini
     public function isSiswa()
@@ -42,4 +48,17 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($user) {
+            // Hapus data sekolah yang terkait
+            if ($user->sekolah) {
+                $user->sekolah->delete();
+            }
+        });
+    }
+    
 }
