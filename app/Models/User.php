@@ -24,9 +24,14 @@ class User extends Authenticatable
         return $this->hasOne(Tugas::class);
     }
 
+    public function pengajuan()
+    {
+        return $this->hasMany(PengajuanPklmagang::class);
+    }
+
     public function sekolah()
     {
-    return $this->belongsTo(Sekolah::class, 'sekolah_id');
+        return $this->hasOne(Sekolah::class, 'user_id');
     }
 
 
@@ -60,5 +65,7 @@ class User extends Authenticatable
             }
         });
     }
-    
+
+
+
 }

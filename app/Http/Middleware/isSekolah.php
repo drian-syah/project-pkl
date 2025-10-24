@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class isSekolah
@@ -15,7 +16,7 @@ class isSekolah
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::user()->role=='sekolah'){
+        if (Auth::user()->role == 'Sekolah'){
             return $next($request);
         }else{
             return redirect()->route('dashboard')->with('error', 'Anda Tidak Punya Akses');

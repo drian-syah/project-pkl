@@ -20,10 +20,8 @@ return new class extends Migration
             $table->string('kontak', 100);
 
             $table->timestamp('created_date')->nullable();
-            $table->foreignId('created_id')
-                ->nullable()
-                ->constrained('users')
-                ->nullOnDelete();
+            $table->unsignedBigInteger('created_id')->nullable(); // tanpa ->constrained()
+
             $table->foreignId('updated_id')
                 ->nullable()
                 ->constrained('users')
@@ -46,6 +44,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sekolah');
+        Schema::dropIfExists('sekolahs');
     }
 };

@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     public function up(): void
     {
         Schema::create('pengajuan_pklmagang', function (Blueprint $table) {
@@ -28,7 +27,7 @@ return new class extends Migration
             $table->enum('status', ['draft', 'diproses', 'diterima', 'ditolak', 'selesai'])
                 ->default('draft');
 
-            $table->string('file_surat_path', 255)->nullable();
+            $table->string('file_surat_path', 10000)->nullable();
 
             // Kolom audit trail
             $table->timestamp('created_date')->useCurrent();
@@ -53,6 +52,8 @@ return new class extends Migration
             $table->timestamp('deleted_date')->nullable();
 
             $table->boolean('is_active')->default(true);
+
+            $table->timestamps();
         });
     }
 

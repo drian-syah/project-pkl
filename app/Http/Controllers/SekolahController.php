@@ -14,7 +14,7 @@ class SekolahController extends Controller
         $data = [
             'title' => 'Menu Pengajuan',
             'menuSekolah' => 'active',
-            'pengajuan' => PengajuanPklmagang::OrderBy('id', 'asc')->get()
+            'pengajuan' => PengajuanPklmagang::where('sekolah_id', Auth::id())->OrderBy('id', 'asc')->get()
         ];
         return view('sekolah.pengajuan.index', $data);
     }
@@ -38,10 +38,40 @@ class SekolahController extends Controller
             'jumlah_siswa' => $validated['jumlah_siswa'],
             'periode_mulai' => $validated['periode_mulai'],
             'periode_selesai' => $validated['periode_selesai'],
-            'status' => 'pending',
         ]);
-        return redirect()->route('sekolah.pengajuan.create')->with('success', 'Pengajuan berhasil dikirim dan sedang menunggu persetujuan admin.');
-
+        return redirect()->route('sekolah')->with('success', 'Pengajuan berhasil dikirim dan sedang menunggu persetujuan admin.');
     }
 
+    public function edit()
+    {
+        $data = array(
+            'title' => 'Edit Pengajuan',
+            'menuEditPengajuanSekolah' => 'active',
+            'pengajuan' => PengajuanPklmagang::where('sekolah_id', Auth::id())->first()
+        );
+        return view('sekolah.pengajuan.edit', $data);
+    }
+
+    public function update(StorePengajuanRequest $request, $sekolah_id)
+    {
+        $validated = $request->validated();
+        PengajuanPklmagang::update([
+            'sekolah_id' => auth()->user()->id,
+            'no_surat' => $validated['no_surat'],
+            'tgl_surat' => $validated['tgl_surat'],
+            'jumlah_siswa' => $validated['jumlah_siswa'],
+            'periode_mulai' => $validated['periode_mulai'],
+            'periode_selesai' => $validated['periode_selesai'],
+        ]);
+        return redirect()->route('sekolah')->with('success', 'Pengajuan berhasil dikirim dan sedang menunggu persetujuan admin.');
+    }
+
+    public function destroy($sekolah_id)
+    {
+        $pengajuan = PengajuanPklmagang::where('sekolah_id', $sekolah_id)->first();
+        $pengajuan->delete();
+
+        return redirect()->route('sekolah')->with('success', 'Data Berhasil Di Hapus');
+
+    }
 }

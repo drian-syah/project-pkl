@@ -38,25 +38,8 @@ Route::middleware('checkLogin')->group(function () {
         Route::get('profil/setting', [SettingController::class, 'index'])->name('index');
         Route::put('profil/setting', [SettingController::class, 'update'])->name('updateSetting');
     });
-
-    // penempatan
-    Route::get('penempatan', [PenempatanController::class, 'index'])->name('penempatan');
-    Route::get('penempatan/pdf', [PenempatanController::class, 'pdf'])->name('penempatanPdf');
-
-    // pembimbing
-    Route::get('pembimbing', [PembimbingController::class, 'index'])->name('pembimbing');
-
-    // siswa
-    Route::get('presensi', [SiswaController::class, 'index'])->name('presensi');
-    Route::post('presensi', [SiswaController::class, 'store'])->name('presensiStore');
-    // form presensi masuk
-    Route::get('presensi/masuk', [SiswaController::class, 'masuk'])->name('presensiMasuk');
-
-    // Form presensi pulang
-    Route::get('presensi/pulang', [SiswaController::class, 'pulang'])->name('presensiPulang');
-
-    // Submit presensi pulang
-    Route::post('presensi/pulang', [SiswaController::class, 'pulangStore'])->name('presensiPulangStore');
+    
+    
 
 
 
@@ -84,24 +67,47 @@ Route::middleware('checkLogin')->group(function () {
         Route::post('penempatan/update/{id}', [PenempatanController::class, 'update'])->name('tugaspenempatanUpdate');
         Route::delete('penempatan/destroy/{id}', [PenempatanController::class, 'destroy'])->name('penempatanDestroy');
         Route::get('penempatan/excel', [PenempatanController::class, 'excel'])->name('penempatanExcel');
+        Route::get('penempatan', [PenempatanController::class, 'index'])->name('penempatan');
+        Route::get('penempatan/pdf', [PenempatanController::class, 'pdf'])->name('penempatanPdf');
+
 
     });
 
-    Route::middleware(['can:isPembimbing'])->group(function () {
+    Route::middleware('isPembimbing')->group(function () {
         // pembimbing
         // Menu Tugas
         Route::get('pembimbing/tugas/index', [AdminPembimbingTugasController::class, 'index'])->name('tugas');
         Route::post('pembimbing/tugas', [AdminPembimbingTugasController::class, 'tugasAdmin'])->name('pembimbingTugas');
+        Route::get('pembimbing', [PembimbingController::class, 'index'])->name('pembimbing');
+
 
         // penilaian
         Route::get('pembimbing/penilaian', [AdminPembimbingPenilaianController::class, 'penilaian'])->name('pembimbingPenilaian');
     });
 
-    Route::middleware(['can:isSekolah'])->group(function () {
+    Route::middleware('isSiswa')->group(function(){
+        // siswa
+    Route::get('presensi', [SiswaController::class, 'index'])->name('presensi');
+    Route::post('presensi', [SiswaController::class, 'store'])->name('presensiStore');
+    // form presensi masuk
+    Route::get('presensi/masuk', [SiswaController::class, 'masuk'])->name('presensiMasuk');
+
+    // Form presensi pulang
+    Route::get('presensi/pulang', [SiswaController::class, 'pulang'])->name('presensiPulang');
+
+    // Submit presensi pulang
+    Route::post('presensi/pulang', [SiswaController::class, 'pulangStore'])->name('presensiPulangStore');
+
+    });
+
+    Route::middleware('isSekolah')->group(function () {
         // sekolah
         Route::get('sekolah', [SekolahController::class, 'index'])->name('sekolah');
+        Route::get('sekolah/pengajuan/create', [SekolahController::class, 'create'])->name('pengajuanSekolah');
+        Route::post('sekolah/pengajuan/store', [SekolahController::class, 'store'])->name('SekolahPengajuan');
+        Route::get('pengajuan/edit', [SekolahController::class, 'edit'])->name('SekolahPengajuanEdit');
+        Route::post('sekolah/pengajuan/update', [SekolahController::class, 'update'])->name('SekolahPengajuanUpdate');
+        Route::delete('sekolah/pengajuan/destroy/{sekolah_id}', [SekolahController::class, 'destroy'])->name('SekolahPengajuanDestroy');
     });
-    Route::get('pengajuan/create', [SekolahController::class, 'create'])->name('pengajuanCreate');
-    Route::post('pengajuan/create', [SekolahController::class, 'Store'])->name('SekolahPengajuan');
 
 });

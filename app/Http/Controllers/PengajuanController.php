@@ -17,9 +17,9 @@ class PengajuanController extends Controller
     public function index()
     {
         $data = array(
-            'title' => 'Data Pengajuan',
+            'title' => 'Data Pengajuan`',
             'menuAdminPengajuan' => 'active',
-            'pengajuan' => PengajuanPklmagang::orderBy('id', 'asc')->get(),
+            'pengajuan' => PengajuanPklmagang::orderBy('status', 'asc')->get(),
         );
         return view('admin.pengajuan.index', $data);
     }
@@ -51,7 +51,7 @@ class PengajuanController extends Controller
             'password.mixed' => 'Password Minimal Harus Mengandung Huruf Besar dan Kecil'
         ]);
 
-        $user = new Pengajuan;
+        $user = new PengajuanPklmagang();
         $user->nama     = $request->nama;
         $user->email    = $request->email;
         $user->role  = $request->role;

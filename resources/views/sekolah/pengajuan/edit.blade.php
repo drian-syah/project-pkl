@@ -7,20 +7,20 @@
 
 <div class="card">
     <div class="card-header bg-primary">
-        <a href="{{ route('pengajuan') }}" class="btn text-white">
+        <a href="{{ route('sekolah') }}" class="btn text-white">
             <i class="fas fa-arrow-left mr-2"></i>
             Kembali</a>
     </div>
         <div class="card-body">
 
-            <form action="{{ route('userUpdate', $user->id) }}" method="post">
+            <form action="{{ route('SekolahPengajuanUpdate', $pengajuan->sekolah_id) }}" method="post">
             @csrf
             <div class="row mb-2">
                 <div class="col-xl-6 mb-1">
                     <label class="form-label">
                         <span class="text-danger">*</span>
                         Nama :</label>
-                    <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" value="{{ $user->nama }}">
+                    <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" value="{{ $pengajuan->nama }}">
                     @error('nama')
                     <small class="text-danger">
                         {{ $message }}
@@ -31,7 +31,7 @@
                     <label class="form-label mb-1">
                         <span class="text-danger">*</span>
                         Email :</label>
-                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ $user->email }}">
+                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ $pengajuan->email }}">
                     @error('email')
                     <small class="text-danger">
                         {{ $message }}
@@ -47,8 +47,8 @@
                         Jabatan :</label>
                         <select name="jabatan" class="form-control @error('jabatan') is-invalid @enderror">
                         <option disabled>--Pilih Jabatan--</option>
-                        <option value="Admin" {{ $user->jabatan == 'Admin' ? 'selected' : '' }}>Admin</option>
-                        <option value="Karyawan" {{ $user->jabatan == 'Karyawan' ? 'selected' : '' }}>Karyawan</option>
+                        <option value="Admin" {{ $pengajuan->jabatan == 'Admin' ? 'selected' : '' }}>Admin</option>
+                        <option value="Karyawan" {{ $pengajuan->jabatan == 'Karyawan' ? 'selected' : '' }}>Karyawan</option>
                     </select>
                     @error('jabatan')
                     <small class="text-danger">

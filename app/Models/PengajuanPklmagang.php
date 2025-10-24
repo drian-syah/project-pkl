@@ -25,4 +25,9 @@ class PengajuanPklmagang extends Model
     {
         return $this->belongsTo(Sekolah::class, 'sekolah_id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

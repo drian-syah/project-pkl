@@ -14,15 +14,16 @@ class Sekolah extends Model
         'npsn',
         'alamat',
         'kontak',
+        'user_id',
     ];
 
     public function user()
     {
-        return $this->hasOne(User::class, 'sekolah_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
     public function pengajuan()
     {
-    return $this->hasMany(PengajuanPklmagang::class, 'sekolah_id');
+        return $this->hasMany(PengajuanPklmagang::class, 'sekolah_id');
     }
 
 }

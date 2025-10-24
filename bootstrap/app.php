@@ -2,7 +2,9 @@
 
 use App\Http\Middleware\isAdmin;
 use App\Http\Middleware\isLogin;
+use App\Http\Middleware\isSiswa;
 use Illuminate\Auth\Events\Login;
+use App\Http\Middleware\isSekolah;
 use App\Http\Middleware\checkLogin;
 use App\Http\Middleware\isPembimbing;
 use Illuminate\Foundation\Application;
@@ -20,8 +22,9 @@ return Application::configure(basePath: dirname(__DIR__))
             'checkLogin' => checkLogin::class,
             'isAdmin' => isAdmin::class,
             'isLogin' => isLogin::class,
-            'siswa' => SiswaMiddleware::class,
+            'isSiswa' => isSiswa::class,
             'isPembimbing' => isPembimbing::class,
+            'isSekolah' => isSekolah::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
