@@ -17,9 +17,11 @@ class PengajuanController extends Controller
     public function index()
     {
         $data = array(
-            'title' => 'Data Pengajuan`',
+            'title' => 'Data Pengajuan',
             'menuAdminPengajuan' => 'active',
-            'pengajuan' => PengajuanPklmagang::orderBy('status', 'asc')->get(),
+            'pengajuan' => PengajuanPklmagang::where('status', '!=', 'draft')
+                        ->orderBy('created_at', 'desc')
+                        ->get()
         );
         return view('admin.pengajuan.index', $data);
     }
@@ -35,31 +37,16 @@ class PengajuanController extends Controller
 
     public function store(StorePengajuanRequest $request)
     {
-        $validate = $request([
-            'nama'     => 'required',
-            'email'    => 'required|unique:users,email',
-            'role'  => 'required',
-            'password' => ['required', 'confirmed', Password::min(8)->mixedCase(),],
-        ],[
-            'nama.required'     => 'Nama Tidak Boleh Kosong',
-            'email.required'    => 'Email Tidak Boleh Kosong',
-            'email.unique'      => 'Email Sudah Ada',
-            'role.required'  => 'Status Anda Harus Dipilih',
-            'password.required' => 'Password Tidak Boleh Kosong',
-            'password.confirmed'=> 'Password Konfirmasi Tidak Sama',
-            'password.min'      => 'Password Minimal 8 Karakter',
-            'password.mixed' => 'Password Minimal Harus Mengandung Huruf Besar dan Kecil'
+        $validated = $request->validated();
+        PengajuanPklmagang::create([
+            'sekolah_id' => auth()->user()->id,
+            'no_surat' => $validated['no_surat'],
+            'tgl_surat' => $validated['tgl_surat'],
+            'jumlah_siswa' => $validated['jumlah_siswa'],
+            'periode_mulai' => $validated['periode_mulai'],
+            'periode_selesai' => $validated['periode_selesai'],
         ]);
-
-        $user = new PengajuanPklmagang();
-        $user->nama     = $request->nama;
-        $user->email    = $request->email;
-        $user->role  = $request->role;
-        $user->password = Hash::make($request->password);
-        $user->is_tugas = false;
-        $user->save();
-
-        return redirect()->route('pengajuan')->with('success', 'Data Berhasil Ditambahkan');
+        return redirect()->route('admin.pengajuan')->with('success', 'Pengajuan berhasil dikirim dan sedang menunggu persetujuan admin.');
     }
 
     public function edit($id)
@@ -67,53 +54,51 @@ class PengajuanController extends Controller
         $data = [
             'title' => 'Edit Data User',
             'menuAdminUser' => 'active',
-            'user'  => Pengajuan::findOrFail($id),
+            'user'  => PengajuanPklmagang::findOrFail($id),
         ];
-        return view('admin/pengajuan/edit', $data);
+        return view('admin.pengajuan.edit', $data);
     }
 
-    public function update(Request $request, $id)
+    public function update(StorePengajuanRequest $request, $id)
     {
-        $request->validate([
-            'nama'     => 'required',
-            'email'    => 'required|unique:users,email,' .$id,
-            'role'  => 'required',
-            'password' => ['nullable', 'confirmed', Password::min(8)->mixedCase()],
-        ],[
-            'nama.required'     => 'Nama Tidak Boleh Kosong',
-            'email.required'    => 'Email Tidak Boleh Kosong',
-            'email.unique'      => 'Email Sudah Ada',
-            'role.required'  => 'Status Anda Harus Dipilih',
-            'password.required' => 'Password Tidak Boleh Kosong',
-            'password.confirmed'=> 'Password Konfirmasi Tidak Sama',
-            'password.min'      => 'Password Minimal 8 Karakter',
-            'password.mixed' => 'Password Minimal Harus Mengandung Huruf Besar dan Kecil' 
+        $validated = $request->validated();
+        PengajuanPklmagang::update([
+            'sekolah_id' => auth()->user()->id,
+            'no_surat' => $validated['no_surat'],
+            'tgl_surat' => $validated['tgl_surat'],
+            'jumlah_siswa' => $validated['jumlah_siswa'],
+            'periode_mulai' => $validated['periode_mulai'],
+            'periode_selesai' => $validated['periode_selesai'],
         ]);
-
-        $user = Pengajuan::with('pengajuan')->findOrFail($id) ;
-        $user->nama     = $request->nama;
-        $user->email    = $request->email;
-        $user->role  = $request->role;
-        if ($request->role == 'Admin') {
-            $user->is_tugas = false;
-            $user->tugas()->delete();
-        }
-
-        if($request->filled('password'))
-        {
-            $user->password = Hash::make($request->password);
-        }
-        $user->save();
-
-        return redirect()->route('pengajuan')->with('success', 'Data Berhasil Di Edit');
+        return redirect()->route('admin.pengajuan')->with('success', 'Pengajuan berhasil dikirim dan sedang menunggu persetujuan admin.');
     }
 
-    public function destroy($id)
+    public function show($sekolah_id)
     {
-        $user = Pengajuan::findOrFail($id);
-        $user->delete();
+        $pengajuan = PengajuanPklmagang::findOrFail($sekolah_id);
+        return view('admin.pengajuan');
+    }
 
-        return redirect()->route('pengajuan')->with('success', 'Data Berhasil Di Hapus');
+    public function disetujui($sekolah_id)
+    {
+        $pengajuan = PengajuanPklmagang::where('sekolah_id', $sekolah_id)->where('status', 'diproses');
+        $pengajuan->update(['status' => 'diterima']);
+        return back()->with('success', 'Pengajuan Sudah Diterima');
+    }
+
+    public function ditolak($sekolah_id)
+    {
+        $pengajuan = PengajuanPklmagang::where('sekolah_id', $sekolah_id)->where('status', 'diproses');
+        $pengajuan->update(['status' => 'ditolak']);
+        return back()->with('success', 'Pengajuan Ditolak');
+    }
+
+    public function destroy($sekolah_id)
+    {
+        $pengajuan = PengajuanPklmagang::where('sekolah_id', $sekolah_id)->first();
+        $pengajuan->delete();
+
+        return redirect()->route('admin.pengajuan')->with('success', 'Data Berhasil Di Hapus');
 
     }
 

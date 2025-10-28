@@ -15,11 +15,11 @@
                 </a>
             </div>
             <div>
-                <a href="{{ route('pengajuanExcel') }}" class="btn btn-sm btn-success">
+                <a href="{{ route('SekolahPengajuanExcel') }}" class="btn btn-sm btn-success">
                     <i class="fas fa-file-excel mr-2"></i>
                     Excel
                 </a>
-                <a href="{{ route('pengajuanPdf') }}" class="btn btn-sm btn-danger" target='__blank'>
+                <a href="{{ route('SekolahPengajuanPdf') }}" class="btn btn-sm btn-danger" target='__blank'>
                     <i class="fas fa-file-pdf mr-2"></i>
                     PDF
                 </a>
@@ -51,13 +51,28 @@
                                 <td class="text-center">{{ $item->periode_mulai }}</td>
                                 <td class="text-center">{{ $item->periode_selesai }}</td>
                                 <td class="text-center">
-                                    @if ($item->status == true)
-                                        <span class="badge badge-danger">Pending</span>
+                                    @if ($item->status == 'draft')
+                                        <span class="badge bg-secondary">Draft</span>
+                                    @elseif ($item->status == 'diproses')
+                                        <span class="badge bg-warning text-dark">Sedang Diproses</span>
+                                    @elseif ($item->status == 'diterima')
+                                        <span class="badge bg-success">Diterima</span>
+                                    @elseif ($item->status == 'ditolak')
+                                        <span class="badge bg-danger">Ditolak</span>
                                     @else
-                                        <span class="badge badge-success">Sudah Ditugaskan</span>
+                                        <span class="badge bg-light">Tidak Diketahui</span>
                                     @endif
                                 </td>
                                 <td class="text-center">
+                                        @if ($item->status === 'draft')
+                                            <form action="{{ route('SekolahPengajuanKirim', $item->sekolah_id) }}" method="POST" class="d-inline">
+                                                @csrf
+                                                <button type="submit" class="btn btn-primary btn-sm">
+                                                    <i class="fas fa-paper-plane mr-1"></i> Kirim ke Admin
+                                                </button>
+                                            </form>
+                                        @else
+                                        @endif
                                     <a href="{{ route('SekolahPengajuanEdit', $item->id) }}" class="btn btn-sm btn-warning">
                                         <i class="fas fa-edit"></i>
                                     </a>

@@ -14,7 +14,8 @@ class SekolahController extends Controller
         $data = [
             'title' => 'Menu Pengajuan',
             'menuSekolah' => 'active',
-            'pengajuan' => PengajuanPklmagang::where('sekolah_id', Auth::id())->OrderBy('id', 'asc')->get()
+            'pengajuan' => PengajuanPklmagang::where('sekolah_id', Auth::user()->sekolah->id)->get(),
+
         ];
         return view('sekolah.pengajuan.index', $data);
     }
@@ -32,14 +33,30 @@ class SekolahController extends Controller
     {
         $validated = $request->validated();
         PengajuanPklmagang::create([
-            'sekolah_id' => auth()->user()->id,
+            'sekolah_id' => auth()->user()->sekolah->id,
             'no_surat' => $validated['no_surat'],
             'tgl_surat' => $validated['tgl_surat'],
             'jumlah_siswa' => $validated['jumlah_siswa'],
             'periode_mulai' => $validated['periode_mulai'],
             'periode_selesai' => $validated['periode_selesai'],
+            'status' => 'draft' 
         ]);
         return redirect()->route('sekolah')->with('success', 'Pengajuan berhasil dikirim dan sedang menunggu persetujuan admin.');
+    }
+
+    public function kirim($sekolah_id)
+    {
+    $pengajuan = PengajuanPklmagang::where('sekolah_id', $sekolah_id)
+        ->where('status', 'draft')
+        ->firstOrFail();
+
+        if ($pengajuan->status !== 'draft') {
+            return back()->with('error', 'Pengajuan ini sudah dikirim atau sudah diproses.');
+        }
+    
+        $pengajuan->update(['status' => 'diproses']);
+    
+        return back()->with('success', 'Pengajuan berhasil dikirim dan sedang diproses oleh admin.');
     }
 
     public function edit()

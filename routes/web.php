@@ -48,14 +48,16 @@ Route::middleware('checkLogin')->group(function () {
 
 
         // pengajuan 
-        Route::get('pengajuan', [PengajuanController::class, 'index'])->name('pengajuan');
-        Route::get('pengajuan/create', [PengajuanController::class, 'create'])->name('pengajuanCreate');
-        Route::post('pengajuan/store', [PengajuanController::class, 'store'])->name('pengajuanStore');
-        Route::get('pengajuan/edit/{id}', [PengajuanController::class, 'edit'])->name('pengajuanEdit');
-        Route::post('pengajuan/update/{id}', [PengajuanController::class, 'update'])->name('pengajuanUpdate');
-        Route::delete('pengajuan/destroy/{id}', [PengajuanController::class, 'destroy'])->name('pengajuanDestroy');
-        Route::get('pengajuan/excel', [PengajuanController::class, 'excel'])->name('pengajuanExcel');
-        Route::get('pengajuan/pdf', [PengajuanController::class, 'pdf'])->name('pengajuanPdf');
+        Route::get('pengajuan', [PengajuanController::class, 'index'])->name('adminPengajuan');
+        Route::get('pengajuan/create', [PengajuanController::class, 'create'])->name('adminPengajuanCreate');
+        Route::post('pengajuan/store', [PengajuanController::class, 'store'])->name('adminPengajuanStore');
+        Route::get('pengajuan/edit/{sekolah_id}', [PengajuanController::class, 'edit'])->name('adminPengajuanEdit');
+        Route::post('pengajuan/update/{sekolah_id}', [PengajuanController::class, 'update'])->name('adminPengajuanUpdate');
+        Route::post('pengajuan/disetujui/{sekolah_id}', [PengajuanController::class, 'disetujui'])->name('adminPengajuanDisetujui');
+        Route::post('pengajuan/ditolak/{sekolah_id}', [PengajuanController::class, 'ditolak'])->name('adminPengajuanDitolak');
+        Route::delete('pengajuan/destroy/{sekolah_id}', [PengajuanController::class, 'destroy'])->name('adminPengajuanDestroy');
+        Route::get('pengajuan/excel', [PengajuanController::class, 'excel'])->name('adminPengajuanExcel');
+        Route::get('pengajuan/pdf', [PengajuanController::class, 'pdf'])->name('adminPengajuanPdf');
         Route::resource('users', PengajuanController::class);
 
 
@@ -105,9 +107,12 @@ Route::middleware('checkLogin')->group(function () {
         Route::get('sekolah', [SekolahController::class, 'index'])->name('sekolah');
         Route::get('sekolah/pengajuan/create', [SekolahController::class, 'create'])->name('pengajuanSekolah');
         Route::post('sekolah/pengajuan/store', [SekolahController::class, 'store'])->name('SekolahPengajuan');
-        Route::get('pengajuan/edit', [SekolahController::class, 'edit'])->name('SekolahPengajuanEdit');
-        Route::post('sekolah/pengajuan/update', [SekolahController::class, 'update'])->name('SekolahPengajuanUpdate');
-        Route::delete('sekolah/pengajuan/destroy/{sekolah_id}', [SekolahController::class, 'destroy'])->name('SekolahPengajuanDestroy');
+        Route::post('sekolah/pengajuan/{sekolah_id}/kirim', [SekolahController::class, 'kirim'])->name('SekolahPengajuanKirim');
+        Route::get('pengajuan/{sekolah_id}/edit', [SekolahController::class, 'edit'])->name('SekolahPengajuanEdit');
+        Route::post('sekolah/pengajuan/{sekolah_id}/update', [SekolahController::class, 'update'])->name('SekolahPengajuanUpdate');
+        Route::delete('sekolah/pengajuan/{sekolah_id}/destroy', [SekolahController::class, 'destroy'])->name('SekolahPengajuanDestroy');
+        Route::get('sekolah/pengajuan/pdf', [SekolahController::class, 'pdf'])->name('SekolahPengajuanPdf');
+        Route::get('sekolah/pengajuan/excel', [SekolahController::class, 'excel'])->name('SekolahPengajuanExcel');
     });
 
 });

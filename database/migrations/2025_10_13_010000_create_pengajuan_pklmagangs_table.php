@@ -16,7 +16,7 @@ return new class extends Migration {
             // Relasi ke tabel sekolah
             $table->foreignId('sekolah_id')
                 ->nullable()
-                ->constrained('sekolahs')
+                ->constrained('sekolahs', 'id')
                 ->nullOnDelete(); // ON DELETE SET NULL
 
             $table->integer('jumlah_siswa')->nullable();
@@ -27,7 +27,7 @@ return new class extends Migration {
             $table->enum('status', ['draft', 'diproses', 'diterima', 'ditolak', 'selesai'])
                 ->default('draft');
 
-            $table->string('file_surat_path', 10000)->nullable();
+            $table->string('file_surat_path', 255)->nullable();
 
             // Kolom audit trail
             $table->timestamp('created_date')->useCurrent();

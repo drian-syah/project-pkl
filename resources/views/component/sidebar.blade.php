@@ -31,7 +31,7 @@
 
 
                 <li class="nav-item {{ $menuAdminPengajuan ?? '' }}">
-                    <a class="nav-link" href="{{ route('pengajuan') }}">
+                    <a class="nav-link" href="{{ route('adminPengajuan') }}">
                         <i class="fas fa-clipboard-list"></i>
                         <span>PENGAJUAN PKL MAGANG</span></a>
                 </li>

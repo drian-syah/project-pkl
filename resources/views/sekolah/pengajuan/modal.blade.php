@@ -12,7 +12,7 @@
         <div class="modal-body text-left">
             <div class="row">
                 <div class="col-6">Nama</div>
-                <div class="col-6">: {{ $item->nama }}</div>
+                <div class="col-6">: {{ $item->sekolah->nama }}</div>
             </div>
             
             <div class="row">
