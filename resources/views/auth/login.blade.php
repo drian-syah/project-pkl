@@ -39,8 +39,13 @@
                             <div class="col-lg-12">
                                 <div class="p-5">
                                     <div class="text-center">
+<<<<<<< HEAD
                                         <h1 class="h4 text-gray-900 mb-4"><i class="fas fa-solid fa-id-card"></i>
                                         SIPKM-Login</h1>
+=======
+                                        <h1 class="h4 text-gray-900 mb-4"><i class="fas fa-tasks mr-2"></i>
+                                        Pengajuan Pkl Magang | Login</h1>
+>>>>>>> acd21f3b7d5183257a35f74f7cc67919f7e88944
                                     </div>
                                     <form class="user" method="POST" action="{{ route('loginProses') }}">
                                         @csrf

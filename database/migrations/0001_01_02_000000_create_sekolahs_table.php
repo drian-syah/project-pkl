@@ -12,17 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('sekolahs', function (Blueprint $table) {
+
             $table->id();
             $table->string('nama', 150);
-            $table->string('npsn', 50);
+            $table->string('npsn', 50)->unique();
             $table->string('alamat', 150);
             $table->string('kontak', 100);
 
             $table->timestamp('created_date')->nullable();
-            $table->foreignId('created_id')
-                ->nullable()
-                ->constrained('users')
-                ->nullOnDelete();
+            $table->unsignedBigInteger('created_id')->nullable(); // tanpa ->constrained()
+
             $table->foreignId('updated_id')
                 ->nullable()
                 ->constrained('users')
@@ -35,8 +34,10 @@ return new class extends Migration
             $table->timestamp('deleted_date')->nullable();
 
             $table->boolean('is_active')->default(true);
+
+            $table->timestamps();
         });
-    }
+    }   
 
     /**
      * Reverse the migrations.

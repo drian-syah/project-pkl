@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Sekolah;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -16,16 +19,28 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:100',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6|confirmed',
+            'nama' => 'required|string|max:100',
+            'npsn' => 'required|string|max:50|unique:sekolahs,npsn',
+            'alamat' => 'required|string|max:150',
+            'kontak' => 'required|string|max:100',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:8|confirmed',
         ]);
 
-        User::create([
-            'name' => $request->name,
+        $user = User::create([
+            'nama' => $request->nama,
             'email' => $request->email,
-            'role' => 'siswa', // default role
+            'role' => 'Sekolah', // default role
             'password' => Hash::make($request->password),
+        ]);
+
+        Sekolah::create([
+            'nama' => $request['nama'],
+            'npsn' => $request['npsn'],
+            'alamat' => $request['alamat'],
+            'kontak' => $request['kontak'],
+            'user_id' => $user->id,
+            'is_active' => true,
         ]);
 
         return redirect('/login')->with('success', 'Akun berhasil dibuat, silakan login.');
@@ -37,36 +52,36 @@ class AuthController extends Controller
     }
 
     public function loginProses(Request $request)
-    {   
+    {
         $request->validate([
             'email' => 'required',
-            'password' => 'required|min:8'
-        ],[
+            'password' => 'required'
+        ], [
             'email.required' => 'Email Tidak Boleh Kosong',
             'password.required' => 'Password Tidak Boleh Kosong',
-            'password.min' => 'Password Minimal 8 Karakter',
         ]);
 
         $data = array(
 
             'email' => $request->email,
-            'password' => $request->password,   
+            'password' => $request->password,
 
         );
 
-        if(Auth::attempt($data)){
+        if (Auth::attempt($data)) {
 
             return redirect()->route('dashboard')->with('success', 'Anda Berhasil Login');
 
-        }else{
+        } else {
             return redirect()->back()->with('error', 'Email atau Password Salah');
         }
 
     }
 
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
 
         return redirect()->route('login')->with('success', 'Anda Berhasil Logout');
     }
-}   
+}

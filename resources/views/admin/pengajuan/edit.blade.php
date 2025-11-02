@@ -7,13 +7,13 @@
 
 <div class="card">
     <div class="card-header bg-primary">
-        <a href="{{ route('pengajuan') }}" class="btn text-white">
+        <a href="{{ route('adminPengajuan') }}" class="btn text-white">
             <i class="fas fa-arrow-left mr-2"></i>
             Kembali</a>
     </div>
         <div class="card-body">
 
-            <form action="{{ route('userUpdate', $user->id) }}" method="post">
+            <form action="{{ route('adminPengajuanUpdate', $user->id) }}" method="post">
             @csrf
             <div class="row mb-2">
                 <div class="col-xl-6 mb-1">

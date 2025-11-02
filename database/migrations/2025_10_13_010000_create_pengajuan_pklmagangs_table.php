@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     public function up(): void
     {
         Schema::create('pengajuan_pklmagang', function (Blueprint $table) {
@@ -17,7 +16,7 @@ return new class extends Migration
             // Relasi ke tabel sekolah
             $table->foreignId('sekolah_id')
                 ->nullable()
-                ->constrained('sekolahs')
+                ->constrained('sekolahs', 'id')
                 ->nullOnDelete(); // ON DELETE SET NULL
 
             $table->integer('jumlah_siswa')->nullable();
@@ -29,7 +28,6 @@ return new class extends Migration
                 ->default('draft');
 
             $table->string('file_surat_path', 255)->nullable();
-            $table->text('catatan')->nullable();
 
             // Kolom audit trail
             $table->timestamp('created_date')->useCurrent();
@@ -54,6 +52,8 @@ return new class extends Migration
             $table->timestamp('deleted_date')->nullable();
 
             $table->boolean('is_active')->default(true);
+
+            $table->timestamps();
         });
     }
 

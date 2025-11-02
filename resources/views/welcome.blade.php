@@ -79,7 +79,7 @@
               @auth
               <a href="{{ route('dashboard') }}" class="btn-get-started">Dashboard</a>
               @else
-              <a href="{{ route('register') }}" class="btn-get-started">Register</a>
+              <a href="{{ route('registerForm') }}" class="btn-get-started">Register</a>
               @endauth
             </div>
           </div>

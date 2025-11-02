@@ -37,7 +37,7 @@
                 </li>
 
                 <li class="nav-item {{ $menuAdminPengajuan ?? '' }}">
-                    <a class="nav-link" href="{{ route('pengajuan') }}">
+                    <a class="nav-link" href="{{ route('adminPengajuan') }}">
                         <i class="fas fa-clipboard-list"></i>
                         <span>PENGAJUAN PKL MAGANG</span></a>
                 </li>
@@ -55,67 +55,95 @@
 
                 <div class="sidebar-heading">
                     MENU PEMBIMBING
+                </div>
 
 
-                    <!-- Nav Item - Tables -->
-                    <li class="nav-item {{ $menuAdminPembimbingTugas ?? '' }}">
-                        <a class="nav-link" href="{{ route('tugas') }}">
-                            <i class="fas fa-fw fa-tasks"></i>
-                            <span>MENU TUGAS</span>
-                        </a>
-                    </li>
+                <!-- Nav Item - Tables -->
+                <li class="nav-item {{ $menuAdminPembimbingTugas ?? '' }}">
+                    <a class="nav-link" href="{{ route('tugas') }}">
+                        <i class="fas fa-fw fa-tasks"></i>
+                        <span>MENU TUGAS</span>
+                    </a>
+                </li>
 
-                    <li class="nav-item {{ $menuAdminPembimbingPenilaian ?? '' }}">
-                        <a class="nav-link" href="{{ route('pembimbingPenilaian') }}">
-                            <i class="fas fa-fw fa-tasks"></i>
-                            <span>MENU PENILAIAN</span>
-                        </a>
-                    </li>
-                @endcan
-                @can('isPembimbing')
-                    <!-- Heading -->
-                    <div class="sidebar-heading">
-                        MENU PEMBIMBING
-                    </div>
+                <li class="nav-item {{ $menuAdminPembimbingPenilaian ?? '' }}">
+                    <a class="nav-link" href="{{ route('pembimbingPenilaian') }}">
+                        <i class="fas fa-fw fa-tasks"></i>
+                        <span>MENU PENILAIAN</span>
+                    </a>
+                </li>
+
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+
+                <div class="sidebar-heading">
+                    MENU SISWA
+                </div>
 
 
-                    <!-- Nav Item - Tables -->
-                    <li class="nav-item {{ $menuPembimbingTugas ?? '' }}">
-                        <a class="nav-link" href="{{ route('pembimbing') }}">
-                            <i class="fas fa-fw fa-tasks"></i>
-                            <span>Data Tugas</span></a>
-                    </li>
-                    {{-- <li class="nav-item {{ $menuSiswaPresensi ?? '' }}">
+                <!-- Nav Item - Tables -->
+                <li class="nav-item {{ $menuAdminSiswaPresensi ?? '' }}">
+                    <a class="nav-link" href="{{ route('tugas') }}">
+                        <i class="fas fa-fw fa-tasks"></i>
+                        <span>MENU TUGAS</span>
+                    </a>
+                </li>
+
+                <li class="nav-item {{ $menuAdminPembimbingPenilaian ?? '' }}">
+                    <a class="nav-link" href="{{ route('pembimbingPenilaian') }}">
+                        <i class="fas fa-fw fa-tasks"></i>
+                        <span>MENU PENILAIAN</span>
+                    </a>
+                </li>
+            @endcan
+            @can('isPembimbing')
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    MENU PEMBIMBING
+                </div>
+
+
+                <!-- Nav Item - Tables -->
+                <li class="nav-item {{ $menuPembimbingTugas ?? '' }}">
+                    <a class="nav-link" href="{{ route('pembimbing') }}">
+                        <i class="fas fa-fw fa-tasks"></i>
+                        <span>Data Tugas</span></a>
+                </li>
+                {{-- <li class="nav-item {{ $menuSiswaPresensi ?? '' }}">
                         <a class="nav-link" href="{{ route('presensi') }}">
                             <i class="fas fa-user"></i>
                             <span>Presensi</span></a> --}}
+            @endcan
+
+            @can('isSiswa')
+                <div class="sidebar-heading">
+                    MENU SISWA
+                </div>
+
+                <li class="nav-item {{ $menuSiswaPresensi ?? '' }}">
+                    <a class="nav-link" href="{{ route('presensi') }}">
+                        <i class="fas fa-user"></i>
+                        <span>Presensi</span></a>
                 @endcan
 
-                @can('isSiswa') 
+                @can('isSekolah')
                     <div class="sidebar-heading">
-                        MENU SISWA
+                        MENU SEKOLAH
                     </div>
 
-                    <li class="nav-item {{ $menuSiswaPresensi ?? '' }}">
-                        <a class="nav-link" href="{{ route('presensi') }}">
-                            <i class="fas fa-user"></i>
-                            <span>Presensi</span></a>
-                    @endcan
+                <li class="nav-item {{ $menuSekolah ?? '' }}">
+                    <a class="nav-link" href="{{ route('sekolah') }}">
+                        <i class="fas fa-user"></i>
+                        <span>Pengajuan</span></a>
+                @endcan
 
+                <!-- Divider -->
+                <hr class="sidebar-divider d-none d-md-block">
 
-
-
-
-
-
-
-                    <!-- Divider -->
-                    <hr class="sidebar-divider d-none d-md-block">
-
-                    <!-- Sidebar Toggler (Sidebar) -->
-                    <div class="text-center d-none d-md-inline">
-                        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-                    </div>
+                <!-- Sidebar Toggler (Sidebar) -->
+                <div class="text-center d-none d-md-inline">
+                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                </div>
 
         </ul>
         <!-- End of Sidebar -->
