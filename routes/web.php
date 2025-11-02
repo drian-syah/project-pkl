@@ -90,7 +90,7 @@ Route::middleware('checkLogin')->group(function () {
     Route::middleware('isSiswa')->group(function(){
         // siswa
     Route::get('presensi', [SiswaController::class, 'index'])->name('presensi');
-    Route::post('presensi', [SiswaController::class, 'store'])->name('presensiStore');
+    Route::post('presensi/store', [SiswaController::class, 'store'])->name('presensiStore');
     // form presensi masuk
     Route::get('presensi/masuk', [SiswaController::class, 'masuk'])->name('presensiMasuk');
 

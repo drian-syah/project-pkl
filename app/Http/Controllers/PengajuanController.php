@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Penempatan;
 use App\Exports\UserExport;
-use App\Http\Requests\StorePengajuanRequest;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\PengajuanPklmagang;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Validation\Rules\Password;
+use App\Http\Requests\StorePengajuanRequest;
 
 class PengajuanController extends Controller
 {
@@ -20,6 +21,7 @@ class PengajuanController extends Controller
             'title' => 'Data Pengajuan',
             'menuAdminPengajuan' => 'active',
             'pengajuan' => PengajuanPklmagang::where('status', '!=', 'draft')
+                        ->where('status', '!=', 'ditolak')
                         ->orderBy('created_at', 'desc')
                         ->get()
         );
@@ -81,8 +83,19 @@ class PengajuanController extends Controller
 
     public function disetujui($sekolah_id)
     {
-        $pengajuan = PengajuanPklmagang::where('sekolah_id', $sekolah_id)->where('status', 'diproses');
+        $pengajuan = PengajuanPklmagang::where('sekolah_id', $sekolah_id)->where('status', 'diproses')->first();
         $pengajuan->update(['status' => 'diterima']);
+
+        Penempatan::create([
+            'pengajuan_id' => $pengajuan->id,
+            'sekolah_id' => $pengajuan->sekolah_id,
+            'no_surat' => $pengajuan->no_surat,
+            'jumlah_siswa' => $pengajuan->jumlah_siswa,
+            'periode_mulai' => $pengajuan->periode_mulai,
+            'periode_selesai' => $pengajuan->periode_selesai,
+        ]);
+    
+
         return back()->with('success', 'Pengajuan Sudah Diterima');
     }
 

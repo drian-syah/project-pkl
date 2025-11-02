@@ -48,7 +48,7 @@ class SekolahController extends Controller
     {
     $pengajuan = PengajuanPklmagang::where('sekolah_id', $sekolah_id)
         ->where('status', 'draft')
-        ->firstOrFail();
+        ->first();
 
         if ($pengajuan->status !== 'draft') {
             return back()->with('error', 'Pengajuan ini sudah dikirim atau sudah diproses.');

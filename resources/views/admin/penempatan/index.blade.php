@@ -28,52 +28,29 @@
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered text-center">
                 <thead class="bg-primary text-white">
-                    <tr class="text-center">
+                    <tr>
                         <th>No</th>
-                        <th>Nama</th>
-                        <th>Tugas</th>
-                        <th>Tanggal Mulai</th>
-                        <th>Tanggal Selesai</th>
-                        <th><i class="fas fa-cog"></i></th>
+                        <th>No Surat</th>
+                        <th>Sekolah</th>
+                        <th>Bidang</th>
+                        <th>Tanggal Penempatan</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($penempatan as $item)
-                        <tr>
-                            <td class="text-center">{{ $loop->iteration }}</td>
-                            <td>{{ $item->user->nama }}</td>
-                            <td>{{ $item->tugas }}</td>
-                            <td class="text-center">
-                                <span class="badge badge-info">
-                                    {{ $item->tanggal_mulai }}
-                                </span>
-                                
-                            </td>
-                            <td class="text-center">
-                                <span class="badge badge-info">
-                                    {{ $item->tanggal_selesai }}
-                                </span>
-                            </td>
-
-                            <td class="text-center">
-                                <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#modalTugasShow{{ $item->id }}">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                                @include('admin/tugas/modal')
-                                <a href="{{ route('penempatanEdit', $item->id) }}" class="btn btn-sm btn-warning">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modalTugasDestroy{{ $item->id }}">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                                @include('admin/penempatan/modal')
-                            </td>
-                        </tr>
+                    @foreach($penempatan as $item)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $item->pengajuan->no_surat }}</td>
+                        <td>{{ $item->pengajuan->sekolah->nama ?? '-' }}</td>
+                        <td>{{ $item->bidang->nama_bidang ?? '-' }}</td>
+                        <td>{{ $item->created_at}}</td>
+                    </tr>
                     @endforeach
                 </tbody>
             </table>
+            
         </div>
     </div>
 </div>

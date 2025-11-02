@@ -164,8 +164,13 @@
           </div>
 
           <div class="row">
-              <div class="col-6">Periode Selesai</div>
-              <div class="col-6">: {{ $item->periode_selesai }}</div>
+              <div class="col-6">Jumlah Siswa</div>
+              <div class="col-6">: {{ $item->jumlah_siswa }}</div>
+          </div>
+          
+          <div class="row">
+              <div class="col-6">Status</div>
+              <div class="col-6">: {{ $item->status }}</div>
           </div>
           
           <div class="row">
