@@ -30,6 +30,12 @@
                 <!-- Nav Item - Charts -->
 
 
+                <li class="nav-item {{ $menuAdminUser ?? '' }}">
+                    <a class="nav-link" href="{{ route('user') }}">
+                        <i class="fas fa-clipboard-list"></i>
+                        <span>Data User</span></a>
+                </li>
+
                 <li class="nav-item {{ $menuAdminPengajuan ?? '' }}">
                     <a class="nav-link" href="{{ route('pengajuan') }}">
                         <i class="fas fa-clipboard-list"></i>

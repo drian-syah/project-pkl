@@ -15,13 +15,13 @@
         <!-- Menu Presensi -->
         <div class="row justify-content-center mt-4">
             <!-- Presensi Masuk -->
-            <div class="col-12 col-md-5 mb-3 bg-primary">
-                <a href="{{ route('presensiMasuk') }}" class="text-decoration-none text-light">
+            <div class="col-12 col-md-5 mb-3">
+                <a href="{{ route('presensiMasuk') }}" class="text-decoration-none text-dark">
                     <div class=" h-100 border-0 shadow-sm hover-shadow transition">
                         <div class="card-body">
                             <h5 class="card-title fw-bold">Presensi Masuk</h5>
                             <p class="card-text mb-0">Presensi masuk untuk siswa PKL dan Magang</p>
-                            <small class="text-light">pada pukul 06.00 WIB</small>
+                            <small class="text-muted">pada pukul 06.00 WIB</small>
                         </div>
                     </div>
                 </a>

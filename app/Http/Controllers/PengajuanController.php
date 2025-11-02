@@ -66,7 +66,7 @@ class PengajuanController extends Controller
         $data = [
             'title' => 'Edit Data User',
             'menuAdminUser' => 'active',
-            'user'  => Pengajuan::findOrFail($id),
+            'pengajuan'  => Pengajuan::findOrFail($id),
         ];
         return view('admin/pengajuan/edit', $data);
     }

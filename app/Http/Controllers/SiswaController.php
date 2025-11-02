@@ -38,7 +38,7 @@ class SiswaController extends Controller
         Presensi::create([
             'siswa_id' => auth()->user()->id,
             'status' => $request->status,
-            'foto' => '',
+            'foto' => '$path',
             'tanggal' => now()->toDateString(),
             'jam_masuk' => now()->toTimeString(),
         ]);
