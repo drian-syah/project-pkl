@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\PengajuanPklmagang;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Validation\Rules\Password;
 
 class PengajuanController extends Controller
 {

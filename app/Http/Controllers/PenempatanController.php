@@ -14,7 +14,7 @@ class PenempatanController extends Controller
         $data = [
             'title' => 'Data Penempatan',
             'menuAdminPenempatan' => 'active',
-            'penempatan' => Penempatan::with(['bidang', 'pembimbing'])->get(),
+            'penempatan' => Penempatan::with(['pengajuan', 'bidang'])->get(),
         ];
 
         return view('admin.penempatan.index', $data);
@@ -45,12 +45,10 @@ class PenempatanController extends Controller
         ]);
 
         // Simpan relasi banyak pembimbing ke bidang
-        foreach ($request->pembimbing_id as $id_pembimbing) {
             Penempatan::create([
                 'bidang_id' => $request->bidang_id,
                 'pembimbing_id' => $id_pembimbing,
             ]);
-        }
 
         return redirect()->route('penempatan.index')->with('success', 'Penempatan berhasil disimpan.');
     }

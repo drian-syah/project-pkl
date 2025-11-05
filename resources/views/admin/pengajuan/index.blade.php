@@ -52,26 +52,26 @@
                                 <td class="text-center">{{ $item->periode_selesai }}</td>
                                 <td class="text-center">
                                     @if ($item->status == 'draft')
-                                        <span class="badge bg-secondary">Draft</span>
+                                        <span class="badge bg-secondary text-white">Draft</span>
                                     @elseif ($item->status == 'diproses')
-                                        <span class="badge bg-warning text-dark">Sedang Diproses</span>
+                                        <span class="badge bg-warning text-white">Sedang Diproses</span>
                                     @elseif ($item->status == 'diterima')
-                                        <span class="badge bg-success">Diterima</span>
+                                        <span class="badge bg-success text-white">Diterima</span>
                                     @elseif ($item->status == 'ditolak')
-                                        <span class="badge bg-danger">Ditolak</span>
+                                        <span class="badge bg-danger text-white">Ditolak</span>
                                     @else
                                         <span class="badge bg-light">Tidak Diketahui</span>
                                     @endif
                                 </td>
                                 <td class=" text-center justify-content-center mb-3">
-                                    <a href="{{ route('adminPengajuanEdit', $item->sekolah_id) }}" class="btn btn-sm btn-warning">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
                                     <button class="btn btn-sm btn-info" data-toggle="modal"
                                         data-target="#exampleModalInfo{{ $item->sekolah_id }}">
                                         <i class="fas fa-eye"></i>
                                     </button>
                                     @if ($item->status == 'diproses')
+                                    <a href="{{ route('adminPengajuanEdit', $item->sekolah_id) }}" class="btn btn-sm btn-warning">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
                                     <button class="btn btn-sm btn-success" data-toggle="modal"
                                         data-target="#exampleModalDiterima{{ $item->sekolah_id }}">
                                         <i class="fas fa-check"></i>

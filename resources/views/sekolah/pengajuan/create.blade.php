@@ -201,15 +201,15 @@
 
 @section('content')
     <h1 class="h3 mb-4 text-gray-800">
-        <i class="fas fa-plus mr-2"></i>
+        <i class="fas fa-file-alt mr-2"></i>
         {{ $title }}
     </h1>
 
     <div class="card">
         <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
             <span><i class="fas fa-file-alt mr-2"></i> Form Pengajuan PKL/Magang</span>
-            <a href="{{ route('pengajuanSekolah') }}" class="btn btn-light btn-sm">
-                <i class="fas fa-arrow-left mr-2"></i> Kembali
+            <a href="{{ route('sekolah') }}">
+                <i class="fas fa-arrow-left mr-2 text-white"></i> <span class="text-white">Kembali</span>
             </a>
         </div>
 
@@ -275,7 +275,7 @@
                     <div class="col-md-6">
                         <label class="form-label"><span class="text-danger">*</span> File Surat Pengajuan</label>
                         <input type="file" name="file_surat"
-                            class="form-control @error('file_surat') is-invalid @enderror" required>
+                            class="form-control @error('file_surat') is-invalid @enderror">
                         @error('file_surat')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
@@ -288,23 +288,12 @@
 
                     {{-- Kirim ke Admin --}}
                     <button type="submit" name="action" value="kirim" class="btn btn-primary btn-sm">
-                        <i class="fas fa-paper-plane mr-1"></i> Kirim ke Admin Sekarang
+                        Draft
                     </button>
                 </div>
             </form>
         </div>
     </div>
-
-    {{-- Optional konfirmasi kirim --}}
-    <script>
-        document.getElementById('formPengajuan').addEventListener('submit', function (e) {
-            const action = e.submitter.value;
-            if (action === 'kirim') {
-                const confirmSend = confirm('Yakin ingin langsung mengirim pengajuan ke admin?');
-                if (!confirmSend) e.preventDefault();
-            }
-        });
-    </script>
 @endsection
 
 

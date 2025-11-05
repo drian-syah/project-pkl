@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Bidang;
+use App\Models\PengajuanPklmagang;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Penempatan extends Model
 {
@@ -26,7 +28,7 @@ class Penempatan extends Model
 
     public function pengajuan()
     {
-        return $this->belongsTo(PengajuanPklMagang::class, 'pengajuan_id');
+        return $this->belongsTo(PengajuanPklmagang::class, 'pengajuan_id');
     }
 
     public function bidang()

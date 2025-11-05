@@ -29,12 +29,27 @@
 
                 <!-- Nav Item - Charts -->
 
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-toggle="collapse" href="#masterdata" role="button">
+                        <i class="fas fa-database"></i> Data User
+                    </a>
+                    <div class="collapse" id="masterdata">
+                        <ul class="nav flex-column ml-3">
+                            <li class="nav-item {{ $menuAdminUser ?? '' }}">
+                                <a class="nav-link" href="{{ route('user') }}">
+                                    <i class="fas fa-user"></i>
+                                    <span>Data User</span></a>
+                                </li>
 
-                <li class="nav-item {{ $menuAdminUser ?? '' }}">
-                    <a class="nav-link" href="{{ route('user') }}">
-                        <i class="fas fa-clipboard-list"></i>
-                        <span>Data User</span></a>
+                            <li class="nav-item {{ $menuAdminBidang ?? '' }}">
+                                <a class="nav-link" href="{{ route('user') }}">
+                                    <i class="fas fa-user"></i>
+                                    <span>Data User</span></a>
+                                </li>
+                        </ul>
+                    </div>
                 </li>
+
 
                 <li class="nav-item {{ $menuAdminPengajuan ?? '' }}">
                     <a class="nav-link" href="{{ route('adminPengajuan') }}">

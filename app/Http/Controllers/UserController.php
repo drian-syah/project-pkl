@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\UserExport;
-use Illuminate\Http\Request;
 use App\Models\User;
-use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\Pegawai;
+use App\Models\Sekolah;
+use App\Exports\UserExport;
+use App\Models\SiswaProfil;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules\Password;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
 {
@@ -22,13 +25,15 @@ class UserController extends Controller
         return view('admin/user/index', $data);
     }
 
-    public function create()
+    public function create(Request $request)
     {
+        $role = $request->query('role');
         $data = array(
             'title' => 'Tambah Data User',
             'menuAdminUser' => 'active',
+            'role' => $request->get('role'),
         );
-        return view('admin/user/create', $data);
+        return view('admin.user.create', $data);
     }
 
     public function store(Request $request)
@@ -48,6 +53,39 @@ class UserController extends Controller
             'password.min'      => 'Password Minimal 8 Karakter',
             'password.mixed' => 'Password Minimal Harus Mengandung Huruf Besar dan Kecil'
         ]);
+
+        $user = User::create([
+            'nama' => $request->nama,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'role' => $request->role,
+        ]);
+
+        switch ($user->role) {
+            case 'Siswa':
+                SiswaProfil::create([
+                    'user_id' => $user->id,
+                    'nisn' => $request->nisn,
+                    'kelas' => $request->kelas,
+                    'jurusan' => $request->jurusan,
+                ]);
+                break;
+            case 'Pembimbing':
+                Pegawai::create([
+                    'user_id' => $user->id,
+                    'nip' => $request->nip,
+                    'jabatan' => $request->jabatan,
+                ]);
+                break;
+            case 'Sekolah':
+                Sekolah::create([
+                    'user_id' => $user->id,
+                    'npsn' => $request->npsn,
+                    'nama_sekolah' => $request->nama_sekolah,
+                    'alamat' => $request->alamat,
+                ]);
+                break;
+            }
 
         $user = new User;
         $user->nama     = $request->nama;
