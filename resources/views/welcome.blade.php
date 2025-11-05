@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>M-Tugas | Beranda</title>
+  <title>APK-SIPKM | Beranda</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -45,7 +45,7 @@
       <a href="#" class="logo d-flex align-items-center me-auto">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
-        <h1 class="sitename" style="font-size: 25px">Aplikasi Pengajuan Pkl Magang</h1>
+        <h1 class="sitename" style="font-size: 25px">APK-SIPKM</h1>
       </a>
 
       <nav id="navmenu" class="navmenu">
@@ -74,7 +74,8 @@
       <div class="container">
         <div class="row gy-4">
           <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center" data-aos="fade-up">
-            <h1 class="mb-3">Aplikasi Pengajuan Pkl Magang</h1>
+            <h1 class="mb-3">SIPKM</h1>
+            <p>Sistem Informasi Pengajuan Pkl-Magang</p>
             <div class="d-flex">
               @auth
               <a href="{{ route('dashboard') }}" class="btn-get-started">Dashboard</a>
@@ -101,7 +102,8 @@
       <div class="container section-title" data-aos="fade-up">
         <span>Tentang Kita<br></span>
         <h2>Tentang Kita</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <p>SIPKM</p>
+        <p>Sistem Informasi Pengajuan Pkl-Magang</p>
       </div><!-- End Section Title -->
 
       <div class="container">
@@ -112,14 +114,25 @@
             <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox pulsating-play-btn"></a> --}}
           </div>
           <div class="col-xl-12 content"  data-aos="fade-up" data-aos-delay="200">
-            <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
+            <h3>Apa Itu SIPKM?</h3>
             <p class="fst-italic">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
+              APK-SIPKM (Aplikasi Sistem Informasi Pengajuan Pkl-Magang) adalah platform digital yang membantu sekolah, mahasiswa, dan instansi dalam mengelola proses pengajuan, pemantauan, dan penilaian kegiatan magang secara efisien dan terintegrasi.
             </p>
             <ul>
-              <li><i class="bi bi-check2-all"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></li>
-              <li><i class="bi bi-check2-all"></i> <span>Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
+              <div class="col-xl-12 content"  data-aos="fade-up" data-aos-delay="200">
+            <h3>VISI</h3>
+            <p class="fst-italic">
+              Mewujudkan sistem informasi magang yang transparan, cepat, dan mudah digunakan bagi seluruh pihak.
+            </p>
+              <div class="col-xl-12 content"  data-aos="fade-up" data-aos-delay="200">
+            <h3>MISI</h3>
+            <div class="lh-1">
+            <p>- Menyediakan layanan digital untuk pengajuan dan persetujuan magang.</p>
+            <p>- Mempermudah komunikasi antara sekolah, pembimbing, dan siswa.</p>
+            <p>- Meningkatkan efisiensi administrasi kegiatan PKL/Magang.</p>
+            </div>
+
+            
               <li><i class="bi bi-check2-all"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</span></li>
             </ul>
             <p>

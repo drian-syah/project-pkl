@@ -2,15 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\SekolahController;
-use App\Http\Controllers\SettingController;
-<<<<<<< HEAD
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\UserController;
-=======
->>>>>>> acd21f3b7d5183257a35f74f7cc67919f7e88944
 
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PengajuanController;
 use App\Http\Controllers\PembimbingController;

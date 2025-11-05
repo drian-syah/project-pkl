@@ -8,9 +8,7 @@ use App\Http\Requests\StorePengajuanRequest;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\PengajuanPklmagang;
-use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Validation\Rules\Password;
 
 class PengajuanController extends Controller
 {
@@ -54,7 +52,7 @@ class PengajuanController extends Controller
         $data = [
             'title' => 'Edit Data User',
             'menuAdminUser' => 'active',
-            'user'  => Pengajuan::findOrFail($id),
+            'user'  => PengajuanPklmagang::findOrFail($id),
         ];
         return view('admin.pengajuan.edit', $data);
     }
@@ -112,7 +110,7 @@ class PengajuanController extends Controller
     {
         $filename = now()->format('d-m-Y H.i.s');
         $data = array(
-            'user' => Pengajuan::get(),
+            'user' => PengajuanPklmagang::get(),
             'tanggal' => now()->format('d-m-y'),
             'jam' => now()->format('H.i.s'),
         );
