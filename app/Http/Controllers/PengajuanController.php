@@ -51,21 +51,21 @@ class PengajuanController extends Controller
         return redirect()->route('admin.pengajuan')->with('success', 'Pengajuan berhasil dikirim dan sedang menunggu persetujuan admin.');
     }
 
-    public function edit($id)
+    public function edit($sekolah_id)
     {
         $data = [
             'title' => 'Edit Data User',
             'menuAdminUser' => 'active',
-            'user'  => PengajuanPklmagang::findOrFail($id),
+            'pengajuan'  => PengajuanPklmagang::findOrFail($sekolah_id),
         ];
         return view('admin.pengajuan.edit', $data);
     }
 
-    public function update(StorePengajuanRequest $request, $id)
+    public function update(StorePengajuanRequest $request, $sekolah_id)
     {
         $validated = $request->validated();
         PengajuanPklmagang::update([
-            'sekolah_id' => auth()->user()->id,
+            'sekolah_id' => auth()->user()->sekolah->id,
             'no_surat' => $validated['no_surat'],
             'tgl_surat' => $validated['tgl_surat'],
             'jumlah_siswa' => $validated['jumlah_siswa'],
@@ -125,11 +125,11 @@ class PengajuanController extends Controller
     {
         $filename = now()->format('d-m-Y H.i.s');
         $data = array(
-            'user' => Pengajuan::get(),
+            'pengajuan' => PengajuanPklmagang::get(),
             'tanggal' => now()->format('d-m-y'),
             'jam' => now()->format('H.i.s'),
         );
-        $pdf = Pdf::loadView('admin/user/pdf', $data);
+        $pdf = Pdf::loadView('admin/pengajuan/pdf', $data);
         return $pdf->setPaper('a4', 'landscape')->stream('DataUsers_'.$filename.'.pdf');
     }
 

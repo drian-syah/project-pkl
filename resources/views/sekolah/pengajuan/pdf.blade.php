@@ -151,7 +151,7 @@
             </tr>
         </thead>
         <tbody>
-          @foreach ($pengajuan_pklmagang as $item)
+          @foreach ($pengajuan as $item)
           <tr>
               <td align="center">{{ $loop->iteration }}</td>
               <td>{{ $item->nama }}</td>

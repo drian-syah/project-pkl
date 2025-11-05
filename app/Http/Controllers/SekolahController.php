@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\PengajuanPklmagang;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StorePengajuanRequest;
@@ -64,7 +65,7 @@ class SekolahController extends Controller
         $data = array(
             'title' => 'Edit Pengajuan',
             'menuEditPengajuanSekolah' => 'active',
-            'pengajuan' => PengajuanPklmagang::where('sekolah_id', Auth::id())->first()
+            'pengajuan' => PengajuanPklmagang::where('sekolah_id', Auth::user()->sekolah->id)->first()
         );
         return view('sekolah.pengajuan.edit', $data);
     }
@@ -72,7 +73,7 @@ class SekolahController extends Controller
     public function update(StorePengajuanRequest $request, $sekolah_id)
     {
         $validated = $request->validated();
-        PengajuanPklmagang::update([
+        PengajuanPklmagang::where('id', $sekolah_id)->update([
             'sekolah_id' => auth()->user()->id,
             'no_surat' => $validated['no_surat'],
             'tgl_surat' => $validated['tgl_surat'],
@@ -91,4 +92,17 @@ class SekolahController extends Controller
         return redirect()->route('sekolah')->with('success', 'Data Berhasil Di Hapus');
 
     }
+
+    public function pdf()
+    {
+        $filename = now()->format('d-m-Y H.i.s');
+        $data = array(
+            'pengajuan' => PengajuanPklmagang::get(),
+            'tanggal' => now()->format('d-m-y'),
+            'jam' => now()->format('H.i.s'),
+        );
+        $pdf = Pdf::loadView('sekolah/pengajuan/pdf', $data);
+        return $pdf->setPaper('a4', 'landscape')->stream('DataUsers_'.$filename.'.pdf');
+    }
+
 }

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nama', 100);
             $table->string('email', 100)->unique();
             $table->enum('role', ['Admin', 'Pembimbing', 'Siswa', 'Sekolah']);
+            $table->unsignedBigInteger('id_bidang')->nullable();
             $table->string('password', 255);
             $table->boolean('is_tugas')->default(false);
             $table->rememberToken();
@@ -33,6 +34,13 @@ return new class extends Migration
             // === Timestamp bawaan Laravel ===
             $table->timestamps();
         });
+
+        // Schema::table('users', function (Blueprint $table) {
+        //     $table->foreign('id_bidang')
+        //           ->references('id')
+        //           ->on('bidangs')
+        //           ->onDelete('set null');
+        // });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
@@ -58,5 +66,8 @@ return new class extends Migration
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropForeign(['id_bidang']);
+        });
     }
 };

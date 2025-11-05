@@ -172,11 +172,6 @@
               <div class="col-6">Status</div>
               <div class="col-6">: {{ $item->status }}</div>
           </div>
-          
-          <div class="row">
-              <div class="col-6">Status</div>
-              <div class="col-6">: {{ $item->status }}</div>
-          </div>
       </div>
 
       <div class="modal-footer">

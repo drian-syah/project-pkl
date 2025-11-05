@@ -64,14 +64,14 @@
                                     @endif
                                 </td>
                                 <td class=" text-center justify-content-center mb-3">
-                                    <a href="{{ route('adminPengajuanEdit', $item->sekolah_id) }}" class="btn btn-sm btn-warning">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
                                     <button class="btn btn-sm btn-info" data-toggle="modal"
                                         data-target="#exampleModalInfo{{ $item->sekolah_id }}">
                                         <i class="fas fa-eye"></i>
                                     </button>
                                     @if ($item->status == 'diproses')
+                                    <a href="{{ route('adminPengajuanEdit', $item->sekolah_id) }}" class="btn btn-sm btn-warning">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
                                     <button class="btn btn-sm btn-success" data-toggle="modal"
                                         data-target="#exampleModalDiterima{{ $item->sekolah_id }}">
                                         <i class="fas fa-check"></i>
