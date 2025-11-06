@@ -38,14 +38,47 @@
                             <li class="nav-item {{ $menuAdminUser ?? '' }}">
                                 <a class="nav-link" href="{{ route('user') }}">
                                     <i class="fas fa-user"></i>
-                                    <span>Data User</span></a>
+                                    <span>User</span></a>
                                 </li>
 
                             <li class="nav-item {{ $menuAdminBidang ?? '' }}">
                                 <a class="nav-link" href="{{ route('user') }}">
                                     <i class="fas fa-user"></i>
-                                    <span>Data User</span></a>
+                                    <span>Pegawai</span></a>
                                 </li>
+
+                            <li class="nav-item {{ $menuAdminBidang ?? '' }}">
+                                <a class="nav-link" href="{{ route('user') }}">
+                                    <i class="fas fa-user"></i>
+                                    <span>Siswa</span></a>
+                                </li>
+
+                            <li class="nav-item {{ $menuAdminBidang ?? '' }}">
+                                <a class="nav-link" href="{{ route('user') }}">
+                                    <i class="fas fa-user"></i>
+                                    <span>Pembimbing</span></a>
+                                </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item {{ request()->is('Bidang*') || request()->is('Tambah Bidang*') ? 'active' : ''}}">
+                    <a class="nav-link collapsed" data-toggle="collapse" href="#bidang" role="button">
+                        <i class="fas fa-database"></i> Data Bidang
+                    </a>
+                    <div class="collapse {{ request()->is('Bidang*') || request()->is('Tambah Bidang*') ? 'active' : ''}}" id="bidang">
+                        <ul class="nav flex-column ml-3">
+                            <li class="nav-item {{ $menuAdminUser ?? '' }}">
+                                <a class="nav-link" href="{{ route('user') }}">
+                                    <i class="fas fa-user"></i>
+                                    <span>Bidang</span></a>
+                            </li>
+
+                            <li class="nav-item {{ $menuAdminUser ?? '' }}">
+                                <a class="nav-link {{ $menuAdminShow }}" href="{{ route('user') }}">
+                                    <i class="fas fa-user"></i>
+                                    <span>Tambah Bidang</span></a>
+                            </li>
                         </ul>
                     </div>
                 </li>
