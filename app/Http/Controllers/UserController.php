@@ -8,6 +8,7 @@ use App\Models\Sekolah;
 use App\Exports\UserExport;
 use App\Models\SiswaProfil;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
