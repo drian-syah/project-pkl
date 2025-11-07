@@ -33,55 +33,62 @@
                     <a class="nav-link collapsed" data-toggle="collapse" href="#masterdata" role="button">
                         <i class="fas fa-database"></i> Data User
                     </a>
-                    <div class="collapse" id="masterdata">
+                    <div class="collapse {{ $menuAdminUserShow ?? '' }}" id="masterdata">
                         <ul class="nav flex-column ml-3">
                             <li class="nav-item {{ $menuAdminUser ?? '' }}">
                                 <a class="nav-link" href="{{ route('user') }}">
-                                    <i class="fas fa-user"></i>
-                                    <span>User</span></a>
-                                </li>
-
-                            <li class="nav-item {{ $menuAdminBidang ?? '' }}">
-                                <a class="nav-link" href="{{ route('user') }}">
-                                    <i class="fas fa-user"></i>
-                                    <span>Pegawai</span></a>
-                                </li>
-
-                            <li class="nav-item {{ $menuAdminBidang ?? '' }}">
-                                <a class="nav-link" href="{{ route('user') }}">
-                                    <i class="fas fa-user"></i>
-                                    <span>Siswa</span></a>
-                                </li>
-
-                            <li class="nav-item {{ $menuAdminBidang ?? '' }}">
-                                <a class="nav-link" href="{{ route('user') }}">
-                                    <i class="fas fa-user"></i>
-                                    <span>Pembimbing</span></a>
-                                </li>
+                                    <i class="fas fa-user"></i> User
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="">
+                                    <i class="fas fa-user-tie"></i> Pegawai
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="">
+                                    <i class="fas fa-user-graduate"></i> Siswa
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="">
+                                    <i class="fas fa-user-check"></i> Pembimbing
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
+                
 
-                <li class="nav-item {{ request()->is('Bidang*') || request()->is('Tambah Bidang*') ? 'active' : ''}}">
-                    <a class="nav-link collapsed" data-toggle="collapse" href="#bidang" role="button">
-                        <i class="fas fa-database"></i> Data Bidang
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#bidang" role="button">
+                        <i class="fas fa-database"></i>Master Data
                     </a>
-                    <div class="collapse {{ request()->is('Bidang*') || request()->is('Tambah Bidang*') ? 'active' : ''}}" id="bidang">
+                    <div class="collapse {{ $menuAdminPenempatanBidangShow ?? '' ? 'show' : '' }}" id="bidang">
                         <ul class="nav flex-column ml-3">
-                            <li class="nav-item {{ $menuAdminUser ?? '' }}">
-                                <a class="nav-link" href="{{ route('user') }}">
-                                    <i class="fas fa-user"></i>
-                                    <span>Bidang</span></a>
+                
+                            <li class="nav-item">
+                                <a class="nav-link " href="">
+                                    <i class="fas fa-layer-group"></i> Daftar Bidang
+                                </a>
                             </li>
-
-                            <li class="nav-item {{ $menuAdminUser ?? '' }}">
-                                <a class="nav-link {{ $menuAdminShow }}" href="{{ route('user') }}">
-                                    <i class="fas fa-user"></i>
-                                    <span>Tambah Bidang</span></a>
+                
+                            <li class="nav-item">
+                                <a class="nav-link" href="">
+                                    <i class="fas fa-plus-circle"></i> Tambah Bidang
+                                </a>
                             </li>
+                
+                            <li class="nav-item {{ $menuAdminPenempatanBidang ?? '' }}">
+                                <a class="nav-link" href="{{ route('penempatanBidang') }}">
+                                    <i class="fas fa-briefcase"></i> Penempatan Bidang
+                                </a>
+                            </li>
+                
                         </ul>
                     </div>
                 </li>
+                
 
 
                 <li class="nav-item {{ $menuAdminPengajuan ?? '' }}">

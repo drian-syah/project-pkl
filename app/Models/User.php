@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Tugas;
+use App\Models\Pegawai;
 use App\Models\Sekolah;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -32,6 +33,11 @@ class User extends Authenticatable
     public function sekolah()
     {
         return $this->hasOne(Sekolah::class, 'user_id');
+    }
+
+    public function pegawai()
+    {
+        return $this->hasOne(Pegawai::class, 'user_id');
     }
 
 

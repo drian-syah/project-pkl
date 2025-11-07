@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminPenempatanBidangController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
@@ -44,7 +45,11 @@ Route::middleware('checkLogin')->group(function () {
 
 
     Route::middleware('isAdmin')->group(function () {
-
+        
+        Route::get('penempatanBidang', [AdminPenempatanBidangController::class, 'index'])->name('penempatanBidang');
+        Route::get('penempatanBidang/create', [AdminPenempatanBidangController::class, 'create'])->name('penempatanBidangCreate');
+        Route::post('penempatanBidang/store', [AdminPenempatanBidangController::class, 'store'])->name('penempatanBidangStore');
+        Route::get('penempatan/get-pegawai/{nip}', [AdminPenempatanBidangController::class, 'getPegawai'])->name('penempatanGetPegawai');
 
 
         // data user
