@@ -33,7 +33,7 @@
                     <a class="nav-link collapsed" data-toggle="collapse" href="#masterdata" role="button">
                         <i class="fas fa-database"></i> Data User
                     </a>
-                    <div class="collapse {{ $menuAdminUserShow ?? '' }}" id="masterdata">
+                    <div class="collapse {{ $menuAdminUserShow ?? '' ? 'show' : ''}}" id="masterdata">
                         <ul class="nav flex-column ml-3">
                             <li class="nav-item {{ $menuAdminUser ?? '' }}">
                                 <a class="nav-link" href="{{ route('user') }}">
