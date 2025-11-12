@@ -64,11 +64,11 @@
                     <a class="nav-link" data-toggle="collapse" href="#bidang" role="button">
                         <i class="fas fa-database"></i>Master Data
                     </a>
-                    <div class="collapse {{ $menuAdminPenempatanBidangShow ?? '' ? 'show' : '' }}" id="bidang">
+                    <div class="collapse {{ $menuAdminPenempatanBidangShow ?? ''}}" id="bidang">
                         <ul class="nav flex-column ml-3">
                 
-                            <li class="nav-item">
-                                <a class="nav-link " href="">
+                            <li class="nav-item {{ $menuAdminBidang ?? '' }}">
+                                <a class="nav-link " href="{{ route ('daftarBidang') }}">
                                     <i class="fas fa-layer-group"></i> Daftar Bidang
                                 </a>
                             </li>

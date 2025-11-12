@@ -1,7 +1,3 @@
-
-
-
-
 @extends('component/app')
 
 @section('content')
@@ -41,8 +37,7 @@
                         @enderror
                     </div>
                 </div>
-
-                <input type="text" class="form-control" name="sekolah_id" value="{{ auth()->user()->sekolah->nama}}">
+                <input type="hidden" class="form-control" name="sekolah_id" value="{{ auth()->user()->sekolah->nama}}">
 
                 <div class="row mb-3">
                     <div class="col-md-6">

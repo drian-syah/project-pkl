@@ -74,7 +74,7 @@ class PengajuanController extends Controller
     public function store(StorePengajuanRequest $request)
     {
         $validated = $request->validated();
-        $filePath = $request->file('file_surat_path')->store('surat');
+        $filePath = $request->file('file_surat_path')->store('surat', 'public');
         PengajuanPklmagang::create([
             'sekolah_id' => $validated['sekolah_id'],
             'no_surat' => $validated['no_surat'],

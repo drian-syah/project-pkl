@@ -32,6 +32,7 @@ class SekolahController extends Controller
 
     public function store(StorePengajuanRequest $request)
     {
+        dd('store jalan', $request->all());
         $validated = $request->validated();
         $filePath = $request->file('file_surat_path')->store('surat');
         PengajuanPklmagang::create([

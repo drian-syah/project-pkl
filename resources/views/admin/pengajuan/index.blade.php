@@ -37,6 +37,7 @@
                             <th>Sekolah</th>
                             <th>Periode Mulai</th>
                             <th>Periode Selesai</th>
+                            <th>File Pengajuan</th>
                             <th>Status</th>
                             <th>Aksi</th>
                         </tr>
@@ -50,6 +51,15 @@
                                 <td class="text-center">{{ $item->sekolah->nama ?? 'N/A' }}</td>
                                 <td class="text-center">{{ $item->periode_mulai }}</td>
                                 <td class="text-center">{{ $item->periode_selesai }}</td>
+                                <td>
+                                    @if ($item->file_surat_path)
+                                        <a href="{{ asset('storage/' . $item->file_surat_path) }}" target="_blank">
+                                            Lihat File
+                                        </a>
+                                    @else
+                                        <span class="text-muted">Tidak ada file</span>
+                                    @endif
+                                </td>
                                 <td class="text-center">
                                     @if ($item->status == 'draft')
                                         <span class="badge bg-secondary text-white">Draft</span>
