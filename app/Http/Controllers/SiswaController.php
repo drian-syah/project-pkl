@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Presensi;
 use App\Models\SiswaProfil;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SiswaController extends Controller
 {
@@ -36,7 +37,7 @@ class SiswaController extends Controller
         $path = $request->file('foto')->store('foto_presensi', 'public');
 
         Presensi::create([
-            'siswa_id' => auth()->user()->id,
+            'siswa_id' => Auth::user()->id,
             'status' => $request->status,
             'foto' => '$path',
             'tanggal' => now()->toDateString(),
@@ -59,7 +60,7 @@ class SiswaController extends Controller
     public function pulangStore(Request $request)
     {
     // Cari record presensi hari ini untuk siswa login
-    $presensi = Presensi::where('siswa_id', auth()->id())
+    $presensi = Presensi::where('siswa_id', Auth::id())
                         ->where('tanggal', now()->toDateString())
                         ->first();
 

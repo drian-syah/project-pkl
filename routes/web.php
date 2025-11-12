@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\AdminPenempatanBidangController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\BidangController;
 use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\DashboardController;
@@ -12,6 +12,7 @@ use App\Http\Controllers\PengajuanController;
 use App\Http\Controllers\PembimbingController;
 use App\Http\Controllers\PenempatanController;
 use App\Http\Controllers\AdminPembimbingTugasController;
+use App\Http\Controllers\AdminPenempatanBidangController;
 use App\Http\Controllers\AdminPembimbingPenilaianController;
 
 Route::get('/', function () {
@@ -45,6 +46,7 @@ Route::middleware('checkLogin')->group(function () {
 
 
     Route::middleware('isAdmin')->group(function () {
+        Route::get('Admin/daftarBidang/index', [BidangController::class, 'index'])->name('daftarBidang');
         
         Route::get('penempatanBidang', [AdminPenempatanBidangController::class, 'index'])->name('penempatanBidang');
         Route::get('penempatanBidang/create', [AdminPenempatanBidangController::class, 'create'])->name('penempatanBidangCreate');
@@ -105,7 +107,7 @@ Route::middleware('checkLogin')->group(function () {
     Route::middleware('isSiswa')->group(function(){
         // siswa
     Route::get('presensi', [SiswaController::class, 'index'])->name('presensi');
-    Route::post('presensi/store', [SiswaController::class, 'store'])->name('presensiStore');
+    Route::get('presensi/store', [SiswaController::class, 'store'])->name('presensiStore');
     // form presensi masuk
     Route::get('presensi/masuk', [SiswaController::class, 'masuk'])->name('presensiMasuk');
 

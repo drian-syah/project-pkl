@@ -34,7 +34,7 @@ class SekolahController extends Controller
     {
         $validated = $request->validated();
         PengajuanPklmagang::create([
-            'sekolah_id' => auth()->user()->sekolah->id,
+            'sekolah_id' => Auth::user()->sekolah->id,
             'no_surat' => $validated['no_surat'],
             'tgl_surat' => $validated['tgl_surat'],
             'jumlah_siswa' => $validated['jumlah_siswa'],
@@ -74,7 +74,7 @@ class SekolahController extends Controller
     {
         $validated = $request->validated();
         PengajuanPklmagang::where('id', $sekolah_id)->update([
-            'sekolah_id' => auth()->user()->id,
+            'sekolah_id' => Auth::user()->id,
             'no_surat' => $validated['no_surat'],
             'tgl_surat' => $validated['tgl_surat'],
             'jumlah_siswa' => $validated['jumlah_siswa'],
