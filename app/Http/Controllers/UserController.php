@@ -62,40 +62,6 @@ class UserController extends Controller
             'role' => $request->role,
         ]);
 
-        switch ($user->role) {
-            case 'Siswa':
-                SiswaProfil::create([
-                    'user_id' => $user->id,
-                    'nisn' => $request->nisn,
-                    'kelas' => $request->kelas,
-                    'jurusan' => $request->jurusan,
-                ]);
-                break;
-            case 'Pembimbing':
-                Pegawai::create([
-                    'user_id' => $user->id,
-                    'nip' => $request->nip,
-                    'jabatan' => $request->jabatan,
-                ]);
-                break;
-            case 'Sekolah':
-                Sekolah::create([
-                    'user_id' => $user->id,
-                    'npsn' => $request->npsn,
-                    'nama_sekolah' => $request->nama_sekolah,
-                    'alamat' => $request->alamat,
-                ]);
-                break;
-            }
-
-        $user = new User;
-        $user->nama     = $request->nama;
-        $user->email    = $request->email;
-        $user->role  = $request->role;
-        $user->password = Hash::make($request->password);
-        $user->is_tugas = false;
-        $user->save();
-
         return redirect()->route('user')->with('success', 'Data Berhasil Ditambahkan');
     }
 

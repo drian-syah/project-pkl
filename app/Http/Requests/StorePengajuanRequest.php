@@ -28,7 +28,7 @@ class StorePengajuanRequest extends FormRequest
             'jumlah_siswa' => ['required', 'integer', 'min:1'],
             'periode_mulai' => ['required', 'date', 'before_or_equal:periode_selesai'],
             'periode_selesai' => ['required', 'date', 'after_or_equal:periode_mulai'],
-            'file_surat' => ['nullable', 'file', 'mimes:pdf', 'max:2000'],
+            'file_surat_path' => ['required', 'file', 'mimes:pdf', 'max:5120'],
         ];
     }
 }

@@ -46,46 +46,48 @@ Route::middleware('checkLogin')->group(function () {
 
     Route::middleware('isAdmin')->group(function () {
         
-        Route::get('penempatanBidang', [AdminPenempatanBidangController::class, 'index'])->name('penempatanBidang');
-        Route::get('penempatanBidang/create', [AdminPenempatanBidangController::class, 'create'])->name('penempatanBidangCreate');
-        Route::post('penempatanBidang/store', [AdminPenempatanBidangController::class, 'store'])->name('penempatanBidangStore');
-        Route::get('penempatan/get-pegawai/{nip}', [AdminPenempatanBidangController::class, 'getPegawai'])->name('penempatanGetPegawai');
+        Route::get('admin/penempatanBidang', [AdminPenempatanBidangController::class, 'index'])->name('penempatanBidang');
+        Route::get('admin/penempatanBidang/create', [AdminPenempatanBidangController::class, 'create'])->name('penempatanBidangCreate');
+        Route::post('admin/penempatanBidang/store', [AdminPenempatanBidangController::class, 'store'])->name('penempatanBidangStore');
+        Route::get('admin/penempatan/get-pegawai/{nip}', [AdminPenempatanBidangController::class, 'getPegawai'])->name('penempatanGetPegawai');
 
 
         // data user
-        Route::get('user', [UserController::class, 'index'])->name('user');
-        Route::get('user/create', [UserController::class, 'create'])->name('userCreate');
-        Route::post('user/store', [UserController::class, 'store'])->name('userStore');
-        Route::get('user/edit/{id}', [UserController::class, 'edit'])->name('userEdit');
-        Route::post('user/update/{id}', [UserController::class, 'update'])->name('userUpdate');
-        Route::delete('user/destroy/{id}', [UserController::class, 'destroy'])->name('userDestroy');
-        Route::get('user/excel', [UserController::class, 'excel'])->name('userExcel');
-        Route::get('user/pdf', [UserController::class, 'pdf'])->name('userPdf');
+        Route::get('admin/user', [UserController::class, 'index'])->name('user');
+        Route::get('admin/user/create', [UserController::class, 'create'])->name('userCreate');
+        Route::post('admin/user/store', [UserController::class, 'store'])->name('userStore');
+        Route::get('admin/user/edit/{id}', [UserController::class, 'edit'])->name('userEdit');
+        Route::post('admin/user/update/{id}', [UserController::class, 'update'])->name('userUpdate');
+        Route::delete('admin/user/destroy/{id}', [UserController::class, 'destroy'])->name('userDestroy');
+        Route::get('admin/user/excel', [UserController::class, 'excel'])->name('userExcel');
+        Route::get('admin/user/pdf', [UserController::class, 'pdf'])->name('userPdf');
         Route::resource('users', UserController::class);
         // pengajuan 
-        Route::get('pengajuan', [PengajuanController::class, 'index'])->name('adminPengajuan');
-        Route::get('pengajuan/create', [PengajuanController::class, 'create'])->name('adminPengajuanCreate');
-        Route::post('pengajuan/store', [PengajuanController::class, 'store'])->name('adminPengajuanStore');
-        Route::get('pengajuan/edit/{sekolah_id}', [PengajuanController::class, 'edit'])->name('adminPengajuanEdit');
-        Route::post('pengajuan/update/{sekolah_id}', [PengajuanController::class, 'update'])->name('adminPengajuanUpdate');
-        Route::post('pengajuan/disetujui/{sekolah_id}', [PengajuanController::class, 'disetujui'])->name('adminPengajuanDisetujui');
-        Route::post('pengajuan/ditolak/{sekolah_id}', [PengajuanController::class, 'ditolak'])->name('adminPengajuanDitolak');
-        Route::delete('pengajuan/destroy/{sekolah_id}', [PengajuanController::class, 'destroy'])->name('adminPengajuanDestroy');
-        Route::get('pengajuan/excel', [PengajuanController::class, 'excel'])->name('adminPengajuanExcel');
-        Route::get('pengajuan/pdf', [PengajuanController::class, 'pdf'])->name('adminPengajuanPdf');
-        Route::resource('users', PengajuanController::class);
+        Route::get('admin/pengajuan', [PengajuanController::class, 'index'])->name('adminPengajuan');
+        Route::get('admin/pengajuan/create', [PengajuanController::class, 'create'])->name('adminPengajuanCreate');
+        Route::post('admin/pengajuan/store', [PengajuanController::class, 'store'])->name('adminPengajuanStore');
+        Route::get('admin/pengajuan/{sekolah_id}/edit', [PengajuanController::class, 'edit'])->name('adminPengajuanEdit');
+        Route::post('admin/pengajuan/{sekolah_id}/update', [PengajuanController::class, 'update'])->name('adminPengajuanUpdate');
+        Route::post('admin/pengajuan/disetujui/{sekolah_id}', [PengajuanController::class, 'disetujui'])->name('adminPengajuanDisetujui');
+        Route::post('admin/pengajuan/ditolak/{sekolah_id}', [PengajuanController::class, 'ditolak'])->name('adminPengajuanDitolak');
+        Route::delete('admin/pengajuan/destroy/{sekolah_id}', [PengajuanController::class, 'destroy'])->name('adminPengajuanDestroy');
+        Route::post('admin/pengajuan/store-ajax', [PengajuanController::class, 'storeAjax'])->name('adminPengajuanStoreAjax');
+        Route::get('admin/pengajuan/excel', [PengajuanController::class, 'excel'])->name('adminPengajuanExcel');
+        Route::get('admin/pengajuan/pdf', [PengajuanController::class, 'pdf'])->name('adminPengajuanPdf');
+        Route::get('admin/pengajuan/showDaftarForm', [PengajuanController::class, 'showDaftarForm'])->name('daftarUserSekolahForm');
+        Route::post('admin/pengajuan/daftar', [PengajuanController::class, 'daftar'])->name('daftarUserSekolah');
 
 
 
         // penempatan
-        Route::get('penempatan/create', [PenempatanController::class, 'create'])->name('penempatanCreate');
-        Route::post('penempatan/store', [PenempatanController::class, 'store'])->name('penempatanStore');
-        Route::get('penempatan/edit/{id}', [PenempatanController::class, 'edit'])->name('penempatanEdit');
-        Route::post('penempatan/update/{id}', [PenempatanController::class, 'update'])->name('tugaspenempatanUpdate');
-        Route::delete('penempatan/destroy/{id}', [PenempatanController::class, 'destroy'])->name('penempatanDestroy');
-        Route::get('penempatan/excel', [PenempatanController::class, 'excel'])->name('penempatanExcel');
-        Route::get('penempatan', [PenempatanController::class, 'index'])->name('penempatan');
-        Route::get('penempatan/pdf', [PenempatanController::class, 'pdf'])->name('penempatanPdf');
+        Route::get('admin/penempatan/create', [PenempatanController::class, 'create'])->name('penempatanCreate');
+        Route::post('admin/penempatan/store', [PenempatanController::class, 'store'])->name('penempatanStore');
+        Route::get('admin/penempatan/edit/{id}', [PenempatanController::class, 'edit'])->name('penempatanEdit');
+        Route::post('admin/penempatan/update/{id}', [PenempatanController::class, 'update'])->name('tugaspenempatanUpdate');
+        Route::delete('admin/penempatan/destroy/{id}', [PenempatanController::class, 'destroy'])->name('penempatanDestroy');
+        Route::get('admin/penempatan/excel', [PenempatanController::class, 'excel'])->name('penempatanExcel');
+        Route::get('admin/penempatan', [PenempatanController::class, 'index'])->name('penempatan');
+        Route::get('admin/penempatan/pdf', [PenempatanController::class, 'pdf'])->name('penempatanPdf');
 
 
     });

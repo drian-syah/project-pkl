@@ -12,47 +12,24 @@ return new class extends Migration {
 
             $table->string('no_surat', 50)->nullable();
             $table->date('tgl_surat')->nullable();
-
             // Relasi ke tabel sekolah
-            $table->foreignId('sekolah_id')
-                ->nullable()
-                ->constrained('sekolahs', 'id')
-                ->nullOnDelete(); // ON DELETE SET NULL
-
+            $table->foreignId('sekolah_id')->nullable()->constrained('sekolahs', 'id')->nullOnDelete(); // ON DELETE SET NULL
             $table->integer('jumlah_siswa')->nullable();
             $table->date('periode_mulai')->nullable();
             $table->date('periode_selesai')->nullable();
-
             // ENUM status
             $table->enum('status', ['draft', 'diproses', 'diterima', 'ditolak', 'selesai'])
                 ->default('draft');
-
             $table->string('file_surat_path', 255)->nullable();
+            $table->string('created_by_role', 20)->default('Sekolah');
 
             // Kolom audit trail
             $table->timestamp('created_date')->useCurrent();
-
-            $table->foreignId('created_id')
-                ->nullable()
-                ->constrained('users')
-                ->nullOnDelete();
-
-            $table->foreignId('updated_id')
-                ->nullable()
-                ->constrained('users')
-                ->nullOnDelete();
-
+            $table->foreignId('created_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('updated_id')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamp('updated_date')->nullable();
-
-            $table->foreignId('deleted_id')
-                ->nullable()
-                ->constrained('users')
-                ->nullOnDelete();
-
-            $table->timestamp('deleted_date')->nullable();
-
+            $table->foreignId('deleted_id')->nullable() ->constrained('users')->nullOnDelete();
             $table->boolean('is_active')->default(true);
-
             $table->timestamps();
         });
     }

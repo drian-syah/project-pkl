@@ -18,6 +18,15 @@ class PengajuanPklmagang extends Model
         'periode_selesai',
         'status',
         'file_surat_path',
+        'created_by_role',
+        'created_date',
+        'created_id',
+        'updated_id',
+        'updated_date',
+        'deleted_id',
+        'is_active',
+        'created_at',
+        'updated_at',
     ];
 
     // Relasi ke Sekolah

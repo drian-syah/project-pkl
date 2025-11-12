@@ -33,14 +33,17 @@ class SekolahController extends Controller
     public function store(StorePengajuanRequest $request)
     {
         $validated = $request->validated();
+        $filePath = $request->file('file_surat_path')->store('surat');
         PengajuanPklmagang::create([
-            'sekolah_id' => auth()->user()->sekolah->id,
+            'sekolah_id' => Auth::user()->sekolah->id,
             'no_surat' => $validated['no_surat'],
             'tgl_surat' => $validated['tgl_surat'],
             'jumlah_siswa' => $validated['jumlah_siswa'],
             'periode_mulai' => $validated['periode_mulai'],
             'periode_selesai' => $validated['periode_selesai'],
-            'status' => 'draft' 
+            'file_surat_path' => $filePath,
+            'status' => 'draft',
+            'created_id' => Auth::id(),
         ]);
         return redirect()->route('sekolah')->with('success', 'Pengajuan berhasil dikirim dan sedang menunggu persetujuan admin.');
     }
@@ -73,13 +76,15 @@ class SekolahController extends Controller
     public function update(StorePengajuanRequest $request, $sekolah_id)
     {
         $validated = $request->validated();
+        $filePath = $request->file('file_surat_path')->store('surat');
         PengajuanPklmagang::where('id', $sekolah_id)->update([
-            'sekolah_id' => auth()->user()->id,
+            'sekolah_id' => Auth::user()->id,
             'no_surat' => $validated['no_surat'],
             'tgl_surat' => $validated['tgl_surat'],
             'jumlah_siswa' => $validated['jumlah_siswa'],
             'periode_mulai' => $validated['periode_mulai'],
             'periode_selesai' => $validated['periode_selesai'],
+            'file_surat_path' => $filePath,
         ]);
         return redirect()->route('sekolah')->with('success', 'Pengajuan berhasil dikirim dan sedang menunggu persetujuan admin.');
     }

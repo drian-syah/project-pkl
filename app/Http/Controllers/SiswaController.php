@@ -36,7 +36,7 @@ class SiswaController extends Controller
         $path = $request->file('foto')->store('foto_presensi', 'public');
 
         Presensi::create([
-            'siswa_id' => auth()->siswa()->id,
+            'siswa_id' => auth()->user()->id,
             'status' => $request->status,
             'foto' => '$path',
             'tanggal' => now()->toDateString(),

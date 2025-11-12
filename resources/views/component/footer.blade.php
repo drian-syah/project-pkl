@@ -8,6 +8,8 @@
  <script src="{{ asset('sbadmin2/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
  <script src="{{ asset('sbadmin2/js/demo/datatables-demo.js') }}"></script>
  <script src="{{ asset('sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
+ <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 
  @session('success')
  <script>Swal.fire({
@@ -25,8 +27,28 @@
    });</script>
  @endsession 
 
-
- 
+ <script>
+  $(document).ready(function() {
+      $('#pengajuanSelect').select2({
+          language: {
+              noResults: function() {
+                  return `
+                      <p class="text-center">
+                        Data tidak ada silahkan tambah data sekolah dibawah ini
+                      </p>
+                      <button type="button" id="btnTambahSekolah" class=" btn-sm mt-1 d-block mx-auto">
+                          + Tambah Sekolah
+                      </button>`;
+              }
+          },
+          escapeMarkup: function(markup) { return markup; }
+      });
+  
+      $(document).on('click', '#btnTambahSekolah', function() {
+          window.location.href = "{{ route('daftarUserSekolahForm') }}";
+      });
+  });
+  </script>
 </body>
 
 </html>

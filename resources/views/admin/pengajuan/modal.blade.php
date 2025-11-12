@@ -170,7 +170,17 @@
           
           <div class="row">
               <div class="col-6">Status</div>
-              <div class="col-6">: {{ $item->status }}</div>
+              <div class="col-6">:
+              @if ($item->status == 'draft')
+                <span class="badge bg-secondary text-white">Draft</span>
+              @elseif ($item->status == 'diproses')
+                <span class="badge bg-success text-white">Sedang Diproses</span>
+              @elseif ($item->status == 'diterima')
+                <span class="badge bg-success text-white">Diterima</span>
+              @elseif ($item->status == 'ditolak')
+                <span class="badge bg-danger text-white">Ditolak</span>
+              @endif
+              </div>
           </div>
       </div>
 

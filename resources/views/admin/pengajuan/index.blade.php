@@ -68,10 +68,11 @@
                                         data-target="#exampleModalInfo{{ $item->sekolah_id }}">
                                         <i class="fas fa-eye"></i>
                                     </button>
-                                    @if ($item->status == 'diproses')
+                                    @if ($item->status == 'draft')
                                     <a href="{{ route('adminPengajuanEdit', $item->sekolah_id) }}" class="btn btn-sm btn-warning">
                                         <i class="fas fa-edit"></i>
                                     </a>
+                                    @elseif ($item->status == 'diproses')
                                     <button class="btn btn-sm btn-success" data-toggle="modal"
                                         data-target="#exampleModalDiterima{{ $item->sekolah_id }}">
                                         <i class="fas fa-check"></i>
