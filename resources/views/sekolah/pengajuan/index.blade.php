@@ -37,6 +37,7 @@
                             <th>Sekolah</th>
                             <th>Periode Mulai</th>
                             <th>Periode Selesai</th>
+                            <th>File Pengajuan</th>
                             <th>Status</th>
                             <th>Aksi</th>
                         </tr>
@@ -50,6 +51,15 @@
                                 <td class="text-center">{{ $item->sekolah->nama ?? 'N/A' }}</td>
                                 <td class="text-center">{{ $item->periode_mulai }}</td>
                                 <td class="text-center">{{ $item->periode_selesai }}</td>
+                                <td>
+                                    @if ($item->file_surat_path)
+                                        <a href="{{ asset('storage/' . $item->file_surat_path) }}" target="_blank">
+                                           <i class="fas fa-file-pdf"></i> Lihat File
+                                        </a>
+                                    @else
+                                        <span class="text-muted">Tidak ada file</span>
+                                    @endif
+                                </td>
                                 <td class="text-center">
                                     @if ($item->status == 'draft')
                                         <span class="badge bg-secondary text-white">Draft</span>
@@ -64,22 +74,31 @@
                                     @endif
                                 </td>
                                 <td class="text-center">
-                                        @if ($item->status === 'draft')
-                                            <form action="{{ route('SekolahPengajuanKirim', $item->sekolah_id) }}" method="POST" class="d-inline">
-                                                @csrf
-                                                <button type="submit" class="btn btn-primary btn-sm">
-                                                    <i class="fas fa-paper-plane mr-1"></i> Kirim ke Admin
-                                                </button>
-                                            </form>
-                                        @else
-                                        @endif
-                                    <a href="{{ route('SekolahPengajuanEdit', $item->id) }}" class="btn btn-sm btn-warning">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <button class="btn btn-sm btn-danger" data-toggle="modal"
-                                        data-target="#exampleModal{{ $item->sekolah_id }}">
+                                    @if ($item->status === 'draft')
+                                        <form action="{{ route('SekolahPengajuanKirim', $item->sekolah_id) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        <button type="submit" class="btn btn-primary btn-sm mb-1">
+                                            <i class="fas fa-paper-plane mr-1"></i> Kirim ke Admin
+                                        </button>
+                                        <a href="{{ route('SekolahPengajuanEdit', $item->id) }}" class="btn btn-sm btn-warning">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                    </form>
+                                        <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#exampleModalInfo{{ $item->sekolah_id }}">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    @elseif ($item->status === 'diproses')
+                                        <button class="btn btn-sm btn-danger mb-1" data-toggle="modal" data-target="#exampleModal{{ $item->sekolah_id }}">
                                         <i class="fas fa-times"></i>
-                                    </button>
+                                        </button>
+                                        <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#exampleModalInfo{{ $item->sekolah_id }}">
+                                        <i class="fas fa-eye"></i>
+                                        </button>
+                                    @elseif ($item->status === 'diterima')
+                                    <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#exampleModalInfo{{ $item->sekolah_id }}">
+                                        <i class="fas fa-eye"></i>
+                                        </button>
+                                    @endif
                                     @include('sekolah.pengajuan.modal')
                                 </td>
                             </tr>

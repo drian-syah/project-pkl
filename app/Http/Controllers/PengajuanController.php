@@ -22,6 +22,7 @@ class PengajuanController extends Controller
         $data = array(
             'title' => 'Data Pengajuan',
             'menuAdminPengajuan' => 'active',
+            'modal'=> 'Pengajuan',
             'pengajuan' => PengajuanPklmagang::where(function($q) {
                 $q->where('status', '!=', 'draft')
                   ->orWhere('created_id', auth()->id());
@@ -65,7 +66,7 @@ class PengajuanController extends Controller
         $data = [
             'title' => 'Tambah Data Pengajuan',
             'menuAdminPengajuan' => 'active',
-            'sekolah' => Sekolah::all()
+            'sekolah' => Sekolah::all(),
         ];
         return view('admin.pengajuan.create', $data);
     }
@@ -95,7 +96,7 @@ class PengajuanController extends Controller
         $data = [
             'title' => 'Edit Data User',
             'menuAdminUser' => 'active',
-            'user'  => PengajuanPklmagang::findOrFail($id),
+            'pengajuan'  => PengajuanPklmagang::findOrFail($id),
         ];
         return view('admin.pengajuan.edit', $data);
     }
@@ -105,7 +106,7 @@ class PengajuanController extends Controller
         $validated = $request->validated();
         $filePath = $request->file('file_surat_path')->store('surat');
         PengajuanPklmagang::update([
-            'sekolah_id' => auth()->user()->id,
+            'sekolah_id' => $request->sekolah_id,
             'no_surat' => $validated['no_surat'],
             'tgl_surat' => $validated['tgl_surat'],
             'jumlah_siswa' => $validated['jumlah_siswa'],

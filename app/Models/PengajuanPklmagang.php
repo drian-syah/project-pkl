@@ -29,6 +29,16 @@ class PengajuanPklmagang extends Model
         'updated_at',
     ];
 
+    public function createdBy()
+    {
+    return $this->belongsTo(User::class, 'created_id');
+    }
+
+    public function updatedBy()
+    {
+    return $this->belongsTo(User::class, 'updated_id');
+    }
+
     // Relasi ke Sekolah
     public function sekolah()
     {

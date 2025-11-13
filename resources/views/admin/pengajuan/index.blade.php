@@ -54,7 +54,7 @@
                                 <td>
                                     @if ($item->file_surat_path)
                                         <a href="{{ asset('storage/' . $item->file_surat_path) }}" target="_blank">
-                                            Lihat File
+                                           <i class="fas fa-file-pdf"></i> Lihat File
                                         </a>
                                     @else
                                         <span class="text-muted">Tidak ada file</span>
@@ -73,16 +73,22 @@
                                         <span class="badge bg-light">Tidak Diketahui</span>
                                     @endif
                                 </td>
-                                <td class=" text-center justify-content-center mb-3">
-                                    <button class="btn btn-sm btn-info" data-toggle="modal"
+                                <td class=" text-center justify-content-center">
+                                    @if ($item->status === 'draft')
+                                    <button class="btn btn-sm btn-info mb-1" data-toggle="modal"
                                         data-target="#exampleModalInfo{{ $item->sekolah_id }}">
                                         <i class="fas fa-eye"></i>
                                     </button>
-                                    @if ($item->status == 'draft')
-                                    <a href="{{ route('adminPengajuanEdit', $item->sekolah_id) }}" class="btn btn-sm btn-warning">
+                                    <a href="{{ route('adminPengajuanEdit', $item->id) }}" class="btn btn-sm btn-warning mb-1">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    @elseif ($item->status == 'diproses')
+                                    <button class="btn btn-sm btn-danger mb-1" data-toggle="modal"
+                                        data-target="#exampleModal{{ $item->sekolah_id }}">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                    <button type="submit" class="btn btn-primary btn-sm"> Konfirmasi Pengajuan
+                                    </button>
+                                    @elseif ($item->status === 'diproses')
                                     <button class="btn btn-sm btn-success" data-toggle="modal"
                                         data-target="#exampleModalDiterima{{ $item->sekolah_id }}">
                                         <i class="fas fa-check"></i>
@@ -91,8 +97,16 @@
                                         data-target="#exampleModalDitolak{{ $item->sekolah_id }}">
                                         <i class="fas fa-times"></i>
                                     </button>
-                                    @else
-
+                                    @elseif ($item->status === 'diterima' )
+                                    <button class="btn btn-sm btn-info mb-3" data-toggle="modal"
+                                    data-target="#exampleModalInfo{{ $item->sekolah_id }}">
+                                    <i class="fas fa-eye"></i>
+                                    </button>
+                                    @elseif ($item->status === 'ditolak')
+                                    <button class="btn btn-sm btn-danger" data-toggle="modal"
+                                        data-target="#exampleModal{{ $item->sekolah_id }}">
+                                        <i class="fas fa-times"></i>
+                                    </button>
                                     @endif
                                     @include('admin.pengajuan.modal')
                                 </td>

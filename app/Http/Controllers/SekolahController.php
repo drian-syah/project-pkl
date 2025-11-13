@@ -14,6 +14,7 @@ class SekolahController extends Controller
     {
         $data = [
             'title' => 'Menu Pengajuan',
+            'modal' => 'Pengajuan',
             'menuSekolah' => 'active',
             'pengajuan' => PengajuanPklmagang::where('sekolah_id', Auth::user()->sekolah->id)->get(),
 
@@ -32,19 +33,19 @@ class SekolahController extends Controller
 
     public function store(StorePengajuanRequest $request)
     {
-        dd('store jalan', $request->all());
         $validated = $request->validated();
-        $filePath = $request->file('file_surat_path')->store('surat');
+        $filePath = $request->file('file_surat_path')->store('surat', 'public');
         PengajuanPklmagang::create([
-            'sekolah_id' => Auth::user()->sekolah->id,
+            'sekolah_id' => $validated['sekolah_id'],
             'no_surat' => $validated['no_surat'],
             'tgl_surat' => $validated['tgl_surat'],
             'jumlah_siswa' => $validated['jumlah_siswa'],
             'periode_mulai' => $validated['periode_mulai'],
             'periode_selesai' => $validated['periode_selesai'],
             'file_surat_path' => $filePath,
+            'created_id' => auth()->id(),
+            'created_by_role' => 'Admin',
             'status' => 'draft',
-            'created_id' => Auth::id(),
         ]);
         return redirect()->route('sekolah')->with('success', 'Pengajuan berhasil dikirim dan sedang menunggu persetujuan admin.');
     }
@@ -77,7 +78,7 @@ class SekolahController extends Controller
     public function update(StorePengajuanRequest $request, $sekolah_id)
     {
         $validated = $request->validated();
-        $filePath = $request->file('file_surat_path')->store('surat');
+        $filePath = $request->file('file_surat_path')->store('surat', 'public');
         PengajuanPklmagang::where('id', $sekolah_id)->update([
             'sekolah_id' => Auth::user()->id,
             'no_surat' => $validated['no_surat'],
