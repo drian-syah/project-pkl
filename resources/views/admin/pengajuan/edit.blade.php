@@ -13,7 +13,7 @@
     </div>
         <div class="card-body">
 
-            <form action="{{ route('adminPengajuanUpdate', $pengajuan->id) }}" method="post">
+            <form action="{{ route('adminPengajuanUpdate', $pengajuan->id) }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row mb-3">
                 <div class="col-md-6">

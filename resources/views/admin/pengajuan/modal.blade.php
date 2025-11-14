@@ -224,6 +224,30 @@
               @endif
               </div>
           </div>
+          <div class="row">
+            <div class="col-6">Dibuat Oleh</div>
+            <div class="col-6">: {{ $item->createdBy->nama }}</div>
+          </div>
+
+          <div class="row">
+            <div class="col-6">Dibuat Pada</div>
+            <div class="col-6">: {{ $item->created_at }}</div>
+          </div>
+
+          @if ($item->updated_id)
+            <div class="row">
+                <div class="col-6">Diperbarui Oleh</div>
+                <div class="col-6">: {{ $item->updatedBy->nama }}</div>
+            </div>
+            @endif
+
+            @if ($item->updated_at)
+            <div class="row">
+              <div class="col-6">Diperbarui Pada</div>
+              <div class="col-6">: {{ $item->updated_at }}
+              </div>
+            </div>
+            @endif
       </div>
 
       <div class="modal-footer">

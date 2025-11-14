@@ -162,14 +162,14 @@
                 <div class="col-6">: {{ $item->created_at }}</div>
             </div>
 
-            @if ($item->created_id === false)
+            @if ($item->updated_id)
             <div class="row">
                 <div class="col-6">Diperbarui Oleh</div>
                 <div class="col-6">: {{ $item->updatedBy->nama }}</div>
             </div>
             @endif
 
-            @if ($item->created_at === false)
+            @if ($item->updated_at)
             <div class="row">
               <div class="col-6">Diperbarui Pada</div>
               <div class="col-6">: {{ $item->updated_at }}

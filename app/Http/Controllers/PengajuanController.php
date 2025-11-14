@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Requests\UpdatePengajuanRequest;
 use App\Models\User;
 use App\Models\Sekolah;
 use App\Exports\UserExport;
@@ -23,7 +24,7 @@ class PengajuanController extends Controller
             'title' => 'Data Pengajuan',
             'menuAdminPengajuan' => 'active',
             'modal'=> 'Pengajuan',
-            'pengajuan' => PengajuanPklmagang::where(function($q) {
+            'pengajuan' => PengajuanPklmagang::with('sekolah')->where(function($q) {
                 $q->where('status', '!=', 'draft')
                   ->orWhere('created_id', auth()->id());
             })
@@ -101,23 +102,34 @@ class PengajuanController extends Controller
         return view('admin.pengajuan.edit', $data);
     }
 
-    public function update(StorePengajuanRequest $request, $id)
-    {
-        $validated = $request->validated();
-        $filePath = $request->file('file_surat_path')->store('surat');
-        PengajuanPklmagang::update([
-            'sekolah_id' => $request->sekolah_id,
-            'no_surat' => $validated['no_surat'],
-            'tgl_surat' => $validated['tgl_surat'],
-            'jumlah_siswa' => $validated['jumlah_siswa'],
-            'periode_mulai' => $validated['periode_mulai'],
-            'periode_selesai' => $validated['periode_selesai'],
-            'file_surat_path' => $filePath,
-            'status' => 'draft',
-            'created_id' => Auth::id(),
-        ]);
-        return redirect()->route('admin.pengajuan')->with('success', 'Pengajuan berhasil dikirim dan sedang menunggu persetujuan admin.');
+    public function update(UpdatePengajuanRequest $request, $id)
+{
+    $pengajuan = PengajuanPklmagang::findOrFail($id);
+
+    $validated = $request->validated();
+
+    // Jika file diupload → simpan
+    if ($request->hasFile('file_surat_path')) {
+        $filePath = $request->file('file_surat_path')->store('surat', 'public');
+    } else {
+        $filePath = $pengajuan->file_surat_path; // tetap pakai file lama
     }
+
+    $pengajuan->update([
+        'sekolah_id' => $validated['sekolah_id'],
+        'no_surat' => $validated['no_surat'],
+        'tgl_surat' => $validated['tgl_surat'],
+        'jumlah_siswa' => $validated['jumlah_siswa'],
+        'periode_mulai' => $validated['periode_mulai'],
+        'periode_selesai' => $validated['periode_selesai'],
+        'file_surat_path' => $filePath,
+        'status' => 'draft',
+        'updated_id' => auth()->id(),
+    ]);
+
+    return redirect()->route('adminPengajuan')->with('success', 'Pengajuan berhasil diupdate.');
+}
+
 
     public function show($sekolah_id)
     {
@@ -139,12 +151,27 @@ class PengajuanController extends Controller
         return back()->with('success', 'Pengajuan Ditolak');
     }
 
+    public function kirim($sekolah_id)
+    {
+    $pengajuan = PengajuanPklmagang::where('sekolah_id', $sekolah_id)
+        ->where('status', 'draft')
+        ->first();
+
+        if ($pengajuan->status !== 'draft') {
+            return back()->with('error', 'Pengajuan ini sudah dikirim atau sudah diproses.');
+        }
+    
+        $pengajuan->update(['status' => 'diproses']);
+    
+        return back()->with('success', 'Pengajuan berhasil dikirim dan sedang diproses oleh admin.');
+    }
+
     public function destroy($sekolah_id)
     {
         $pengajuan = PengajuanPklmagang::where('sekolah_id', $sekolah_id)->first();
         $pengajuan->delete();
 
-        return redirect()->route('admin.pengajuan')->with('success', 'Data Berhasil Di Hapus');
+        return redirect()->route('adminPengajuan')->with('success', 'Data Berhasil Di Hapus');
 
     }
 

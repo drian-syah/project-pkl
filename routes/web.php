@@ -40,14 +40,14 @@ Route::middleware('checkLogin')->group(function () {
         Route::get('profil/setting', [SettingController::class, 'index'])->name('index');
         Route::put('profil/setting', [SettingController::class, 'update'])->name('updateSetting');
     });
-    
-    
+
+
 
 
 
     Route::middleware('isAdmin')->group(function () {
         Route::get('Admin/daftarBidang/index', [BidangController::class, 'index'])->name('daftarBidang');
-        
+
         Route::get('admin/penempatanBidang', [AdminPenempatanBidangController::class, 'index'])->name('penempatanBidang');
         Route::get('admin/penempatanBidang/create', [AdminPenempatanBidangController::class, 'create'])->name('penempatanBidangCreate');
         Route::post('admin/penempatanBidang/store', [AdminPenempatanBidangController::class, 'store'])->name('penempatanBidangStore');
@@ -72,6 +72,7 @@ Route::middleware('checkLogin')->group(function () {
         Route::post('admin/pengajuan/{sekolah_id}/update', [PengajuanController::class, 'update'])->name('adminPengajuanUpdate');
         Route::post('admin/pengajuan/disetujui/{sekolah_id}', [PengajuanController::class, 'disetujui'])->name('adminPengajuanDisetujui');
         Route::post('admin/pengajuan/ditolak/{sekolah_id}', [PengajuanController::class, 'ditolak'])->name('adminPengajuanDitolak');
+        Route::post('admin/pengajuan/{sekolah_id}/kirim', [PengajuanController::class, 'kirim'])->name('adminPengajuanKirim');
         Route::delete('admin/pengajuan/destroy/{sekolah_id}', [PengajuanController::class, 'destroy'])->name('adminPengajuanDestroy');
         Route::post('admin/pengajuan/store-ajax', [PengajuanController::class, 'storeAjax'])->name('adminPengajuanStoreAjax');
         Route::get('admin/pengajuan/excel', [PengajuanController::class, 'excel'])->name('adminPengajuanExcel');
@@ -106,18 +107,18 @@ Route::middleware('checkLogin')->group(function () {
         Route::get('pembimbing/penilaian', [AdminPembimbingPenilaianController::class, 'penilaian'])->name('pembimbingPenilaian');
     });
 
-    Route::middleware('isSiswa')->group(function(){
+    Route::middleware('isSiswa')->group(function () {
         // siswa
-    Route::get('presensi', [SiswaController::class, 'index'])->name('presensi');
-    Route::get('presensi/store', [SiswaController::class, 'store'])->name('presensiStore');
-    // form presensi masuk
-    Route::get('presensi/masuk', [SiswaController::class, 'masuk'])->name('presensiMasuk');
+        Route::get('presensi', [SiswaController::class, 'index'])->name('presensi');
+        Route::get('presensi/store', [SiswaController::class, 'store'])->name('presensiStore');
+        // form presensi masuk
+        Route::get('presensi/masuk', [SiswaController::class, 'masuk'])->name('presensiMasuk');
 
-    // Form presensi pulang
-    Route::get('presensi/pulang', [SiswaController::class, 'pulang'])->name('presensiPulang');
+        // Form presensi pulang
+        Route::get('presensi/pulang', [SiswaController::class, 'pulang'])->name('presensiPulang');
 
-    // Submit presensi pulang
-    Route::post('presensi/pulang', [SiswaController::class, 'pulangStore'])->name('presensiPulangStore');
+        // Submit presensi pulang
+        Route::post('presensi/pulang', [SiswaController::class, 'pulangStore'])->name('presensiPulangStore');
 
     });
 

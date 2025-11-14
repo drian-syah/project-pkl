@@ -87,6 +87,7 @@ class SekolahController extends Controller
             'periode_mulai' => $validated['periode_mulai'],
             'periode_selesai' => $validated['periode_selesai'],
             'file_surat_path' => $filePath,
+            'updated_id' => auth()->id(),
         ]);
         return redirect()->route('sekolah')->with('success', 'Pengajuan berhasil dikirim dan sedang menunggu persetujuan admin.');
     }

@@ -37,7 +37,7 @@
                         @enderror
                     </div>
                 </div>
-
+                
                 <input type="hidden" class="form-control" name="sekolah_id" value="{{ auth()->user()->sekolah->id}}">
 
                 <div class="row mb-3">

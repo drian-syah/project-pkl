@@ -86,8 +86,11 @@
                                         data-target="#exampleModal{{ $item->sekolah_id }}">
                                         <i class="fas fa-times"></i>
                                     </button>
+                                    <form action="{{ route('adminPengajuanKirim', $item->sekolah_id) }}" method="POST" class="d-inline">
+                                        @csrf
                                     <button type="submit" class="btn btn-primary btn-sm"> Konfirmasi Pengajuan
                                     </button>
+                                    </form>
                                     @elseif ($item->status === 'diproses')
                                     <button class="btn btn-sm btn-success" data-toggle="modal"
                                         data-target="#exampleModalDiterima{{ $item->sekolah_id }}">
