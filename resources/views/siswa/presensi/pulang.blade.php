@@ -1,4 +1,5 @@
 @extends('component.app')
+ @include('component.kamera')
 @section('content')
 <form action="{{ route('presensiStore') }}">
     @csrf
