@@ -18,5 +18,9 @@
         </div>
         <button type="submit" class="btn btn-success">Kirim Presensi</button>
     </div>
+    <a href="{{ route('presensi') }}" class="btn btn-secondary">
+    <i class="fas fa-arrow-left"></i> Kembali
+</a>
+
 </form>
 @endsection

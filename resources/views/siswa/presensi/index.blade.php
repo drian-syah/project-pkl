@@ -18,7 +18,6 @@
             <div class="col-12 col-md-5 mb-3">
                 <a href="{{ route('presensiMasuk') }}" class="text-decoration-none text-dark">
 
-                    <div class=" h-100 border-0 shadow-sm hover-shadow transition">
 
                     <div class="card h-100 border-0 shadow-sm hover-shadow transition">
 
@@ -34,6 +33,7 @@
             <!-- Presensi Pulang -->
             <div class="col-12 col-md-5 mb-3">
                 <a href="{{ route('presensiPulang') }}" class="text-decoration-none text-dark">
+                    
                     <div class="card h-100 border-0 shadow-sm hover-shadow transition">
                         <div class="card-body">
                             <h5 class="card-title fw-bold">Presensi Pulang</h5>
