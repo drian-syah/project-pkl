@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\BidangController;
+use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\DashboardController;
@@ -53,6 +54,8 @@ Route::middleware('checkLogin')->group(function () {
         Route::post('admin/penempatanBidang/store', [AdminPenempatanBidangController::class, 'store'])->name('penempatanBidangStore');
         Route::get('admin/penempatan/get-pegawai/{nip}', [AdminPenempatanBidangController::class, 'getPegawai'])->name('penempatanGetPegawai');
 
+        Route::get('admin/daftarJabatan', [JabatanController::class, 'index'])->name('daftarJabatan');
+        Route::get('admin/penempatanBidang/create', [AdminPenempatanBidangController::class, 'create'])->name('penempatanBidangCreate');
 
         // data user
         Route::get('admin/user', [UserController::class, 'index'])->name('user');

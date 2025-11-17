@@ -31,7 +31,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-toggle="collapse" href="#masterdata" role="button">
-                        <i class="fas fa-database"></i> Data User
+                        <i class="fas fa-database"></i> User Management
                     </a>
                     <div class="collapse {{ $menuAdminUserShow ?? '' ? 'show' : ''}}" id="masterdata">
                         <ul class="nav flex-column ml-3">
@@ -64,7 +64,7 @@
                     <a class="nav-link" data-toggle="collapse" href="#bidang" role="button">
                         <i class="fas fa-database"></i>Master Data
                     </a>
-                    <div class="collapse {{ $menuAdminPenempatanBidangShow ?? ''}}" id="bidang">
+                    <div class="collapse {{ $menuAdminPenempatanMasterDataShow ?? ''}}" id="bidang">
                         <ul class="nav flex-column ml-3">
                 
                             <li class="nav-item {{ $menuAdminBidang ?? '' }}">
@@ -82,6 +82,24 @@
                             <li class="nav-item {{ $menuAdminPenempatanBidang ?? '' }}">
                                 <a class="nav-link" href="{{ route('penempatanBidang') }}">
                                     <i class="fas fa-briefcase"></i> Penempatan Bidang
+                                </a>
+                            </li>
+                
+                            <li class="nav-item {{ $MenuAdminJabatan ?? '' }}">
+                                <a class="nav-link" href="{{ route('daftarJabatan') }}">
+                                    <i class="fas fa-briefcase"></i> Jabatan
+                                </a>
+                            </li>
+                
+                            <li class="nav-item {{ $menuAdminTambahJabatan ?? '' }}">
+                                <a class="nav-link" href="{{ route('penempatanBidang') }}">
+                                    <i class="fas fa-briefcase"></i> Tambah Jabatan
+                                </a>
+                            </li>
+                
+                            <li class="nav-item {{ $menuAdminPenempatanJabatan ?? '' }}">
+                                <a class="nav-link" href="{{ route('penempatanBidang') }}">
+                                    <i class="fas fa-briefcase"></i> Penempatan Jabatan
                                 </a>
                             </li>
                 

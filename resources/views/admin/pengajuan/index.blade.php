@@ -106,6 +106,10 @@
                                     <i class="fas fa-eye"></i>
                                     </button>
                                     @elseif ($item->status === 'ditolak')
+                                    <button class="btn btn-sm btn-info mb-1" data-toggle="modal"
+                                    data-target="#exampleModalInfo{{ $item->sekolah_id }}">
+                                    <i class="fas fa-eye"></i>
+                                    </button>
                                     <button class="btn btn-sm btn-danger" data-toggle="modal"
                                         data-target="#exampleModal{{ $item->sekolah_id }}">
                                         <i class="fas fa-times"></i>

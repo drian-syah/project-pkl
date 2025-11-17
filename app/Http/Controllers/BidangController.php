@@ -12,7 +12,7 @@ class BidangController extends Controller
         $data = [
         'title' => 'Menu Bidang',
         'menuAdminBidang' => 'active',
-        'menuAdminBidangShow' => 'active',
+        'menuAdminMasterDataShow' => 'active',
         'bidang' => Bidang::orderBy('id', 'asc')->get(),
         ];
         

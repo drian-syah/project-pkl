@@ -75,18 +75,21 @@
                                 </td>
                                 <td class="text-center">
                                     @if ($item->status === 'draft')
-                                        <form action="{{ route('SekolahPengajuanKirim', $item->sekolah_id) }}" method="POST" class="d-inline">
-                                        @csrf
-                                        <button type="submit" class="btn btn-primary btn-sm mb-1">
-                                            <i class="fas fa-paper-plane mr-1"></i> Kirim ke Admin
-                                        </button>
-                                        <a href="{{ route('SekolahPengajuanEdit', $item->id) }}" class="btn btn-sm btn-warning">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                    </form>
                                         <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#exampleModalInfo{{ $item->sekolah_id }}">
                                             <i class="fas fa-eye"></i>
                                         </button>
+                                        <form action="{{ route('SekolahPengajuanKirim', $item->sekolah_id) }}" method="POST" class="d-inline mb-1">
+                                            @csrf
+                                            <a href="{{ route('SekolahPengajuanEdit', $item->id) }}" class="btn btn-sm btn-warning mb-1">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <button class="btn btn-sm btn-danger mb-1" data-toggle="modal" data-target="#exampleModal{{ $item->sekolah_id }}">
+                                                <i class="fas fa-times mb-1"></i>
+                                                </button>
+                                            <button type="submit" class="btn btn-primary btn-sm">
+                                                <i class="fas fa-paper-plane mr-1"></i> Kirim ke Admin
+                                            </button>
+                                        </form>
                                     @elseif ($item->status === 'diproses')
                                         <button class="btn btn-sm btn-danger mb-1" data-toggle="modal" data-target="#exampleModal{{ $item->sekolah_id }}">
                                         <i class="fas fa-times"></i>
