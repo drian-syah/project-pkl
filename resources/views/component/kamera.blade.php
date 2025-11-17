@@ -35,7 +35,7 @@
 
 <br>
 
-<button id="capture-btn" class="btn btn-primary btn-block">Ambil Foto</button>
+<button id="capture-btn" class="btn btn-primary btn-block mb-2">Ambil Foto</button>
 
 <canvas id="snapshot" width="420" height="320" style="display:none;"></canvas>
 <input type="hidden" id="foto_input" name="foto">
