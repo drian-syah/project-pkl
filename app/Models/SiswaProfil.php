@@ -16,6 +16,17 @@ class SiswaProfil extends Model
         'kelas',
         'jurusan',
         'foto',
+        'created_id',
         'created_date',
     ];
+
+    public function pengajuan()
+    {
+        return $this->belongsTo(PengajuanPklmagang::class, 'pengajuan_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

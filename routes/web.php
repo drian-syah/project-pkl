@@ -12,8 +12,10 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PengajuanController;
 use App\Http\Controllers\PembimbingController;
 use App\Http\Controllers\PenempatanController;
+use App\Http\Controllers\AdminTambahSiswaController;
 use App\Http\Controllers\AdminPembimbingTugasController;
 use App\Http\Controllers\AdminPenempatanBidangController;
+use App\Http\Controllers\AdminPenempatanJabatanController;
 use App\Http\Controllers\AdminPembimbingPenilaianController;
 
 Route::get('/', function () {
@@ -47,16 +49,23 @@ Route::middleware('checkLogin')->group(function () {
 
 
     Route::middleware('isAdmin')->group(function () {
+        // Bidang
         Route::get('Admin/daftarBidang/index', [BidangController::class, 'index'])->name('daftarBidang');
 
-        Route::get('admin/penempatanBidang', [AdminPenempatanBidangController::class, 'index'])->name('penempatanBidang');
-        Route::get('admin/penempatanBidang/create', [AdminPenempatanBidangController::class, 'create'])->name('penempatanBidangCreate');
-        Route::post('admin/penempatanBidang/store', [AdminPenempatanBidangController::class, 'store'])->name('penempatanBidangStore');
+        Route::get('admin/penempatan-bidang', [AdminPenempatanBidangController::class, 'index'])->name('penempatanBidang');
+        Route::get('admin/penempatan-bidang/create', [AdminPenempatanBidangController::class, 'create'])->name('penempatanBidangCreate');
+        Route::post('admin/penempatan-bidang/store', [AdminPenempatanBidangController::class, 'store'])->name('penempatanBidangStore');
         Route::get('admin/penempatan/get-pegawai/{nip}', [AdminPenempatanBidangController::class, 'getPegawai'])->name('penempatanGetPegawai');
-
-        Route::get('admin/daftarJabatan', [JabatanController::class, 'index'])->name('daftarJabatan');
-        Route::get('admin/penempatanBidang/create', [AdminPenempatanBidangController::class, 'create'])->name('penempatanBidangCreate');
-
+        
+        // Jabatan
+        Route::get('admin/daftar-jabatan', [JabatanController::class, 'index'])->name('daftarJabatan');
+        Route::get('admin/daftar-jabatan/edit/{id}', [JabatanController::class, 'edit'])->name('editJabatan');
+        Route::post('admin/daftar-jabatan/update/{id}', [JabatanController::class, 'update'])->name('updateJabatan');
+        Route::delete('admin/daftar-jabatan/destroy/{id}', [JabatanController::class, 'destroy'])->name('jabatanDestroy');
+        Route::get('admin/tambah-jabatan/create', [JabatanController::class, 'create'])->name('tambahJabatan');
+        Route::post('admin/tambah-jabatan/store', [JabatanController::class, 'store'])->name('tambahJabatanStore');
+        
+        Route::get('admin/penempatan-jabatan/index', [AdminPenempatanJabatanController::class, 'index'])->name('penempatanJabatan');
         // data user
         Route::get('admin/user', [UserController::class, 'index'])->name('user');
         Route::get('admin/user/create', [UserController::class, 'create'])->name('userCreate');
@@ -83,7 +92,8 @@ Route::middleware('checkLogin')->group(function () {
         Route::get('admin/pengajuan/showDaftarForm', [PengajuanController::class, 'showDaftarForm'])->name('daftarUserSekolahForm');
         Route::post('admin/pengajuan/daftar', [PengajuanController::class, 'daftar'])->name('daftarUserSekolah');
 
-
+        Route::get('admin/pengajuan-siswa/showDaftarFormSiswa/{id}', [AdminTambahSiswaController::class, 'showDaftarSiswaForm'])->name('adminPengajuanSiswaForm');
+        Route::post('admin/pengajuan-siswa/DaftarSiswa/{id}', [AdminTambahSiswaController::class, 'daftarSiswa'])->name('adminPengajuanDaftarSiswa');
 
         // penempatan
         Route::get('admin/penempatan/create', [PenempatanController::class, 'create'])->name('penempatanCreate');

@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('jabatans', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_jabatan', 50);
+            $table->string('nama_jabatan', 100)->unique();
             $table->unsignedBigInteger('created_id')->nullable();
             $table->timestamp('created_date')->useCurrent();
             $table->unsignedBigInteger('updated_id')->nullable();
             $table->timestamp('updated_date')->nullable()->useCurrentOnUpdate();
+            $table->timestamps();
         });
     }
 

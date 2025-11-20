@@ -24,7 +24,7 @@ return new class extends Migration
                 ->nullOnDelete();
 
             $table->string('nama', 100);
-            $table->string('nisn', 30)->nullable();
+            $table->string('nisn', 30)->nullable()->unique();
             $table->string('kelas', 50)->nullable();
             $table->string('jurusan', 100)->nullable();
             $table->string('foto', 255)->nullable();

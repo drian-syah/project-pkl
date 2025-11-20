@@ -31,6 +31,11 @@ class Pegawai extends Model
 
     public $timestamps = false;
 
+    public function jabatan()
+    {
+        return $this->belongsTo(Jabatan::class, 'jabatan');
+    }
+
     public function bidang()
     {
         return $this->belongsTo(Bidang::class, 'bidang_id');

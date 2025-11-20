@@ -88,7 +88,7 @@
                                     </button>
                                     <form action="{{ route('adminPengajuanKirim', $item->sekolah_id) }}" method="POST" class="d-inline">
                                         @csrf
-                                    <button type="submit" class="btn btn-primary btn-sm"> Konfirmasi Pengajuan
+                                    <button type="submit" class="btn btn-primary btn-sm"> Proses
                                     </button>
                                     </form>
                                     @elseif ($item->status === 'diproses')
@@ -101,6 +101,9 @@
                                         <i class="fas fa-times"></i>
                                     </button>
                                     @elseif ($item->status === 'diterima' )
+                                    <a href="{{ route('adminPengajuanSiswaForm', $item->id) }}" class="btn btn-sm btn-success mb-1">
+                                        <i class="fas fa-user-plus"></i>
+                                    </a>
                                     <button class="btn btn-sm btn-info mb-3" data-toggle="modal"
                                     data-target="#exampleModalInfo{{ $item->sekolah_id }}">
                                     <i class="fas fa-eye"></i>

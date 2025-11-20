@@ -23,7 +23,7 @@
                 </div>
             </div>
             
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-6">Jabatan</div>
                 <div class="col-6">
                     :
@@ -33,7 +33,7 @@
                     <span class="badge badge-info">{{ $item->jabatan }}</span>
                     @endif
                 </div>
-            </div>
+            </div> --}}
             
             <div class="row">
                 <div class="col-6">Status</div>
