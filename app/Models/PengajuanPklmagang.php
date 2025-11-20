@@ -18,7 +18,26 @@ class PengajuanPklmagang extends Model
         'periode_selesai',
         'status',
         'file_surat_path',
+        'created_by_role',
+        'created_date',
+        'created_id',
+        'updated_id',
+        'updated_date',
+        'deleted_id',
+        'is_active',
+        'created_at',
+        'updated_at',
     ];
+
+    public function createdBy()
+    {
+    return $this->belongsTo(User::class, 'created_id');
+    }
+
+    public function updatedBy()
+    {
+    return $this->belongsTo(User::class, 'updated_id');
+    }
 
     // Relasi ke Sekolah
     public function sekolah()

@@ -47,7 +47,7 @@ class PenempatanController extends Controller
         // Simpan relasi banyak pembimbing ke bidang
             Penempatan::create([
                 'bidang_id' => $request->bidang_id,
-                'pembimbing_id' => $id_pembimbing,
+                'pembimbing_id' => $pembimbing_id,
             ]);
 
         return redirect()->route('penempatan.index')->with('success', 'Penempatan berhasil disimpan.');

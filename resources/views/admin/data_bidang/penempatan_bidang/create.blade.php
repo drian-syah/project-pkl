@@ -57,7 +57,7 @@
                 <label class="form-label">
                     <span class="text-danger">*</span> Bidang
                 </label>
-                <select name="bidang_id" class="form-control @error('bidang_id') is-invalid @enderror">
+                <select name="id_bidang" class="form-control @error('id_bidang') is-invalid @enderror">
                     <option selected disabled>-- Pilih Bidang --</option>
                     @foreach ($bidang as $b)
                         <option value="{{ $b->id }}">{{ $b->nama }}</option>

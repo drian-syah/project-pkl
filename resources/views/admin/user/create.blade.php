@@ -140,9 +140,6 @@
                     <small class="text-danger">{{ $message }}</small>
                 @enderror 
             </div>
-
-            <div id="form-role"></div>
-
             {{-- Password --}}
             <div class="row mb-3 mt-3">
                 <div class="col-md-6">
@@ -171,70 +168,4 @@
         </form>
     </div>
 </div>
-
-
-{{-- SCRIPT ROLE HANDLER --}}
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const roleSelect = document.getElementById('role');
-    const formRole = document.getElementById('form-role');
-
-    const formTemplates = {
-        Siswa: `
-            <div class="form-group mb-3">
-                <label>NISN</label>
-                <input type="text" name="nisn" class="form-control" required>
-            </div>
-            <div class="form-group mb-3">
-                <label>Kelas</label>
-                <input type="text" name="kelas" class="form-control" required>
-            </div>
-            <div class="form-group mb-3">
-                <label>Jurusan</label>
-                <input type="text" name="jurusan" class="form-control">
-            </div>
-        `,
-        Pegawai: `
-            <div class="form-group mb-3">
-                <label>NIP</label>
-                <input type="text" name="nip" class="form-control" required>
-            </div>
-            <div class="form-group mb-3">
-                <label>Jabatan</label>
-                <input type="text" name="jabatan" class="form-control">
-            </div>
-        `,
-        Sekolah: `
-            <div class="form-group mb-3">
-                <label>NPSN</label>
-                <input type="text" name="npsn" class="form-control" required>
-            </div>
-            <div class="form-group mb-3">
-                <label>Nama Sekolah</label>
-                <input type="text" name="nama_sekolah" class="form-control">
-            </div>
-            <div class="form-group mb-3">
-                <label>Alamat</label>
-                <textarea name="alamat" class="form-control"></textarea>
-            </div>
-        `,
-        Pembimbing: `
-            <div class="form-group mb-3">
-                <label>Bidang</label>
-                <input type="text" name="bidang" class="form-control">
-            </div>
-            <div class="form-group mb-3">
-                <label>Pengalaman</label>
-                <input type="text" name="pengalaman" class="form-control">
-            </div>
-        `,
-        Admin: ``
-    };
-
-    roleSelect.addEventListener('change', function() {
-        const selectedRole = this.value;
-        formRole.innerHTML = formTemplates[selectedRole] || '';
-    });
-});
-</script>
 @endsection

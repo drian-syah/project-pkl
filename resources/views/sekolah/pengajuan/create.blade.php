@@ -37,8 +37,8 @@
                         @enderror
                     </div>
                 </div>
-
-                <input type="hidden" class="form-control" name="sekolah_id" value="{{ auth()->user()->sekolah->nama }}">
+                
+                <input type="hidden" class="form-control" name="sekolah_id" value="{{ auth()->user()->sekolah->id}}">
 
                 <div class="row mb-3">
                     <div class="col-md-6">
@@ -75,9 +75,9 @@
 
                     <div class="col-md-6">
                         <label class="form-label"><span class="text-danger">*</span> File Surat Pengajuan</label>
-                        <input type="file" name="file_surat"
-                            class="form-control @error('file_surat') is-invalid @enderror">
-                        @error('file_surat')
+                        <input type="file" name="file_surat_path"
+                            class="form-control @error('file_surat_path') is-invalid @enderror">
+                        @error('file_surat_path')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
@@ -85,10 +85,7 @@
 
                 {{-- Tombol Aksi --}}
                 <div class="d-flex justify-content-end gap-2">
-                    {{-- Simpan sebagai Draft --}}
-
-                    {{-- Kirim ke Admin --}}
-                    <button type="submit" name="action" value="kirim" class="btn btn-primary btn-sm">
+                    <button type="submit" class="btn btn-primary btn-sm">
                         Draft
                     </button>
                 </div>
