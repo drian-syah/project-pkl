@@ -15,6 +15,7 @@
                             <th>No</th>
                             <th>Nama</th>
                             <th>Kode</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -23,6 +24,18 @@
                                 <td class="text-center">{{ $loop->iteration }}</td>
                                 <td>{{ $item->nama }}</td>
                                 <td>{{ $item->kode }}</td>
+                                <td class="text-center">
+                                    <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#exampleModalView{{ $item->id }}">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                <a href="{{ route('editBidang', $item->id) }}" class="btn btn-sm btn-warning">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModalDelete{{ $item->id }}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                                @include('admin.data_bidang.daftar_bidang.modal')
+                            </td>
                             </tr>
                         @endforeach
                     </tbody>

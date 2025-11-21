@@ -27,7 +27,7 @@ class AdminPenempatanJabatanController extends Controller
             'jabatan' => Jabatan::all(),                 // dropdown bidang
         ];
     
-        return view('admin.data_bidang.penempatan_bidang.create', $data);
+        return view('admin.data_jabatan.penempatan_jabatan.create', $data);
     }
 
     public function store(Request $request)

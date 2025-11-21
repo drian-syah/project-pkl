@@ -14,7 +14,7 @@
     </div>
 
     <div class="card-body">
-        <form action="{{ route('penempatanBidangStore') }}" method="POST">
+        <form action="{{ route('penempatanJabatanStore') }}" method="POST">
             @csrf
 
             {{-- NIP --}}
@@ -47,8 +47,8 @@
                 </div>
 
                 <div class="col-xl-6 mb-3">
-                    <label class="form-label">Jabatan</label>
-                    <input type="text" id="jabatan" class="form-control" disabled>
+                    <label class="form-label">Bidang</label>
+                    <input type="text" id="bidang" class="form-control" disabled>
                 </div>
             </div>
 
@@ -59,7 +59,7 @@
                 </label>
                 <select name="bidang_id" class="form-control @error('bidang_id') is-invalid @enderror">
                     <option selected disabled>-- Pilih Bidang --</option>
-                    @foreach ($bidang as $b)
+                    @foreach ($jabatan as $b)
                         <option value="{{ $b->id }}">{{ $b->nama }}</option>
                     @endforeach
                 </select>

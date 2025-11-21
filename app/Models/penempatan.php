@@ -16,7 +16,7 @@ class Penempatan extends Model
 
     protected $fillable = [
         'pengajuan_id',
-        'bidang_id',
+        'id_bidang',
         'created_date',
         'created_id',
         'updated_id',

@@ -50,22 +50,27 @@ Route::middleware('checkLogin')->group(function () {
 
     Route::middleware('isAdmin')->group(function () {
         // Bidang
-        Route::get('Admin/daftarBidang/index', [BidangController::class, 'index'])->name('daftarBidang');
-
-        Route::get('admin/penempatan-bidang', [AdminPenempatanBidangController::class, 'index'])->name('penempatanBidang');
-        Route::get('admin/penempatan-bidang/create', [AdminPenempatanBidangController::class, 'create'])->name('penempatanBidangCreate');
-        Route::post('admin/penempatan-bidang/store', [AdminPenempatanBidangController::class, 'store'])->name('penempatanBidangStore');
-        Route::get('admin/penempatan/get-pegawai/{nip}', [AdminPenempatanBidangController::class, 'getPegawai'])->name('penempatanGetPegawai');
+        Route::get('Admin/daftarbidang/index', [BidangController::class, 'index'])->name('daftarBidang');
+        Route::delete('Admin/daftarbidang/destroy/{id}', [BidangController::class, 'destroy'])->name('hapusBidang');
+        Route::get('Admin/daftarbidang/edit/{id}', [BidangController::class, 'edit'])->name('editBidang');
+        Route::post('Admin/daftarbidang/update/{id}', [BidangController::class, 'update'])->name('updateBidang');
+        Route::get('Admin/tambahbidang/create', [BidangController::class, 'create'])->name('tambahBidang');
+        Route::post('Admin/tambahbidang/store', [BidangController::class, 'store'])->name('tambahBidangStore');
         
+        Route::get('Admin/penempatanbidang/index', [AdminPenempatanBidangController::class, 'index'])->name('penempatanBidang');
+        Route::get('Admin/penempatanbidang/create', [AdminPenempatanBidangController::class, 'create'])->name('penempatanBidangCreate');
+        Route::post('Admin/penempatanbidang/store', [AdminPenempatanBidangController::class, 'store'])->name('penempatanBidangStore');
         // Jabatan
-        Route::get('admin/daftar-jabatan', [JabatanController::class, 'index'])->name('daftarJabatan');
-        Route::get('admin/daftar-jabatan/edit/{id}', [JabatanController::class, 'edit'])->name('editJabatan');
-        Route::post('admin/daftar-jabatan/update/{id}', [JabatanController::class, 'update'])->name('updateJabatan');
-        Route::delete('admin/daftar-jabatan/destroy/{id}', [JabatanController::class, 'destroy'])->name('jabatanDestroy');
-        Route::get('admin/tambah-jabatan/create', [JabatanController::class, 'create'])->name('tambahJabatan');
-        Route::post('admin/tambah-jabatan/store', [JabatanController::class, 'store'])->name('tambahJabatanStore');
+        Route::get('admin/daftarjabatan', [JabatanController::class, 'index'])->name('daftarJabatan');
+        Route::get('admin/daftarjabatan/edit/{id}', [JabatanController::class, 'edit'])->name('editJabatan');
+        Route::post('admin/daftarjabatan/update/{id}', [JabatanController::class, 'update'])->name('updateJabatan');
+        Route::delete('admin/daftarjabatan/destroy/{id}', [JabatanController::class, 'destroy'])->name('jabatanDestroy');
+        Route::get('admin/tambahabatan/create', [JabatanController::class, 'create'])->name('tambahJabatan');
+        Route::post('admin/tambahjabatan/store', [JabatanController::class, 'store'])->name('tambahJabatanStore');
         
-        Route::get('admin/penempatan-jabatan/index', [AdminPenempatanJabatanController::class, 'index'])->name('penempatanJabatan');
+        Route::get('admin/penempatanjabatan/index', [AdminPenempatanJabatanController::class, 'index'])->name('penempatanJabatan');
+        Route::get('admin/penempatanjabatan/create', [AdminPenempatanJabatanController::class, 'create'])->name('penempatanJabatanCreate');
+        Route::get('admin/penempatanjabatan/store', [AdminPenempatanJabatanController::class, 'store'])->name('penempatanJabatanStore');
         // data user
         Route::get('admin/user', [UserController::class, 'index'])->name('user');
         Route::get('admin/user/create', [UserController::class, 'create'])->name('userCreate');
@@ -105,6 +110,10 @@ Route::middleware('checkLogin')->group(function () {
         Route::get('admin/penempatan', [PenempatanController::class, 'index'])->name('penempatan');
         Route::get('admin/penempatan/pdf', [PenempatanController::class, 'pdf'])->name('penempatanPdf');
 
+        Route::get('pembimbing/penilaian', [AdminPembimbingPenilaianController::class, 'penilaian'])->name('pembimbingPenilaian');
+        Route::get('/admin/pembimbing/penilaian', [AdminPembimbingPenilaianController::class, 'penilaianIndex'])->name('pembimbing.penilaian');
+        Route::post('/admin/pembimbing/penilaian/store', [AdminPembimbingPenilaianController::class, 'penilaianStore'])->name('pembimbing.penilaian.store');});
+
 
     });
 
@@ -114,11 +123,7 @@ Route::middleware('checkLogin')->group(function () {
         Route::get('pembimbing/tugas/index', [AdminPembimbingTugasController::class, 'index'])->name('tugas');
         Route::post('pembimbing/tugas', [AdminPembimbingTugasController::class, 'tugasAdmin'])->name('pembimbingTugas');
         Route::get('pembimbing', [PembimbingController::class, 'index'])->name('pembimbing');
-
-
-        // penilaian
-        Route::get('pembimbing/penilaian', [AdminPembimbingPenilaianController::class, 'penilaian'])->name('pembimbingPenilaian');
-    });
+        Route::delete('/admin/pembimbing/tugas/delete/{id}', [PembimbingController::class, 'tugasDelete'])->name('pembimbing.tugas.delete');
 
     Route::middleware('isSiswa')->group(function () {
         // siswa

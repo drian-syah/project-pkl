@@ -50,6 +50,10 @@ class User extends Authenticatable
     {
         return $this->hasOne(Jabatan::class);
     }
+    public function bidang()
+    {
+        return $this->hasOne(Bidang::class);
+    }
 
 
     // Tambahkan di sini

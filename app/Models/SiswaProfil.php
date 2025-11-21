@@ -8,6 +8,10 @@ class SiswaProfil extends Model
 {
     protected $table = 'siswa_profile';
 
+    public function presensi()
+    {
+    return $this->hasMany(Presensi::class, 'siswa_id');
+    }
     protected $fillable = [
         'user_id',
         'pengajuan_id',

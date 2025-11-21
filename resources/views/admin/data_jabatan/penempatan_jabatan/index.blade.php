@@ -3,8 +3,8 @@
 <div class="card">
     <div class="card-header d-flex flex-wrap justify-content-center justify-content-xl-between">
         <div class="mb-1 mr-2">
-            <a href="{{ route('penempatanBidangCreate') }}" class="btn btn-sm btn-primary">
-                <i class="fas fa-user-check mr-2"></i>Tambah Bidang Pegawai
+            <a href="{{ route('penempatanJabatanCreate') }}" class="btn btn-sm btn-primary">
+                <i class="fas fa-user-check mr-2"></i>Tambah Jabatan Pegawai
                 
             </a>
         </div>

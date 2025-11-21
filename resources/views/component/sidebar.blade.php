@@ -73,8 +73,8 @@
                                 </a>
                             </li>
                 
-                            <li class="nav-item">
-                                <a class="nav-link" href="">
+                            <li class="nav-item {{ $MenuAdminTambahBidang ?? '' }}">
+                                <a class="nav-link" href="{{ route('tambahBidang') }}">
                                     <i class="fas fa-plus-circle"></i> Tambah Bidang
                                 </a>
                             </li>
