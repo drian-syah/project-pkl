@@ -60,6 +60,7 @@ Route::middleware('checkLogin')->group(function () {
         Route::get('Admin/penempatanbidang/index', [AdminPenempatanBidangController::class, 'index'])->name('penempatanBidang');
         Route::get('Admin/penempatanbidang/create', [AdminPenempatanBidangController::class, 'create'])->name('penempatanBidangCreate');
         Route::post('Admin/penempatanbidang/store', [AdminPenempatanBidangController::class, 'store'])->name('penempatanBidangStore');
+        Route::get('admin/penempatanbidang/getPegawai/{nip}', [AdminPenempatanBidangController::class, 'getPegawai']);
         // Jabatan
         Route::get('admin/daftarjabatan', [JabatanController::class, 'index'])->name('daftarJabatan');
         Route::get('admin/daftarjabatan/edit/{id}', [JabatanController::class, 'edit'])->name('editJabatan');
@@ -70,7 +71,8 @@ Route::middleware('checkLogin')->group(function () {
         
         Route::get('admin/penempatanjabatan/index', [AdminPenempatanJabatanController::class, 'index'])->name('penempatanJabatan');
         Route::get('admin/penempatanjabatan/create', [AdminPenempatanJabatanController::class, 'create'])->name('penempatanJabatanCreate');
-        Route::get('admin/penempatanjabatan/store', [AdminPenempatanJabatanController::class, 'store'])->name('penempatanJabatanStore');
+        Route::post('admin/penempatanjabatan/store', [AdminPenempatanJabatanController::class, 'store'])->name('penempatanJabatanStore');
+        Route::get('admin/penempatanjabatan/getPegawai/{nip}', [AdminPenempatanJabatanController::class, 'getPegawai']);
         // data user
         Route::get('admin/user', [UserController::class, 'index'])->name('user');
         Route::get('admin/user/create', [UserController::class, 'create'])->name('userCreate');
@@ -112,33 +114,28 @@ Route::middleware('checkLogin')->group(function () {
 
         Route::get('pembimbing/penilaian', [AdminPembimbingPenilaianController::class, 'penilaian'])->name('pembimbingPenilaian');
         Route::get('/admin/pembimbing/penilaian', [AdminPembimbingPenilaianController::class, 'penilaianIndex'])->name('pembimbing.penilaian');
-        Route::post('/admin/pembimbing/penilaian/store', [AdminPembimbingPenilaianController::class, 'penilaianStore'])->name('pembimbing.penilaian.store');});
+        Route::post('/admin/pembimbing/penilaian/store', [AdminPembimbingPenilaianController::class, 'penilaianStore'])->name('pembimbing.penilaian.store');
 
 
     });
 
     Route::middleware('isPembimbing')->group(function () {
         // pembimbing
-        // Menu Tugas
         Route::get('pembimbing/tugas/index', [AdminPembimbingTugasController::class, 'index'])->name('tugas');
         Route::post('pembimbing/tugas', [AdminPembimbingTugasController::class, 'tugasAdmin'])->name('pembimbingTugas');
         Route::get('pembimbing', [PembimbingController::class, 'index'])->name('pembimbing');
         Route::delete('/admin/pembimbing/tugas/delete/{id}', [PembimbingController::class, 'tugasDelete'])->name('pembimbing.tugas.delete');
+    });
+    
 
     Route::middleware('isSiswa')->group(function () {
-        // siswa
         Route::get('presensi', [SiswaController::class, 'index'])->name('presensi');
         Route::get('presensi/store', [SiswaController::class, 'store'])->name('presensiStore');
-        // form presensi masuk
         Route::get('presensi/masuk', [SiswaController::class, 'masuk'])->name('presensiMasuk');
-
-        // Form presensi pulang
         Route::get('presensi/pulang', [SiswaController::class, 'pulang'])->name('presensiPulang');
-
-        // Submit presensi pulang
         Route::post('presensi/pulang', [SiswaController::class, 'pulangStore'])->name('presensiPulangStore');
-
     });
+    
 
     Route::middleware('isSekolah')->group(function () {
         // sekolah
@@ -152,5 +149,4 @@ Route::middleware('checkLogin')->group(function () {
         Route::get('sekolah/pengajuan/pdf', [SekolahController::class, 'pdf'])->name('SekolahPengajuanPdf');
         Route::get('sekolah/pengajuan/excel', [SekolahController::class, 'excel'])->name('SekolahPengajuanExcel');
     });
-
 });

@@ -41,14 +41,14 @@
                                 <td>{{ $item->nip }}</td>
                                 <td>{{ $item->nama }}</td>
                                 <td class="text-center">{{ $item->user->email ?? '-'}}</td>
-                                <td class="text-center">{{ $item->jabatan }}</td>
+                                <td class="text-center">{{ $item->jabatan->nama_jabatan }}</td>
                                 <td class="text-center">{{ $item->bidang->nama ?? '-' }}</td>
                                 <td class=" text-center justify-content-center mb-3">
                                     <button class="btn btn-sm btn-info" data-toggle="modal"
                                         data-target="#exampleModalInfo">
                                         <i class="fas fa-eye"></i>
                                     </button>
-                                    @include('admin.data_jabatan.penempatan_jabatan.modal')
+                                    {{-- @include('admin.data_jabatan.penempatan_jabatan.modal') --}}
                                 </td>
                             </tr>
                         @endforeach

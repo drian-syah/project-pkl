@@ -19,7 +19,7 @@ return new class extends Migration
 
             $table->string('nip', 50)->unique();
             $table->string('nama', 100);
-            $table->string('jabatan', 100)->nullable();
+            $table->string('jabatan_id', 100)->nullable();
 
             $table->foreignId('bidang_id')
                 ->nullable()

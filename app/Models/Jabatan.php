@@ -17,7 +17,7 @@ class Jabatan extends Model
 
     public function pegawai()
     {
-        return $this->hasMany(Pegawai::class, 'jabatan');
+        return $this->hasMany(Pegawai::class, 'jabatan_id');
     }
 
     public function createdBy()

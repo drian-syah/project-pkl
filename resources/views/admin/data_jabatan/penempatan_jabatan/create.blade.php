@@ -8,7 +8,7 @@
 
 <div class="card">
     <div class="card-header bg-primary text-white">
-        <a href="{{ route('penempatanBidang') }}" class="text-white">
+        <a href="{{ route('penempatanJabatan') }}" class="text-white">
             <i class="fas fa-arrow-left mr-2"></i> Kembali
         </a>
     </div>
@@ -48,22 +48,22 @@
 
                 <div class="col-xl-6 mb-3">
                     <label class="form-label">Bidang</label>
-                    <input type="text" id="bidang" class="form-control" disabled>
+                    <input type="text" id="bidang_id" class="form-control" disabled>
                 </div>
             </div>
 
             {{-- Bidang --}}
             <div class="mb-3">
                 <label class="form-label">
-                    <span class="text-danger">*</span> Bidang
+                    <span class="text-danger">*</span> Jabatan
                 </label>
-                <select name="bidang_id" class="form-control @error('bidang_id') is-invalid @enderror">
-                    <option selected disabled>-- Pilih Bidang --</option>
-                    @foreach ($jabatan as $b)
-                        <option value="{{ $b->id }}">{{ $b->nama }}</option>
+                <select name="jabatan_id" class="form-control @error('jabatan_id') is-invalid @enderror">
+                    <option selected disabled>-- Pilih Jabatan --</option>
+                    @foreach ($jabatan as $jbtn)
+                        <option value="{{ $jbtn->id }}">{{ $jbtn->nama_jabatan }}</option>
                     @endforeach
                 </select>
-                @error('bidang_id')
+                @error('jabatan_id')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
             </div>
@@ -88,17 +88,17 @@ document.getElementById('nip').addEventListener('change', function() {
     if (!nip) {
         document.getElementById('nama').value = '';
         document.getElementById('email').value = '';
-        document.getElementById('jabatan').value = '';
+        document.getElementById('bidang_id').value = '';
         return;
     }
 
     // Fetch data pegawai
-    fetch('/penempatan/get-pegawai/' + nip)
+    fetch('/admin/penempatanjabatan/getPegawai/' + nip)
         .then(res => res.json())
         .then(data => {
             document.getElementById('nama').value = data.nama ?? '';
             document.getElementById('email').value = data.email ?? '';
-            document.getElementById('jabatan').value = data.jabatan ?? '';
+            document.getElementById('bidang_id').value = data.bidang_id ?? 'N/A';
         })
         .catch(error => {
             console.error('Error:', error);

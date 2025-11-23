@@ -21,10 +21,10 @@ class AdminPenempatanJabatanController extends Controller
     public function create()
     {
         $data = [
-            'title' => 'Penempatan Pegawai ke Bidang',
-            'menuAdminPenempatanBidang' => 'active',
-            'pegawai' => Pegawai::with('user')->get(),  // untuk dropdown NIP
-            'jabatan' => Jabatan::all(),                 // dropdown bidang
+            'title' => 'Penempatan Jabatan Pegawai',
+            'menuAdminPenempatanJabatan' => 'active',
+            'pegawai' => Pegawai::with('user')->whereNull('jabatan_id')->get(),  // untuk dropdown NIP
+            'jabatan' => Jabatan::all(),
         ];
     
         return view('admin.data_jabatan.penempatan_jabatan.create', $data);
@@ -34,25 +34,25 @@ class AdminPenempatanJabatanController extends Controller
     {
     $request->validate([
         'nip' => 'required|exists:pegawai,nip',
-        'nama_jabatan' => 'required|exists:jabatan,nama_jabatan',
+        'jabatan_id' => 'required|exists:jabatans,id',
     ]);
 
     // Cari pegawai berdasarkan NIP
-    $pegawai = Pegawai::where('nip', $request->nip)->first();
+    $pegawai = Pegawai::where('nip', $request->nip)->firstOrFail();
     
     // Update bidang pegawai
     $pegawai->update([
-        'jabatan' => $request->jabatan,
+        'jabatan_id' => $request->jabatan_id,
     ]);
 
     return redirect()->route('penempatanJabatan')
-                     ->with('success', 'Pegawai berhasil ditempatkan ke bidang.');
+                     ->with('success', 'Pegawai berhasil ditempatkan ke jabatan.');
     }
 
     public function getPegawai($nip)
-{
+    {
     try {
-        $pegawai = Pegawai::where('nip', $nip)->first();
+        $pegawai = Pegawai::with('user', 'bidang')->where('nip', $nip)->first();
         
         if (!$pegawai) {
             return response()->json([
@@ -63,7 +63,7 @@ class AdminPenempatanJabatanController extends Controller
         return response()->json([
             'nama' => $pegawai->nama,
             'email' => $pegawai->user->email,
-            'bidang_id' => $pegawai->bidang_id ?? '-', // Sesuaikan dengan nama kolom
+            'bidang_id' => $pegawai->bidang->nama ?? '-', // Sesuaikan dengan nama kolom
         ]);
         
     } catch (\Exception $e) {
@@ -72,5 +72,5 @@ class AdminPenempatanJabatanController extends Controller
             'error' => $e->getMessage()
         ], 500);
     }
-}
+    }
 }
