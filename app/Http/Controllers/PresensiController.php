@@ -24,7 +24,7 @@ class PresensiController extends Controller
     {
         $request->validate([
             'status' => 'required', // hadir / pulang / izin / sakit
-            'keterangan' => 'nullable|string',
+            'keterangan' => 'required|string',
         ]);
 
         Presensi::create([
@@ -32,6 +32,7 @@ class PresensiController extends Controller
             'tanggal' => now()->toDateString(),
             'status' => $request->status,
             'keterangan' => $request->keterangan,
+            'foto'
         ]);
 
         return redirect()->back()->with('success', 'Presensi berhasil dikirim ke pembimbing.');
