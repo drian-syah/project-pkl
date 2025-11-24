@@ -1,6 +1,6 @@
 @extends('component.app')
 @section('content')
-<form action="{{ route('presensiStore') }}">
+<form action="{{ route('presensiStore') }}" method="post" enctype="multipart/form-data">
     @csrf
     <div class="card p-3 shadow-sm">
         <h4>Presensi Hari Ini</h4>

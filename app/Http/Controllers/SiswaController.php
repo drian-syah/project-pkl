@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Storage;
 use App\Models\Presensi;
 use App\Models\SiswaProfil;
 use Illuminate\Http\Request;
@@ -11,70 +12,122 @@ class SiswaController extends Controller
 {
     public function index()
     {
-        $data = array(
-        'title' => 'Dashboard Siswa',
-        'menuSiswaPresensi' => 'active',
-        'siswa' => SiswaProfil::orderBy('id', 'asc')->get(),
-        );
-        return view('siswa/presensi/index', $data);
+        $data = [
+            'title' => 'Dashboard Siswa',
+            'menuSiswaPresensi' => 'active',
+            'siswa' => SiswaProfil::orderBy('id', 'asc')->get(),
+        ];
+
+        return view('siswa.presensi.index', $data);
     }
 
     public function masuk()
     {
-        $data = array(
-            'title' => 'Menu Presensi Masuk'
-        );
+        $data = [
+            'title' => 'Menu Presensi Masuk',
+            'menuSiswaPresensi' => 'active',
+        ];
+
         return view('siswa.presensi.masuk', $data);
     }
 
     public function store(Request $request)
     {
+        $siswa = SiswaProfil::where('user_id', Auth::id())->first();
+
+    if (!$siswa) {
+    return back()->with('error', 'Profil siswa tidak ditemukan!');
+    }
+
         $request->validate([
             'status' => 'required|in:hadir,izin,sakit',
-            'foto' => 'required|image|mimes:jpg,jpeg,png|max:10000',
+            'foto'   => 'required',  // BUKAN image lagi
         ]);
 
-        $path = $request->file('foto')->store('foto_presensi', 'public');
+        // Decode base64
+        $base64 = $request->foto;
+        list($type, $data) = explode(';', $base64);
+        list(, $data) = explode(',', $data);
+        $data = base64_decode($data);
 
+        // Nama file
+        $fileName = 'masuk_' . time() . '.jpg';
+
+        // Simpan
+        Storage::put('public/foto_presensi/' . $fileName, $data);
+
+        // Cek apakah sudah presensi
+        $cek = Presensi::where('siswa_id', Auth::id())
+                        ->where('tanggal', now()->toDateString())
+                        ->first();
+
+        if ($cek) {
+            return back()->with('error', 'Kamu sudah presensi masuk hari ini!');
+        }
+
+        // Simpan database
         Presensi::create([
-            'siswa_id' => Auth::user()->id,
-            'status' => $request->status,
-            'foto' => '$path',
-            'tanggal' => now()->toDateString(),
-            'jam_masuk' => now()->toTimeString(),
+            'siswa_id'   => $siswa->id,
+            'status'     => $request->status,
+            'foto'       => 'foto_presensi/' . $fileName,
+            'tanggal'    => now()->toDateString(),
+            'jam_masuk'  => now()->toTimeString(),
         ]);
         
-        return redirect()->back()->with('success', 'Presensi Berhasil Dikkirim!');
+        return back()->with('success', 'Presensi masuk berhasil dikirim!');
     }
 
     public function pulang()
     {
-    $data = [
-        'title' => 'Presensi Pulang',
-        'menuSiswaPresensi' => 'active',
-    ];
+        $data = [
+            'title' => 'Presensi Pulang',
+            'menuSiswaPresensi' => 'active',
+        ];
 
-    return view('siswa.presensi.pulang', $data);
+        return view('siswa.presensi.pulang', $data);
     }
 
     public function pulangStore(Request $request)
     {
-    // Cari record presensi hari ini untuk siswa login
-    $presensi = Presensi::where('siswa_id', Auth::id())
-                        ->where('tanggal', now()->toDateString())
-                        ->first();
+        $siswa = SiswaProfil::where('user_id', Auth::id())->first();
 
-    if (!$presensi) {
-        return redirect()->back()->with('error', 'Belum melakukan presensi masuk!');
+    if (!$siswa) {
+    return back()->with('error', 'Profil siswa tidak ditemukan!');
     }
 
-    // Update jam_keluar
-    $presensi->update([
-        'jam_keluar' => now()->toTimeString(),
-    ]);
+        $request->validate([
+            'foto' => 'required'
+        ]);
 
-    return redirect()->back()->with('success', 'Presensi pulang berhasil dicatat!');
-}
+        // Cari record presensi hari ini
+        $presensi = Presensi::where('siswa_id', Auth::id())
+                            ->where('tanggal', now()->toDateString())
+                            ->first();
 
+        if (!$presensi) {
+            return back()->with('error', 'Kamu belum presensi masuk!');
+        }
 
+        if ($presensi->jam_keluar) {
+            return back()->with('error', 'Kamu sudah presensi pulang!');
+        }
+
+        // Decode base64 untuk foto pulang
+        $base64 = $request->foto;
+        list($type, $data) = explode(';', $base64);
+        list(, $data) = explode(',', $data);
+        $data = base64_decode($data);
+
+        $fileName = 'pulang_' . time() . '.jpg';
+
+        Storage::put('public/foto_pulang/' . $fileName, $data);
+
+        // Update
+        $presensi->update([
+            'jam_keluar'   => now()->toTimeString(),
+            'foto_pulang'  => 'foto_pulang/' . $fileName,
+        ]);
+
+        return back()->with('success', 'Presensi pulang berhasil dicatat!');
+    }
 }

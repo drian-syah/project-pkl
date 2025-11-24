@@ -119,20 +119,28 @@ Route::middleware('checkLogin')->group(function () {
         Route::post('/admin/pembimbing/penilaian/store', [AdminPembimbingPenilaianController::class, 'penilaianStore'])->name('pembimbing.penilaian.store');
 
 
+        Route::get('pembimbing/tugas/index', [AdminPembimbingTugasController::class, 'index'])->name('tugas');
+        Route::post('pembimbing/tugas', [AdminPembimbingTugasController::class, 'tugasAdmin'])->name('pembimbingTugas');
+        Route::delete('/admin/pembimbing/tugas/delete/{id}', [PembimbingController::class, 'tugasDelete'])->name('pembimbing.tugas.delete');
     });
 
     Route::middleware('isPembimbing')->group(function () {
         // pembimbing
-        Route::get('pembimbing/tugas/index', [AdminPembimbingTugasController::class, 'index'])->name('tugas');
-        Route::post('pembimbing/tugas', [AdminPembimbingTugasController::class, 'tugasAdmin'])->name('pembimbingTugas');
         Route::get('pembimbing', [PembimbingController::class, 'index'])->name('pembimbing');
-        Route::delete('/admin/pembimbing/tugas/delete/{id}', [PembimbingController::class, 'tugasDelete'])->name('pembimbing.tugas.delete');
+
+
+        // penilaian
+        Route::get('pembimbing/penilaian', [AdminPembimbingPenilaianController::class, 'penilaian'])->name('pembimbingPenilaian');
     });
     
 
     Route::middleware('isSiswa')->group(function () {
         Route::get('presensi', [SiswaController::class, 'index'])->name('presensi');
-        Route::get('presensi/store', [SiswaController::class, 'store'])->name('presensiStore');
+        // form presensi masuk
+        Route::get('presensi/masuk', [SiswaController::class, 'masuk'])->name('presensiMasuk');
+        Route::post('presensi/store', [SiswaController::class, 'store'])->name('presensiStore');
+
+        // Form presensi pulang
         Route::get('presensi/masuk', [SiswaController::class, 'masuk'])->name('presensiMasuk');
         Route::get('presensi/pulang', [SiswaController::class, 'pulang'])->name('presensiPulang');
         Route::post('presensi/pulang', [SiswaController::class, 'pulangStore'])->name('presensiPulangStore');
