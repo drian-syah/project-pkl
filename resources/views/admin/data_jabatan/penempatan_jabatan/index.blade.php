@@ -41,14 +41,20 @@
                                 <td>{{ $item->nip }}</td>
                                 <td>{{ $item->nama }}</td>
                                 <td class="text-center">{{ $item->user->email ?? '-'}}</td>
-                                <td class="text-center">{{ $item->jabatan->nama_jabatan }}</td>
+                                <td class="text-center">{{ $item->jabatan->nama_jabatan ?? '-' }}</td>
                                 <td class="text-center">{{ $item->bidang->nama ?? '-' }}</td>
                                 <td class=" text-center justify-content-center mb-3">
                                     <button class="btn btn-sm btn-info" data-toggle="modal"
                                         data-target="#exampleModalInfo">
                                         <i class="fas fa-eye"></i>
                                     </button>
-                                    {{-- @include('admin.data_jabatan.penempatan_jabatan.modal') --}}
+                                    @if ($item->jabatan_id)
+                                    <button class="btn btn-sm btn-danger mb-1" data-toggle="modal"
+                                        data-target="#exampleModal{{ $item->id }}">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                    @endif
+                                    @include('admin.data_jabatan.penempatan_jabatan.modal')
                                 </td>
                             </tr>
                         @endforeach

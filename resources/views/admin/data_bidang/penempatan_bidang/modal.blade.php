@@ -10,42 +10,42 @@
         </div>
  
         <div class="modal-body text-left">
-            <div class="row">
-                <div class="col-6">Nama</div>
-                <div class="col-6">: {{ $item->nama }}</div>
-            </div>
-            
-            <div class="row">
-                <div class="col-6">Email</div>
-                <div class="col-6">
-                    : 
-                    <span class="badge badge-primary">{{ $item->email }}</span>
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="col-6">Jabatan</div>
-                <div class="col-6">
-                    :
-                    @if ($item->jabatan == 'Admin')
-                    <span class="badge badge-dark">{{ $item->jabatan }}</span>
-                    @else
-                    <span class="badge badge-info">{{ $item->jabatan }}</span>
-                    @endif
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="col-6">Status</div>
-                <div class="col-6">: {{ $item->is_tugas }}</div>
-            </div>
-        </div>
+          <div class="row">
+              <div class="col-6">Nama</div>
+              <div class="col-6">: {{ $item->nama }}</div>
+          </div>
+          
+          <div class="row">
+              <div class="col-6">Email</div>
+              <div class="col-6">
+                  : 
+                  <span>{{ $item->user->email }}</span>
+              </div>
+          </div>
+
+          <div class="row">
+              <div class="col-6">Jabatan</div>
+              <div class="col-6">
+                  :
+                  <span >{{ $item->jabatan->nama_jabatan ?? '-' }}</span>
+              </div>
+          </div>
+          
+          <div class="row">
+              <div class="col-6">Bidang</div>
+              <div class="col-6">
+                  :
+                  <span >{{ $item->bidang->nama ?? '-' }}</span>
+              </div>
+          </div>
+
+      </div>
   
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">
             <i class="fas fa-times"></i> Tutup
           </button>
-          <form action="{{ route('userDestroy', $item->id) }}" method="post">
+          <form action="{{ route('penempatanBidangDestroy', $item->id) }}" method="post">
             @csrf
             @method('delete')
           <button type="submit" class="btn btn-danger btn-sm">
