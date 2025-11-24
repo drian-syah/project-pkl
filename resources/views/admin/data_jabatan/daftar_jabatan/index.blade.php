@@ -14,6 +14,7 @@
                 <tr class="text-center">
                     <th>No</th>
                     <th>Nama</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -21,6 +22,19 @@
                     <tr>
                         <td class="text-center">{{ $loop->iteration }}</td>
                         <td>{{ $item->nama_jabatan }}</td>
+                        <td class="text-center">
+                            <button class="btn btn-sm btn-info mb-1" data-toggle="modal"
+                                        data-target="#exampleModalInfo{{ $item->sekolah_id }}">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                            <a href="{{ route('editJabatan', $item->id) }}" class="btn btn-sm btn-warning">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModalDelete{{ $item->id }}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                            @include('admin.data_jabatan.daftar_jabatan.modal')
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

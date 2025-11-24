@@ -91,9 +91,6 @@
                                             </button>
                                         </form>
                                     @elseif ($item->status === 'diproses')
-                                        <button class="btn btn-sm btn-danger mb-1" data-toggle="modal" data-target="#exampleModal{{ $item->sekolah_id }}">
-                                        <i class="fas fa-times"></i>
-                                        </button>
                                         <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#exampleModalInfo{{ $item->sekolah_id }}">
                                         <i class="fas fa-eye"></i>
                                         </button>

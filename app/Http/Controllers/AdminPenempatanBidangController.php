@@ -25,7 +25,7 @@ class AdminPenempatanBidangController extends Controller
         $data = [
             'title' => 'Penempatan Pegawai ke Bidang',
             'menuAdminPenempatanBidang' => 'active',
-            'pegawai' => Pegawai::with('user')->get(),  // untuk dropdown NIP
+            'pegawai' => Pegawai::with('user')->whereNull('bidang_id')->get(),  // untuk dropdown NIP
             'bidang' => Bidang::all(),                 // dropdown bidang
         ];
     
@@ -52,9 +52,9 @@ class AdminPenempatanBidangController extends Controller
     }
 
     public function getPegawai($nip)
-{
+    {
     try {
-        $pegawai = Pegawai::where('nip', $nip)->first();
+        $pegawai = Pegawai::with('user', 'jabatan')->where('nip', $nip)->first();
         
         if (!$pegawai) {
             return response()->json([
@@ -65,7 +65,7 @@ class AdminPenempatanBidangController extends Controller
         return response()->json([
             'nama' => $pegawai->nama,
             'email' => $pegawai->user->email,
-            'jabatan' => $pegawai->jabatan ?? '-', // Sesuaikan dengan nama kolom
+            'jabatan_id' => $pegawai->jabatan->nama_jabatan ?? '-', // Sesuaikan dengan nama kolom
         ]);
         
     } catch (\Exception $e) {
@@ -74,5 +74,5 @@ class AdminPenempatanBidangController extends Controller
             'error' => $e->getMessage()
         ], 500);
     }
-}
+    }
 }

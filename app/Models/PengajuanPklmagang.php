@@ -49,4 +49,9 @@ class PengajuanPklmagang extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function siswa()
+    {
+        return $this->hasMany(SiswaProfil::class, 'pengajuan_id');
+    }
 }

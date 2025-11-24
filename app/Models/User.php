@@ -18,6 +18,7 @@ class User extends Authenticatable
         'email',
         'role',
         'password',
+        'id_bidang',
     ];
 
     public function tugas()
@@ -35,11 +36,20 @@ class User extends Authenticatable
         return $this->hasOne(Sekolah::class, 'user_id');
     }
 
+    public function siswa()
+    {
+        return $this->hasOne(SiswaProfil::class, 'user_id');
+    }
+
     public function pegawai()
     {
         return $this->hasOne(Pegawai::class, 'user_id');
     }
 
+    public function jabatan()
+    {
+        return $this->hasOne(Jabatan::class);
+    }
     public function bidang()
     {
         return $this->hasOne(Bidang::class);

@@ -14,7 +14,7 @@ class Pegawai extends Model
     protected $fillable = [
         'nip',
         'nama',
-        'jabatan',
+        'jabatan_id',
         'user_id',
         'bidang_id',
     ];
@@ -30,6 +30,11 @@ class Pegawai extends Model
     }
 
     public $timestamps = false;
+
+    public function jabatan()
+    {
+        return $this->belongsTo(Jabatan::class, 'jabatan_id');
+    }
 
     public function bidang()
     {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Storage;
 use App\Models\Presensi;
 use App\Models\SiswaProfil;
 use Illuminate\Http\Request;
@@ -32,6 +33,12 @@ class SiswaController extends Controller
 
     public function store(Request $request)
     {
+        $siswa = SiswaProfil::where('user_id', Auth::id())->first();
+
+    if (!$siswa) {
+    return back()->with('error', 'Profil siswa tidak ditemukan!');
+    }
+
         $request->validate([
             'status' => 'required|in:hadir,izin,sakit',
             'foto'   => 'required',  // BUKAN image lagi
@@ -47,7 +54,7 @@ class SiswaController extends Controller
         $fileName = 'masuk_' . time() . '.jpg';
 
         // Simpan
-        \Storage::put('public/foto_presensi/' . $fileName, $data);
+        Storage::put('public/foto_presensi/' . $fileName, $data);
 
         // Cek apakah sudah presensi
         $cek = Presensi::where('siswa_id', Auth::id())
@@ -60,7 +67,7 @@ class SiswaController extends Controller
 
         // Simpan database
         Presensi::create([
-            'siswa_id'   => Auth::id(),
+            'siswa_id'   => $siswa->id,
             'status'     => $request->status,
             'foto'       => 'foto_presensi/' . $fileName,
             'tanggal'    => now()->toDateString(),
@@ -82,6 +89,12 @@ class SiswaController extends Controller
 
     public function pulangStore(Request $request)
     {
+        $siswa = SiswaProfil::where('user_id', Auth::id())->first();
+
+    if (!$siswa) {
+    return back()->with('error', 'Profil siswa tidak ditemukan!');
+    }
+
         $request->validate([
             'foto' => 'required'
         ]);
@@ -107,7 +120,7 @@ class SiswaController extends Controller
 
         $fileName = 'pulang_' . time() . '.jpg';
 
-        \Storage::put('public/foto_pulang/' . $fileName, $data);
+        Storage::put('public/foto_pulang/' . $fileName, $data);
 
         // Update
         $presensi->update([

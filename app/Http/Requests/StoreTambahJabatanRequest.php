@@ -11,7 +11,7 @@ class StoreTambahJabatanRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,15 @@ class StoreTambahJabatanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nama_jabatan' => ['required', 'string', 'max:100']
+            'nama_jabatan' => ['required', 'unique:jabatans,nama_jabatan', 'string', 'max:100']
+        ];
+    }
+
+    public function messages(): array
+    {
+        return[
+            'nama_jabatan.required' => 'Nama jabatan wajib diisi.',
+            'nama_jabatan.unique' => 'Jabatan sudah ada.'
         ];
     }
 }

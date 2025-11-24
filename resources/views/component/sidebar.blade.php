@@ -91,14 +91,14 @@
                                 </a>
                             </li>
                 
-                            <li class="nav-item {{ $menuAdminTambahJabatan ?? '' }}">
-                                <a class="nav-link" href="{{ route('penempatanBidang') }}">
+                            <li class="nav-item {{ $MenuAdminTambahJabatan ?? '' }}">
+                                <a class="nav-link" href="{{ route('tambahJabatan') }}">
                                     <i class="fas fa-briefcase"></i> Tambah Jabatan
                                 </a>
                             </li>
                 
                             <li class="nav-item {{ $menuAdminPenempatanJabatan ?? '' }}">
-                                <a class="nav-link" href="{{ route('penempatanBidang') }}">
+                                <a class="nav-link" href="{{ route('penempatanJabatan') }}">
                                     <i class="fas fa-briefcase"></i> Penempatan Jabatan
                                 </a>
                             </li>

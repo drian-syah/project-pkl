@@ -48,7 +48,7 @@
 
                 <div class="col-xl-6 mb-3">
                     <label class="form-label">Jabatan</label>
-                    <input type="text" id="jabatan" class="form-control" disabled>
+                    <input type="text" id="jabatan_id" class="form-control" disabled>
                 </div>
             </div>
 
@@ -57,10 +57,10 @@
                 <label class="form-label">
                     <span class="text-danger">*</span> Bidang
                 </label>
-                <select name="id_bidang" class="form-control @error('id_bidang') is-invalid @enderror">
+                <select name="bidang_id" class="form-control @error('bidang_id') is-invalid @enderror">
                     <option selected disabled>-- Pilih Bidang --</option>
-                    @foreach ($bidang as $b)
-                        <option value="{{ $b->id }}">{{ $b->nama }}</option>
+                    @foreach ($bidang as $item)
+                        <option value="{{ $item->id }}">{{ $item->nama }}</option>
                     @endforeach
                 </select>
                 @error('bidang_id')
@@ -81,29 +81,29 @@
 
 {{-- Script Autofill Data --}}
 <script>
-document.getElementById('nip').addEventListener('change', function() {
-    const nip = this.value;
+    document.getElementById('nip').addEventListener('change', function() {
+        const nip = this.value;
+        
+        // Reset fields jika tidak ada NIP dipilih
+        if (!nip) {
+            document.getElementById('nama').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('jabatan_id').value = '';
+            return;
+        }
     
-    // Reset fields jika tidak ada NIP dipilih
-    if (!nip) {
-        document.getElementById('nama').value = '';
-        document.getElementById('email').value = '';
-        document.getElementById('jabatan').value = '';
-        return;
-    }
-
-    // Fetch data pegawai
-    fetch('/penempatan/get-pegawai/' + nip)
-        .then(res => res.json())
-        .then(data => {
-            document.getElementById('nama').value = data.nama ?? '';
-            document.getElementById('email').value = data.email ?? '';
-            document.getElementById('jabatan').value = data.jabatan ?? '';
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Gagal mengambil data pegawai');
-        });
-});
-</script>
+        // Fetch data pegawai
+        fetch('/admin/penempatanbidang/getPegawai/' + nip)
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('nama').value = data.nama ?? '';
+                document.getElementById('email').value = data.email ?? '';
+                document.getElementById('jabatan_id').value = data.jabatan_id ?? 'N/A';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Gagal mengambil data pegawai');
+            });
+    });
+    </script>
 @endsection
