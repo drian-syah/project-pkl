@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminUserPembimbingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
@@ -86,6 +87,9 @@ Route::middleware('checkLogin')->group(function () {
         Route::get('admin/user/pdf', [UserController::class, 'pdf'])->name('userPdf');
         Route::resource('users', UserController::class);
         // pengajuan 
+        Route::get('admin/user/pembimbing/index', [AdminUserPembimbingController::class, 'index'])->name('userPembimbing');
+        Route::get('admin/user/pembimbing/create', [AdminUserPembimbingController::class, 'create'])->name('userPembimbingCreate');
+
         Route::get('admin/pengajuan', [PengajuanController::class, 'index'])->name('adminPengajuan');
         Route::get('admin/pengajuan/create', [PengajuanController::class, 'create'])->name('adminPengajuanCreate');
         Route::post('admin/pengajuan/store', [PengajuanController::class, 'store'])->name('adminPengajuanStore');

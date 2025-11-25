@@ -25,7 +25,7 @@ class JabatanController extends Controller
             'title' => 'Tambah Jabatan',
             'MenuAdminTambahJabatan' => 'active',
         ];
-        return view('admin.data_jabatan.tambah_jabatan.index', $data);
+        return view('admin.data_jabatan.daftar_jabatan.create', $data);
     }
 
     public function store(StoreTambahJabatanRequest $request)

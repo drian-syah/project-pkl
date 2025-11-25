@@ -50,8 +50,8 @@
                                     <i class="fas fa-user-graduate"></i> Siswa
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="">
+                            <li class="nav-item {{ $MenuAdminUserPembimbing ?? '' }}">
+                                <a class="nav-link" href="{{ route('userPembimbing') }}">
                                     <i class="fas fa-user-check"></i> Pembimbing
                                 </a>
                             </li>

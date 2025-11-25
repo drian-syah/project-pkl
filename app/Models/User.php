@@ -48,11 +48,11 @@ class User extends Authenticatable
 
     public function jabatan()
     {
-        return $this->hasOne(Jabatan::class);
+        return $this->belongsTo(Jabatan::class, 'jabatan_id');
     }
     public function bidang()
     {
-        return $this->hasOne(Bidang::class);
+        return $this->belongsTo(Bidang::class, 'id_bidang');
     }
 
 
