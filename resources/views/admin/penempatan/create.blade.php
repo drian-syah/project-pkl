@@ -20,7 +20,7 @@
                     <div class="col-xl-12 mb-1">
                         <label class="form-label">
                             <span class="text-danger">*</span>
-                            Nama :</label>
+                            Nama Siswa:</label>
                             <select name="user_id" class="form-control @error('user_id') is-invalid @enderror">
                             <option selected disabled>--Pilih Nama--</option>
                             @foreach ($penempatan as $item)
@@ -33,18 +33,34 @@
                         </small>
                     @enderror 
                     </div>
-                <div class="col-xl-12 mb-2">
-                    
-                    <label class="form-label">
-                        <span class="text-danger">*</span>
-                        Tugas :</label>
-                        <textarea name="tugas" rows="5" class="form-control  @error('tugas') is-invalid @enderror"></textarea>
-                    @error('tugas')
-                    <small class="text-danger">
-                        {{ $message }}
-                    </small>
-                @enderror
-                </div>
+                    <div class="mb-3">
+                        <label class="form-label">
+                            <span class="text-danger">*</span> Bidang
+                        </label>
+                        <select name="bidang_id" class="form-control @error('bidang_id') is-invalid @enderror">
+                            <option selected disabled>-- Pilih Bidang --</option>
+                            @foreach ($bidang as $item)
+                                <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                            @endforeach
+                        </select>
+                        @error('bidang_id')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">
+                            <span class="text-danger">*</span> Pembimbing
+                        </label>
+                        <select name="bidang_id" class="form-control @error('bidang_id') is-invalid @enderror">
+                            <option selected disabled>-- Pilih Bidang --</option>
+                            @foreach ($bidang as $item)
+                                <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                            @endforeach
+                        </select>
+                        @error('bidang_id')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
             </div>
 
             <div class="row mb-2">

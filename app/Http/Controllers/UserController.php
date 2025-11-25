@@ -97,18 +97,13 @@ class UserController extends Controller
         $user->nama     = $request->nama;
         $user->email    = $request->email;
         $user->role  = $request->role;
-        if ($request->role == 'Admin') {
-            $user->is_tugas = false;
-            $user->tugas()->delete();
-        }
+        // if($request->filled('password'))
+        // {
+        //     $user->password = Hash::make($request->password);
+        // }
+        // $user->save();
 
-        if($request->filled('password'))
-        {
-            $user->password = Hash::make($request->password);
-        }
-        $user->save();
-
-        return redirect()->route('edit')->with('success', 'Data Berhasil Di Edit');
+        return redirect()->route('user', $user->id)->with('success', 'Data Berhasil Di Edit');
     }
 
     public function destroy($id)
