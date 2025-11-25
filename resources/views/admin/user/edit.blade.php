@@ -44,13 +44,15 @@
                 <div class="col-xl-12 mb-1">
                     <label class="form-label">
                         <span class="text-danger">*</span>
-                        Jabatan :</label>
-                        <select name="jabatan" class="form-control @error('jabatan') is-invalid @enderror">
-                        <option disabled>--Pilih Jabatan--</option>
-                        <option value="Admin" {{ $user->jabatan == 'Admin' ? 'selected' : '' }}>Admin</option>
-                        <option value="Karyawan" {{ $user->jabatan == 'Karyawan' ? 'selected' : '' }}>Karyawan</option>
+                        Role :</label>
+                        <select name="role" class="form-control @error('role') is-invalid @enderror">
+                        <option disabled>--Pilih Role--</option>
+                        <option value="Admin" {{ $user->role == 'Admin' ? 'selected' : '' }}>Admin</option>
+                        <option value="Karyawan" {{ $user->role == 'Pembimbing' ? 'selected' : '' }}>Pembimbing</option>
+                        <option value="Karyawan" {{ $user->role == 'Siswa' ? 'selected' : '' }}>Siswa</option>
+                        <option value="Karyawan" {{ $user->role == 'Sekolah' ? 'selected' : '' }}>Sekolah</option>
                     </select>
-                    @error('jabatan')
+                    @error('role')
                     <small class="text-danger">
                         {{ $message }}
                     </small>

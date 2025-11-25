@@ -48,6 +48,12 @@
                                         data-target="#exampleModalInfo">
                                         <i class="fas fa-eye"></i>
                                     </button>
+                                    @if ($item->bidang_id)
+                                    <button class="btn btn-sm btn-danger mb-1" data-toggle="modal"
+                                        data-target="#exampleModal{{ $item->id }}">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                    @endif
                                     @include('admin.data_bidang.penempatan_bidang.modal')
                                 </td>
                             </tr>

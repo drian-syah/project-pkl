@@ -76,6 +76,7 @@
           <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center" data-aos="fade-up">
             <h1 class="mb-3">SIPKM</h1>
             <p>Sistem Informasi Pengajuan Pkl-Magang</p>
+            <p>Sistem Informasi Pengajuan PKL–Magang adalah aplikasi (biasanya berbasis web) yang digunakan oleh siswa, guru, dan instansi untuk mengatur proses pengajuan Praktik Kerja Lapangan (PKL) atau Magang secara digital.</p>
             <div class="d-flex">
               @auth
               <a href="{{ route('dashboard') }}" class="btn-get-started">Dashboard</a>
@@ -146,7 +147,7 @@
       <div class="container section-title" data-aos="fade-up">
         <span>Kontak</span>
         <h2>Kontak</h2>
-        <p>Jika Terjadi Masalah Silahkan Hubungi Atau Telusuri Di Bawah Ini!!</p>
+        <p>Apabila Anda mengalami kendala dalam penggunaan sistem, silakan menghubungi pihak terkait atau menelusuri informasi yang tersedia pada bagian berikut. Tim kami akan berupaya memberikan bantuan secepat dan sebaik mungkin.</p>
       </div><!-- End Section Title -->
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -180,7 +181,7 @@
                 </div>
               </div><!-- End Info Item -->
 
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15849.964553769358!2d108.5589887121199!3d-6.709755387518452!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6ee267cb8474b3%3A0x73c7df4620b5d915!2sAlun%20Alun%20Kejaksan%20Cirebon!5e0!3m2!1sen!2sid!4v1757863423171!5m2!1sen!2sid" frameborder="0" style="border:0; width: 100%; height: 270px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3962.335604178755!2d108.55035467589508!3d-6.728844693267219!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6f1d89f269093f%3A0xe9281bd67b6f3c25!2sDinas%20Komunikasi%2C%20Informatika%20dan%20Statistik%20Kota%20Cirebon!5e0!3m2!1sid!2sid!4v1763952108271!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
           </div>
 

@@ -58,6 +58,6 @@ class AdminTambahSiswaController extends Controller
             'jurusan' => $request['jurusan'],
             'foto' => $foto
         ]);
-        return redirect()->route('adminPengajuanSiswaForm', $request->pengajuan_id)->with('success', 'Siswa berhasil didaftarkan.');
+        return redirect()->route('pengajuan', $request->pengajuan_id)->with('success', 'Siswa berhasil didaftarkan.');
     }
 }

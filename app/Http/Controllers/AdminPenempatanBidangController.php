@@ -75,4 +75,16 @@ class AdminPenempatanBidangController extends Controller
         ], 500);
     }
     }
+
+    public function destroy($id)
+    {
+    $pegawai = Pegawai::findOrFail($id);
+
+    $pegawai->update([
+        'jabatan_id' => null,
+        'bidang_id' => null,
+    ]);
+
+    return redirect()->back()->with('success', 'Penempatan berhasil dihapus.');
+    }
 }

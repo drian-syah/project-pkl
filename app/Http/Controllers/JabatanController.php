@@ -35,7 +35,7 @@ class JabatanController extends Controller
             'nama_jabatan' => $validated['nama_jabatan'],
             'created_id' => auth()->id(),
         ]);
-        return redirect()->route('tambahJabatan')->with('success', 'Jabatan Berhasil Ditambahkan.');
+        return redirect()->route('daftarJabatan')->with('success', 'Jabatan Berhasil Ditambahkan.');
     }
 
     public function edit($id)

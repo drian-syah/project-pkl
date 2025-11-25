@@ -126,13 +126,13 @@
                 <!-- Divider -->
                 <hr class="sidebar-divider">
 
-                <div class="sidebar-heading">
+                {{-- <div class="sidebar-heading">
                     MENU PEMBIMBING
-                </div>
+                </div> --}}
 
 
                 <!-- Nav Item - Tables -->
-                <li class="nav-item {{ $menuAdminPembimbingTugas ?? '' }}">
+                {{-- <li class="nav-item {{ $menuAdminPembimbingTugas ?? '' }}">
                     <a class="nav-link" href="{{ route('tugas') }}">
                         <i class="fas fa-fw fa-tasks"></i>
                         <span>MENU TUGAS</span>
@@ -144,18 +144,18 @@
                         <i class="fas fa-fw fa-tasks"></i>
                         <span>MENU PENILAIAN</span>
                     </a>
-                </li>
+                </li> --}}
 
                 <!-- Divider -->
-                <hr class="sidebar-divider">
+                {{-- <hr class="sidebar-divider"> --}}
 
-                <div class="sidebar-heading">
+                {{-- <div class="sidebar-heading">
                     MENU SISWA
-                </div>
+                </div> --}}
 
 
                 <!-- Nav Item - Tables -->
-                <li class="nav-item {{ $menuAdminSiswaPresensi ?? '' }}">
+                {{-- <li class="nav-item {{ $menuAdminSiswaPresensi ?? '' }}">
                     <a class="nav-link" href="{{ route('tugas') }}">
                         <i class="fas fa-fw fa-tasks"></i>
                         <span>MENU TUGAS</span>
@@ -167,7 +167,7 @@
                         <i class="fas fa-fw fa-tasks"></i>
                         <span>MENU PENILAIAN</span>
                     </a>
-                </li>
+                </li> --}}
             @endcan
             @can('isPembimbing')
                 <!-- Heading -->

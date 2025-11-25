@@ -61,6 +61,7 @@ Route::middleware('checkLogin')->group(function () {
         Route::get('Admin/penempatanbidang/create', [AdminPenempatanBidangController::class, 'create'])->name('penempatanBidangCreate');
         Route::post('Admin/penempatanbidang/store', [AdminPenempatanBidangController::class, 'store'])->name('penempatanBidangStore');
         Route::get('admin/penempatanbidang/getPegawai/{nip}', [AdminPenempatanBidangController::class, 'getPegawai']);
+        Route::delete('admin/penempatanbidang/destroy/{id}', [AdminPenempatanBidangController::class, 'destroy'])->name('penempatanBidangDestroy');
         // Jabatan
         Route::get('admin/daftarjabatan', [JabatanController::class, 'index'])->name('daftarJabatan');
         Route::get('admin/daftarjabatan/edit/{id}', [JabatanController::class, 'edit'])->name('editJabatan');
@@ -73,6 +74,7 @@ Route::middleware('checkLogin')->group(function () {
         Route::get('admin/penempatanjabatan/create', [AdminPenempatanJabatanController::class, 'create'])->name('penempatanJabatanCreate');
         Route::post('admin/penempatanjabatan/store', [AdminPenempatanJabatanController::class, 'store'])->name('penempatanJabatanStore');
         Route::get('admin/penempatanjabatan/getPegawai/{nip}', [AdminPenempatanJabatanController::class, 'getPegawai']);
+        Route::delete('admin/penempatanjabatan/destroy/{id}', [AdminPenempatanJabatanController::class, 'destroy'])->name('penempatanJabatanDestroy');
         // data user
         Route::get('admin/user', [UserController::class, 'index'])->name('user');
         Route::get('admin/user/create', [UserController::class, 'create'])->name('userCreate');
