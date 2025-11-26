@@ -24,18 +24,20 @@ class AuthController extends Controller
             'alamat' => 'required|string|max:150',
             'kontak' => 'required|string|max:100',
             'email' => 'required|email|unique:users,email',
+            'username' => 'required|string|max:50|unique:users,username',
             'password' => 'required|min:8|confirmed',
         ]);
 
         $user = User::create([
             'nama' => $request->nama,
             'email' => $request->email,
-            'role' => 'Sekolah', // default role
+            'username' => $request->username,
+            'role' => 'Sekolah',
             'password' => Hash::make($request->password),
         ]);
 
         Sekolah::create([
-            'nama' => $request['nama'],
+            'nama' => $request->nama,
             'npsn' => $request['npsn'],
             'alamat' => $request['alamat'],
             'kontak' => $request['kontak'],
@@ -46,42 +48,40 @@ class AuthController extends Controller
         return redirect('/login')->with('success', 'Akun berhasil dibuat, silakan login.');
     }
 
+
     public function login()
     {
         return view('auth/login');
     }
 
+
     public function loginProses(Request $request)
     {
         $request->validate([
-            'email' => 'required',
+            'login' => 'required',
             'password' => 'required'
         ], [
-            'email.required' => 'Email Tidak Boleh Kosong',
-            'password.required' => 'Password Tidak Boleh Kosong',
+            'login.required' => 'Email atau Username tidak boleh kosong',
+            'password.required' => 'Password tidak boleh kosong',
         ]);
 
-        $data = array(
+        // Tentukan apakah input email atau username
+        $login = $request->login;
+        $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
-            'email' => $request->email,
-            'password' => $request->password,
-
-        );
-
-        if (Auth::attempt($data)) {
-
+        // Attempt login
+        if (Auth::attempt([$field => $login, 'password' => $request->password])) {
+            $request->session()->regenerate();
             return redirect()->route('dashboard')->with('success', 'Anda Berhasil Login');
-
-        } else {
-            return redirect()->back()->with('error', 'Email atau Password Salah');
         }
 
+        return back()->with('error', 'Email/Username atau Password salah');
     }
+
 
     public function logout()
     {
         Auth::logout();
-
         return redirect()->route('login')->with('success', 'Anda Berhasil Logout');
     }
 }

@@ -45,10 +45,10 @@
                                     <form class="user" method="POST" action="{{ route('loginProses') }}">
                                         @csrf
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user @error('email') is-invalid @enderror"
-                                                placeholder="Masukkan Email" name="email">
+                                            <input type="login" class="form-control form-control-user @error('login') is-invalid @enderror"
+                                                placeholder="Masukkan Email/Username" name="login">
 
-                                                @error('email')
+                                                @error('login')
                                                     <small class="text-danger">{{ $message }}</small>
                                                 @enderror
 

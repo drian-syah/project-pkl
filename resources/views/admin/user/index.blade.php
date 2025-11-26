@@ -13,7 +13,7 @@
                 <i class="fas fa-plus mr-2"></i>
                 Tambah Data
             </a>
-        </div>
+        {{-- </div>
         <div>
             <a href="{{ route('userExcel') }}" class="btn btn-sm btn-success">
                 <i class="fas fa-file-excel mr-2"></i>
@@ -23,7 +23,7 @@
                 <i class="fas fa-file-pdf mr-2"></i>
                 PDF
             </a>
-        </div>
+        </div> --}}
     </div>
 
     <div class="card-body">
