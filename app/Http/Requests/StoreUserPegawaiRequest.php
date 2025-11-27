@@ -11,7 +11,7 @@ class StoreUserPegawaiRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,11 @@ class StoreUserPegawaiRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'user_id' => ['nullable', 'string', 'exists:users,id'],
+            'nama' => ['required', 'string'],
+            'nip' => ['required', 'string'],
+            'jabatan_id' => ['required', 'string'],
+            'bidang_id' => ['required', 'string'],
         ];
     }
 }

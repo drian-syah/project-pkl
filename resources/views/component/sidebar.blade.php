@@ -41,7 +41,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="">
+                                <a class="nav-link" href="{{ route('pegawaiIndex') }}">
                                     <i class="fas fa-user-tie"></i> Pegawai
                                 </a>
                             </li>
@@ -70,12 +70,6 @@
                             <li class="nav-item {{ $menuAdminBidang ?? '' }}">
                                 <a class="nav-link " href="{{ route ('daftarBidang') }}">
                                     <i class="fas fa-layer-group"></i> Daftar Bidang
-                                </a>
-                            </li>
-                
-                            <li class="nav-item {{ $MenuAdminTambahBidang ?? '' }}">
-                                <a class="nav-link" href="{{ route('tambahBidang') }}">
-                                    <i class="fas fa-plus-circle"></i> Tambah Bidang
                                 </a>
                             </li>
                 
