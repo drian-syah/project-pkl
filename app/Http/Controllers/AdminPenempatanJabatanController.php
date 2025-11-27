@@ -27,7 +27,7 @@ class AdminPenempatanJabatanController extends Controller
             'jabatan' => Jabatan::all(),
         ];
     
-        return view('admin.data_jabatan.penempatan_jabatan.create', $data);
+        return view('admin.data_jabatan.daftar_jabatan.create', $data);
     }
 
     public function store(Request $request)

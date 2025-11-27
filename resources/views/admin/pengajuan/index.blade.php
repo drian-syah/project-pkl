@@ -14,7 +14,7 @@
                 Tambah Data
             </a>
         </div>
-        <div>
+        {{-- <div>
             <a href="{{ route('adminPengajuanExcel') }}" class="btn btn-sm btn-success">
                 <i class="fas fa-file-excel mr-2"></i>
                 Excel
@@ -23,7 +23,7 @@
                 <i class="fas fa-file-pdf mr-2"></i>
                 PDF
             </a>
-        </div>
+        </div> --}}
     </div>
 
     <div class="card-body">
@@ -100,11 +100,20 @@
                                         data-target="#exampleModalDitolak{{ $item->sekolah_id }}">
                                         <i class="fas fa-times"></i>
                                     </button>
-                                    @elseif ($item->status === 'diterima' )
+                                    @elseif ($item->status === 'diterima')
+                                    @php
+                                    $countSiswa = \App\Models\SiswaProfil::where('pengajuan_id', $item->id)->count();
+                                    @endphp
+                                    @if ($countSiswa < $item->jumlah_siswa)
                                     <a href="{{ route('adminPengajuanSiswaForm', $item->id) }}" class="btn btn-sm btn-success mb-1">
                                         <i class="fas fa-user-plus"></i>
                                     </a>
-                                    <button class="btn btn-sm btn-info mb-3" data-toggle="modal"
+                                    @else
+                                    <a href="{{ route('indexPengajuanSiswa', $item->sekolah_id) }}" class="btn btn-sm btn-success">
+                                        <i class="fas fa-user"></i>
+                                    </a>
+                                    @endif
+                                    <button class="btn btn-sm btn-info" data-toggle="modal"
                                     data-target="#exampleModalInfo{{ $item->sekolah_id }}">
                                     <i class="fas fa-eye"></i>
                                     </button>

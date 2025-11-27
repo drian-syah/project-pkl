@@ -12,9 +12,11 @@ class AdminTambahSiswaController extends Controller
 {
     public function showDaftarSiswaForm($id)
     {
+        $countSiswa = SiswaProfil::where('pengajuan_id', $id)->count();
         $data = [
             'title' => 'Daftar User Siswa',
             'pengajuan' => PengajuanPklmagang::findOrFail($id),
+            'countSiswa' => $countSiswa,  // ← kirim ke blade
         ];
         return view('admin.pengajuan.pengajuansiswa', $data);
     }
@@ -37,6 +39,15 @@ class AdminTambahSiswaController extends Controller
 
     public function daftarSiswa(daftarSiswaStoreRequest $request)
     {
+
+        $pengajuan = PengajuanPklmagang::findOrFail($request->pengajuan_id);
+
+        $current = SiswaProfil::where('pengajuan_id', $pengajuan->id)->count();
+
+        if ($current >= $pengajuan->jumlah_siswa) {
+        return back()->with('error', 'Jumlah siswa sudah mencapai batas maksimal.');
+        }
+
         $email = $this->generateUniqueEmail($request->nama, $request->nisn);
         
         $user = User::create([
@@ -58,6 +69,6 @@ class AdminTambahSiswaController extends Controller
             'jurusan' => $request['jurusan'],
             'foto' => $foto
         ]);
-        return redirect()->route('pengajuan', $request->pengajuan_id)->with('success', 'Siswa berhasil didaftarkan.');
+        return redirect()->route('adminPengajuan', $request->pengajuan_id)->with('success', 'Siswa berhasil didaftarkan.');
     }
 }

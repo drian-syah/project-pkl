@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 
-use App\Http\Requests\daftarSiswaStoreRequest;
-use App\Http\Requests\UpdatePengajuanRequest;
-use App\Models\SiswaProfil;
 use App\Models\User;
 use App\Models\Sekolah;
+use App\Models\Penempatan;
 use App\Exports\UserExport;
+use App\Models\SiswaProfil;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\PengajuanPklmagang;
@@ -17,6 +16,8 @@ use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Validation\Rules\Password;
 use App\Http\Requests\StorePengajuanRequest;
+use App\Http\Requests\UpdatePengajuanRequest;
+use App\Http\Requests\daftarSiswaStoreRequest;
 
 class PengajuanController extends Controller
 {
@@ -91,7 +92,7 @@ class PengajuanController extends Controller
             'created_by_role' => 'Admin',
             'status' => 'draft',
         ]);
-        return redirect()->route('adminPengajuan')->with('success', 'Pengajuan berhasil dikirim dan sedang menunggu persetujuan admin.');
+        return redirect()->route('adminPengajuan')->with('success', 'Pengajuan berhasil dibuat. Silahkan proses.');
     }
 
     public function edit($id)
@@ -141,10 +142,23 @@ class PengajuanController extends Controller
 
     public function disetujui($sekolah_id)
     {
-        $pengajuan = PengajuanPklmagang::where('sekolah_id', $sekolah_id)->where('status', 'diproses');
-        $pengajuan->update(['status' => 'diterima']);
-        return back()->with('success', 'Pengajuan Sudah Diterima');
+    // Ambil pengajuan sebagai MODEL
+    $pengajuan = PengajuanPklmagang::where('sekolah_id', $sekolah_id)
+        ->where('status', 'diproses')
+        ->firstOrFail();
+    $pengajuan->update(['status' => 'diterima']);
+    $penempatan = Penempatan::where('pengajuan_id', $pengajuan->id)->first();
+
+    if (!$penempatan) {
+        Penempatan::create([
+            'pengajuan_id' => $pengajuan->id,
+            'bidang_id'    => $pengajuan->bidang_id ?? null,
+        ]);
     }
+
+    return back()->with('success', 'Pengajuan Sudah Diterima dan otomatis masuk ke menu Penempatan.');
+    }
+
 
     public function ditolak($sekolah_id)
     {

@@ -46,7 +46,7 @@
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link" href="">
+                                <a class="nav-link" href="{{ route('userSiswa') }}">
                                     <i class="fas fa-user-graduate"></i> Siswa
                                 </a>
                             </li>
@@ -89,13 +89,7 @@
                                 <a class="nav-link" href="{{ route('daftarJabatan') }}">
                                     <i class="fas fa-briefcase"></i> Jabatan
                                 </a>
-                            </li>
-                
-                            <li class="nav-item {{ $MenuAdminTambahJabatan ?? '' }}">
-                                <a class="nav-link" href="{{ route('tambahJabatan') }}">
-                                    <i class="fas fa-briefcase"></i> Tambah Jabatan
-                                </a>
-                            </li>
+                            </li> 
                 
                             <li class="nav-item {{ $menuAdminPenempatanJabatan ?? '' }}">
                                 <a class="nav-link" href="{{ route('penempatanJabatan') }}">

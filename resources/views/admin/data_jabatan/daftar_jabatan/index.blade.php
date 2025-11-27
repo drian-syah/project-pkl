@@ -7,6 +7,14 @@
 </h1>
 
 <div class="card">
+    <div class="card-header d-flex flex-wrap justify-content-center justify-content-xl-between">
+        <div class="mb-1 mr-2">
+            <a href="{{ route('tambahJabatan') }}" class="btn btn-sm btn-primary">
+                <i class="fas fa-plus mr-2"></i>
+                Tambah Jabatan
+            </a>
+        </div>
+    </div>
 <div class="card-body">
     <div class="table-responsive">
         <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
