@@ -19,6 +19,7 @@ use App\Http\Controllers\AdminPembimbingTugasController;
 use App\Http\Controllers\AdminPenempatanBidangController;
 use App\Http\Controllers\AdminPenempatanJabatanController;
 use App\Http\Controllers\AdminPembimbingPenilaianController;
+use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\IndexPengajuanSiswaAdminController;
 
 Route::get('/', function () {
@@ -88,6 +89,18 @@ Route::middleware('checkLogin')->group(function () {
         Route::get('admin/user/excel', [UserController::class, 'excel'])->name('userExcel');
         Route::get('admin/user/pdf', [UserController::class, 'pdf'])->name('userPdf');
         Route::resource('users', UserController::class);
+
+        // Menu Pegawai
+        // Route::prefix('admin')->middleware(['auth'])->group(function () {
+        Route::get('admin/pegawai/index', [PegawaiController::class, 'index'])->name('pegawaiIndex');
+        Route::get('admin/pegawai/create', [PegawaiController::class, 'create'])->name('pegawaiCreate');
+        Route::post('admin/pegawai/store', [PegawaiController::class, 'store'])->name('pegawaiStore');
+        Route::get('admin/pegawai/{id}/edit', [PegawaiController::class, 'edit'])->name('pegawaiEdit');
+        Route::put('admin/pegawai/{id}/update', [PegawaiController::class, 'update'])->name('pegawaiUpdate');
+        Route::delete('admin/pegawai/{id}/delete', [PegawaiController::class, 'destroy'])->name('pegawaiDestroy');
+});
+
+
         // pengajuan 
         Route::get('admin/user/pembimbing/index', [AdminUserPembimbingController::class, 'index'])->name('userPembimbing');
         Route::get('admin/user/pembimbing/create', [AdminUserPembimbingController::class, 'create'])->name('userPembimbingCreate');
@@ -168,4 +181,3 @@ Route::middleware('checkLogin')->group(function () {
         Route::get('sekolah/pengajuan/pdf', [SekolahController::class, 'pdf'])->name('SekolahPengajuanPdf');
         Route::get('sekolah/pengajuan/excel', [SekolahController::class, 'excel'])->name('SekolahPengajuanExcel');
     });
-});

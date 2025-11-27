@@ -40,6 +40,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'pegawai_id' => 'required|exists:pegawai,id',
             'nama'     => 'required',
             'email'    => 'required|unique:users,email',
             'role'  => 'required',

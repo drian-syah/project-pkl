@@ -13,12 +13,12 @@ class PegawaiSeeder extends Seeder
      */
     public function run(): void
     {
-        // Pegawai::create([
-        //     'user_id' => 4,
-        //     'nip' => 837482,
-        //     'nama' => 'Mohammad Teguh Adriansyah',
-        //     'jabatan' => 'Kepala Dinas Komunikasi, Informatika dan Statistik',
-        //     'bidang_id' => ,
-        // ]);
+        Pegawai::create([
+            'user_id' => 4,
+            'nip' => 837482,
+            'nama' => 'Mohammad Teguh Adriansyah',
+            'jabatan' => 'Kepala Dinas Komunikasi, Informatika dan Statistik',
+            'bidang_id' => '',
+        ]);
     }
 }

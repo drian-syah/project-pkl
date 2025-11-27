@@ -27,7 +27,7 @@ class BidangController extends Controller
             'title' => 'Tambah Bidang',
             'MenuAdminTambahBidang' => 'active',
         ];
-        return view('admin.data_bidang.tambah_bidang.index', $data);
+        return view('admin.data_bidang.daftar_bidang.create', $data);
     }
 
     public function store(StoreTambahBidangRequest $request)
@@ -37,7 +37,7 @@ class BidangController extends Controller
             'nama' => $validated['nama'], 
             'kode' => $validated['kode'], 
         ]);
-        return redirect()->route('tambahBidang')->with('success', 'Bidang Berhasil Di Tambahkan.');
+        return redirect()->route('daftarBidang')->with('success', 'Bidang Berhasil Di Tambahkan.');
     }
 
     public function destroy($id)

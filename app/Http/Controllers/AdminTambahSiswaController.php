@@ -21,6 +21,20 @@ class AdminTambahSiswaController extends Controller
         return view('admin.pengajuan.pengajuansiswa', $data);
     }
 
+    private function generateUniqueUsername($nisn)
+{
+    $username = $nisn;
+    $count = 1;
+
+    while (User::where('username', $username)->exists()) {
+        $username = $nisn . $count;
+        $count++;
+    }
+
+    return $username;
+}
+
+
     private function generateUniqueEmail($nama, $nisn)
 {
     $base = strtolower(str_replace(' ', '.', $nama));
@@ -49,8 +63,10 @@ class AdminTambahSiswaController extends Controller
         }
 
         $email = $this->generateUniqueEmail($request->nama, $request->nisn);
+         $username = $this->generateUniqueUsername($request->nisn);
         
         $user = User::create([
+            'username' => $username,
             'nama' => $request->nama,
             'email' => $this->generateUniqueEmail($request->nama, $request->nisn),
             'password' => bcrypt($request->nisn),

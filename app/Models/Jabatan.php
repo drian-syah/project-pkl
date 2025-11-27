@@ -15,7 +15,7 @@ class Jabatan extends Model
         'updated_date',
     ];
 
-    public function pegawai()
+    public function pegawai()   
     {
         return $this->hasMany(Pegawai::class, 'jabatan_id');
     }

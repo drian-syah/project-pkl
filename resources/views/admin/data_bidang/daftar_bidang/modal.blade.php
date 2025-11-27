@@ -3,8 +3,8 @@
 <div class="modal fade" id="exampleModalDelete{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="diterimaModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
-        <div class="modal-header bg-success text-white">
-          <h5 class="modal-title" id="diterimaModallLabel {{ $item->id }}">Disetujui? </h5>
+        <div class="modal-header bg-danger text-white">
+          <h5 class="modal-title" id="diterimaModallLabel {{ $item->id }}">Dihapus? </h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true" class="text-white">&times;</span>
           </button>
@@ -30,8 +30,8 @@
           <form action="{{ route('hapusBidang', $item->id) }}" method="post">
             @csrf
             @method('delete')
-          <button type="submit" class="btn btn-success btn-sm">
-            <i class="fas fa-check"></i> 
+          <button type="submit" class="btn btn-danger btn-sm">
+            <i class="fas fa-trash"></i> 
           </button>
         </form>
         </div>

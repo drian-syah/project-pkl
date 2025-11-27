@@ -76,7 +76,7 @@
           <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center" data-aos="fade-up">
             <h1 class="mb-3">SIPKM</h1>
             <p>Sistem Informasi Pengajuan Pkl-Magang</p>
-            <p>Sistem Informasi Pengajuan PKL–Magang adalah aplikasi (biasanya berbasis web) yang digunakan oleh siswa, guru, dan instansi untuk mengatur proses pengajuan Praktik Kerja Lapangan (PKL) atau Magang secara digital.</p>
+            <p>Sistem Informasi Pengajuan PKL–Magang adalah aplikasi berbasis web yang digunakan oleh siswa, guru, dan instansi untuk mengatur proses pengajuan Praktik Kerja Lapangan PKL atau Magang secara digital.</p>
             <div class="d-flex">
               @auth
               <a href="{{ route('dashboard') }}" class="btn-get-started">Dashboard</a>
@@ -181,7 +181,7 @@
                 </div>
               </div><!-- End Info Item -->
 
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3962.335604178755!2d108.55035467589508!3d-6.728844693267219!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6f1d89f269093f%3A0xe9281bd67b6f3c25!2sDinas%20Komunikasi%2C%20Informatika%20dan%20Statistik%20Kota%20Cirebon!5e0!3m2!1sid!2sid!4v1763952108271!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3962.335604178755!2d108.55035467589508!3d-6.728844693267219!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6f1d89f269093f%3A0xe9281bd67b6f3c25!2sDinas%20Komunikasi%2C%20Informatika%20dan%20Statistik%20Kota%20Cirebon!5e0!3m2!1sid!2sid!4v1763952108271!5m2!1sid!2sid" width="1050" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
           </div>
 

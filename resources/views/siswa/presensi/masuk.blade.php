@@ -7,8 +7,6 @@
         <div class="mt-3">
             <label>Status Presensi</label><br>
             <label class="mr-1"><input type="radio" name="status" value="hadir"required> Hadir</label>
-            <label class="mr-1"><input type="radio" name="status" value="hadir"> Izin</label>
-            <label><input type="radio" name="status" value="hadir"> Sakit</label>
         </div>
 
         @include('component.kamera')
