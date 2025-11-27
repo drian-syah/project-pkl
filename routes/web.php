@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\AdminUserPembimbingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
@@ -13,12 +12,15 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PengajuanController;
 use App\Http\Controllers\PembimbingController;
 use App\Http\Controllers\PenempatanController;
+use App\Http\Controllers\AdminUserSiswaController;
 use App\Http\Controllers\AdminTambahSiswaController;
+use App\Http\Controllers\AdminUserPembimbingController;
 use App\Http\Controllers\AdminPembimbingTugasController;
 use App\Http\Controllers\AdminPenempatanBidangController;
 use App\Http\Controllers\AdminPenempatanJabatanController;
 use App\Http\Controllers\AdminPembimbingPenilaianController;
 use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\IndexPengajuanSiswaAdminController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -102,6 +104,8 @@ Route::middleware('checkLogin')->group(function () {
         // pengajuan 
         Route::get('admin/user/pembimbing/index', [AdminUserPembimbingController::class, 'index'])->name('userPembimbing');
         Route::get('admin/user/pembimbing/create', [AdminUserPembimbingController::class, 'create'])->name('userPembimbingCreate');
+        
+        Route::get('admin/user/siswa/index', [AdminUserSiswaController::class, 'index'])->name('userSiswa');
 
         Route::get('admin/pengajuan', [PengajuanController::class, 'index'])->name('adminPengajuan');
         Route::get('admin/pengajuan/create', [PengajuanController::class, 'create'])->name('adminPengajuanCreate');
@@ -117,7 +121,8 @@ Route::middleware('checkLogin')->group(function () {
         Route::get('admin/pengajuan/pdf', [PengajuanController::class, 'pdf'])->name('adminPengajuanPdf');
         Route::get('admin/pengajuan/showDaftarForm', [PengajuanController::class, 'showDaftarForm'])->name('daftarUserSekolahForm');
         Route::post('admin/pengajuan/daftar', [PengajuanController::class, 'daftar'])->name('daftarUserSekolah');
-
+        
+        Route::get('admin/pengajuan/daftarsiswa/index/{sekolah_id}', [IndexPengajuanSiswaAdminController::class, 'index'])->name('indexPengajuanSiswa');
         Route::get('admin/pengajuan-siswa/showDaftarFormSiswa/{id}', [AdminTambahSiswaController::class, 'showDaftarSiswaForm'])->name('adminPengajuanSiswaForm');
         Route::post('admin/pengajuan-siswa/DaftarSiswa/{id}', [AdminTambahSiswaController::class, 'daftarSiswa'])->name('adminPengajuanDaftarSiswa');
 

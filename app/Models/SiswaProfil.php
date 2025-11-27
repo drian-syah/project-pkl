@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Bidang;
 use Illuminate\Database\Eloquent\Model;
 
 class SiswaProfil extends Model
@@ -32,5 +33,10 @@ class SiswaProfil extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function bidang()
+    {
+        return $this->belongsTo(Bidang::class, 'bidang_id');
     }
 }

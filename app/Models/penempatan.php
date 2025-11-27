@@ -11,7 +11,7 @@ class Penempatan extends Model
 {
     use HasFactory;
 
-    protected $table = 'penempatan';
+    protected $table = 'Penempatan';
     public $timestamps = false;
 
     protected $fillable = [

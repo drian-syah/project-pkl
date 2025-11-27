@@ -9,8 +9,7 @@
         @csrf
 
         <div class="mb-3">
-            <label>id User</label>
-            <input type="text" class="form-control" name="user_id" required>
+            <input type="hidden" class="form-control" name="user_id" required>
         </div>
         <div class="mb-3">
             <label>Nama</label>
@@ -19,7 +18,7 @@
 
         <div class="mb-3">
             <label>NIP</label>
-            <input type="email" class="form-control" name="nip" required>
+            <input type="number" class="form-control" name="nip" required>
         </div>
 
         <div class="mb-3">

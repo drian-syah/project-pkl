@@ -18,17 +18,4 @@ class AdminUserPembimbingController extends Controller
         ];
         return view('admin.user.pembimbing.index', $data);
     }
-
-    public function create()
-    {
-        $data = [
-            'title' => 'Menu Tambah Pembimbing',
-            'menuAdminUserPembimbing' => 'active',
-            'pembimbing' => Pembimbing::all(),
-            'pengajuan' => PengajuanPklmagang::all(),
-        ];
-    
-        return view('admin.user.pembimbing.create', $data);
-    }
-
 }

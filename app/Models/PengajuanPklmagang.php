@@ -54,4 +54,9 @@ class PengajuanPklmagang extends Model
     {
         return $this->hasMany(SiswaProfil::class, 'pengajuan_id');
     }
+
+    public function penempatan()
+    {
+        return $this->hasMany(Penempatan::class, 'pengajuan_id');
+    }
 }
