@@ -32,6 +32,14 @@
                 <form class="user" action="{{ route('register') }}" method="POST">
                     @csrf
                     <div class="form-group mb-3">
+                        <input type="text" class="form-control form-control-user" id="username" name="username"
+                            placeholder="Username" value="{{ old('username') }}">
+                        @error('username')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+
+                    <div class="form-group mb-3">
                         <input type="text" class="form-control form-control-user" id="nama" name="nama"
                             placeholder="Nama Sekolah" value="{{ old('nama') }}">
                         @error('nama')

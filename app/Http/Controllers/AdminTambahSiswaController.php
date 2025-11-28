@@ -22,7 +22,7 @@ class AdminTambahSiswaController extends Controller
     }
 
     private function generateUniqueUsername($nisn)
-{
+    {
     $username = $nisn;
     $count = 1;
 
@@ -32,11 +32,11 @@ class AdminTambahSiswaController extends Controller
     }
 
     return $username;
-}
+    }
 
 
     private function generateUniqueEmail($nama, $nisn)
-{
+    {
     $base = strtolower(str_replace(' ', '.', $nama));
     $kode = substr($nisn, -1) . rand(10, 99);
     $email = $base . $kode . '@gmail.com';
@@ -48,7 +48,7 @@ class AdminTambahSiswaController extends Controller
     }
 
     return $email;
-}
+    }
 
 
     public function daftarSiswa(daftarSiswaStoreRequest $request)

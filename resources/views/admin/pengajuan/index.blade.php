@@ -109,7 +109,7 @@
                                         <i class="fas fa-user-plus"></i>
                                     </a>
                                     @else
-                                    <a href="{{ route('indexPengajuanSiswa', $item->sekolah_id) }}" class="btn btn-sm btn-success">
+                                    <a href="{{ route('indexPengajuanSiswa', $item->sekolah_id) }}" class="btn btn-sm btn-success mb-1">
                                         <i class="fas fa-user"></i>
                                     </a>
                                     @endif

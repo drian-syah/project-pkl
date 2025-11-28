@@ -45,7 +45,7 @@
                                     <i class="fas fa-user-tie"></i> Pegawai
                                 </a>
                             </li> --}}
-                            <li class="nav-item ">
+                            <li class="nav-item {{ $MenuAdminUserSiswa ?? '' }}">
                                 <a class="nav-link" href="{{ route('userSiswa') }}">
                                     <i class="fas fa-user-graduate"></i> Siswa
                                 </a>

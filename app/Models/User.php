@@ -20,6 +20,7 @@ class User extends Authenticatable
         'role',
         'password',
         'id_bidang',
+        'is_active',
     ];
 
     public function tugas()

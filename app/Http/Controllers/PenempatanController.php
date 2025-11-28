@@ -38,7 +38,7 @@ class PenempatanController extends Controller
         $request->validate([
             'bidang_id' => 'required|exists:bidang,id',
             'pembimbing_id' => 'required|array',
-            'pembimbing_id.*' => 'exists:users,id',
+            'pembimbing_id.*' => 'exists:users,id', 
         ],[
             'bidang_id.required' => 'Bidang harus dipilih',
             'pembimbing_id.required' => 'Pilih minimal satu pembimbing',

@@ -18,8 +18,7 @@ return new class extends Migration {
             $table->date('periode_mulai')->nullable();
             $table->date('periode_selesai')->nullable();
             // ENUM status
-            $table->enum('status', ['draft', 'diproses', 'diterima', 'ditolak', 'selesai'])
-                ->default('draft');
+            $table->enum('status', ['draft', 'diproses', 'diterima', 'ditolak', 'selesai'])->default('draft');
             $table->string('file_surat_path', 255)->nullable();
             $table->string('created_by_role', 20)->default('Sekolah');
 

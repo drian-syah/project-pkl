@@ -16,6 +16,16 @@
             <form action="{{ route('userUpdate', $user->id) }}" method="post">
             @csrf
             <div class="row mb-2">
+                <div class="col-md-6">
+                    <label class="form-label">
+                        <span class="text-danger">*</span> Username
+                    </label>
+                    <input type="text" name="username" class="form-control @error('username') is-invalid @enderror" value="{{ old('username') }}">
+                    @error('username')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+
                 <div class="col-xl-6 mb-1">
                     <label class="form-label">
                         <span class="text-danger">*</span>
@@ -27,37 +37,37 @@
                     </small>
                 @enderror
                 </div>
-                <div class="col-xl-6">
-                    <label class="form-label mb-1">
-                        <span class="text-danger">*</span>
-                        Email :</label>
-                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ $user->email }}">
-                    @error('email')
-                    <small class="text-danger">
-                        {{ $message }}
-                    </small>
-                @enderror
-                </div>
             </div>
-
+            
             <div class="row mb-2">
-                <div class="col-xl-12 mb-1">
+                <div class="col-xl-6 mb-1">
                     <label class="form-label">
                         <span class="text-danger">*</span>
                         Role :</label>
                         <select name="role" class="form-control @error('role') is-invalid @enderror">
-                        <option disabled>--Pilih Role--</option>
-                        <option value="Admin" {{ $user->role == 'Admin' ? 'selected' : '' }}>Admin</option>
-                        <option value="Karyawan" {{ $user->role == 'Pembimbing' ? 'selected' : '' }}>Pembimbing</option>
-                        <option value="Karyawan" {{ $user->role == 'Siswa' ? 'selected' : '' }}>Siswa</option>
-                        <option value="Karyawan" {{ $user->role == 'Sekolah' ? 'selected' : '' }}>Sekolah</option>
-                    </select>
-                    @error('role')
-                    <small class="text-danger">
-                        {{ $message }}
-                    </small>
-                @enderror 
-                </div>
+                            <option disabled>--Pilih Role--</option>
+                            <option value="Admin" {{ $user->role == 'Admin' ? 'selected' : '' }}>Admin</option>
+                            <option value="Pembimbing" {{ $user->role == 'Pembimbing' ? 'selected' : '' }}>Pembimbing</option>
+                            <option value="Siswa" {{ $user->role == 'Siswa' ? 'selected' : '' }}>Siswa</option>
+                            <option value="Sekolah" {{ $user->role == 'Sekolah' ? 'selected' : '' }}>Sekolah</option>
+                        </select>
+                        @error('role')
+                        <small class="text-danger">
+                            {{ $message }}
+                        </small>
+                        @enderror 
+                    </div>
+                    <div class="col-xl-6">
+                        <label class="form-label mb-1">
+                            <span class="text-danger">*</span>
+                            Email :</label>
+                        <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ $user->email }}">
+                        @error('email')
+                        <small class="text-danger">
+                            {{ $message }}
+                        </small>
+                    @enderror
+                    </div>
       
             </div>
 

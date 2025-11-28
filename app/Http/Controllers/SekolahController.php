@@ -17,12 +17,8 @@ class SekolahController extends Controller
             'title' => 'Menu Pengajuan',
             'modal' => 'Pengajuan',
             'menuSekolah' => 'active',
-            'pengajuan' => PengajuanPklmagang::with('sekolah')->where(function($q) {
-                $q->where('status', '!=', 'draft')
-                  ->orWhere('created_id', auth()->id());
-            })
-            ->orderBy('created_at', 'desc')
-            ->get(),
+            'pengajuan' => PengajuanPklmagang::with('sekolah')->where('created_id', auth()->id())->where('status', '!=', 'draft')->orderBy('created_at', 'desc')->get(),
+
 
         ];
         return view('sekolah.pengajuan.index', $data);

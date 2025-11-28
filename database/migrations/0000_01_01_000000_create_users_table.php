@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('email', 100)->unique();
             $table->enum('role', ['Admin', 'Pembimbing', 'Siswa', 'Sekolah']);
             $table->unsignedBigInteger('id_bidang')->nullable();
+            $table->enum('status', ['diproses', 'diterima', 'ditolak'])->default('diproses');
             $table->string('password', 255);
             $table->boolean('is_tugas')->default(false);
             $table->rememberToken();

@@ -37,15 +37,15 @@
 
                            </td>
                             
-                            {{-- <td class="text-center"> --}}
-                                {{-- <a href="{{ route('userEdit', $item->id) }}" class="btn btn-sm btn-warning">
+                            {{-- <td class="text-center">
+                                <a href="{{ route('userEdit', $item->id) }}" class="btn btn-sm btn-warning">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal{{ $item->id }}">
                                     <i class="fas fa-trash"></i>
                                 </button>
-                                @include('admin/user/modal') --}}
-                            {{-- </td> --}}
+                                @include('admin/user/modal')
+                            </td> --}}
                         </tr>
                     @endforeach
                 </tbody>

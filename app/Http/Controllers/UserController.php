@@ -40,12 +40,15 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'username' => 'required|string|unique:users,username',
             'pegawai_id' => 'required|exists:pegawai,id',
             'nama'     => 'required',
             'email'    => 'required|unique:users,email',
             'role'  => 'required',
             'password' => ['required', 'confirmed', Password::min(8)->mixedCase(),],
         ],[
+            'username.required' => 'Username Harus Diisi',
+            'username.unique' => 'Username Sudah Ada dan Tidak Boleh Sama',
             'nama.required'     => 'Nama Tidak Boleh Kosong',
             'email.required'    => 'Email Tidak Boleh Kosong',
             'email.unique'      => 'Email Sudah Ada',
@@ -98,11 +101,11 @@ class UserController extends Controller
         $user->nama     = $request->nama;
         $user->email    = $request->email;
         $user->role  = $request->role;
-        // if($request->filled('password'))
-        // {
-        //     $user->password = Hash::make($request->password);
-        // }
-        // $user->save();
+        if($request->filled('password'))
+        {
+            $user->password = Hash::make($request->password);
+        }
+        $user->save();
 
         return redirect()->route('user', $user->id)->with('success', 'Data Berhasil Di Edit');
     }

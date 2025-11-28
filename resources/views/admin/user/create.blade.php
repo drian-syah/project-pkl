@@ -105,6 +105,24 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label class="form-label">
+                        <span class="text-danger">*</span> Username
+                    </label>
+                    <input type="text" name="username" class="form-control @error('username') is-invalid @enderror" value="{{ old('username') }}">
+                    @error('username')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">
+                        <span class="text-danger">*</span> Id Pegawai
+                    </label>
+                    <input type="text" name="pegawai_id" class="form-control @error('pegawai_id') is-invalid @enderror" value="{{ old('pegawai_id') }}">
+                    @error('pegawai_id')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">
                         <span class="text-danger">*</span> Nama
                     </label>
                     <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama') }}">
