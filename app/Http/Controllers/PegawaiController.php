@@ -2,40 +2,45 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreUserPegawaiRequest;
+use App\Http\Requests\UpdateUserPegawaiRequest;
+use App\Models\User;
+use App\Models\Bidang;
+use App\Models\Jabatan;
 use App\Models\Pegawai;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreUserPegawaiRequest;
 
 class PegawaiController extends Controller
 {
     public function index()
     {
-        $pegawai = Pegawai::all();
-
-        return view('admin.user.pegawai.index', [
-            'title' => 'Data Pegawai',
-            'pegawai' => $pegawai
-        ]);
+        $data = [
+            'title'    => 'Data Pegawai',
+            'pegawai'  => Pegawai::with('jabatan', 'bidang', 'user')->get(),
+            'menuPegawaiActive' => 'active'
+        ];
+        return view('admin.user.pegawai.index', $data);
     }
 
     public function create()
     {
-        return view('admin.user.pegawai.create', [
-            'title' => 'Tambah Pegawai'
-        ]);
+        $data = [
+            'title'   => 'Tambah Pegawai',
+            'jabatan' => Jabatan::all(),
+            'bidang'  => Bidang::all(),
+            'user'  => User::all(),
+            'menuPegawai' => 'active'
+        ];
+        return view('admin.user.pegawai.create', $data);
     }
 
     public function store(StoreUserPegawaiRequest $request)
     {
-        // $request->validate([
-        //     'nama' => 'required',
-        //     'email' => 'required|email|unique:pegawai,email',
-        //     'jabatan' => 'required'
-        // ]);
         $validated = $request->validated();
+        $user = User::find($validated['user_id']);
         Pegawai::create([
-        'user_id' => null,
-        'nama' => $validated['nama'],
+        'user_id' => $user->id,
+        'nama' => $user->nama,
         'nip' => $validated['nip'],
         'jabatan_id' => $validated['jabatan_id'],
         'bidang_id' => $validated['bidang_id'],
@@ -45,23 +50,39 @@ class PegawaiController extends Controller
     }
 
     public function edit($id)
-    {
-        $pegawai = Pegawai::findOrFail($id);
+{
+    $pegawai = Pegawai::findOrFail($id);
 
-        return view('admin.pegawai.edit', [
-            'title' => 'Edit Pegawai',
-            'pegawai' => $pegawai
-        ]);
-    }
+    $data = [
+        'title'   => 'Edit Pegawai',
+        'pegawai' => $pegawai,
+        'user'   => User::all(),
+        'bidang'  => Bidang::all(),
+        'jabatan' => Jabatan::all(),
+    ];
 
-    public function update(Request $request, $id)
-    {
-        $pegawai = Pegawai::findOrFail($id);
+    return view('admin.user.pegawai.edit', $data);
+}
 
-        $pegawai->update($request->all());
 
-        return redirect()->route('pegawaiIndex')->with('success', 'Pegawai berhasil diperbarui');
-    }
+public function update(UpdateUserPegawaiRequest $request, $id)
+{
+    $validated = $request->validated();
+
+    $pegawai = Pegawai::findOrFail($id);
+
+    $pegawai->update([
+        'user_id'    => $validated['user_id'],
+        'nama'       => $validated['nama'],  // ← pakai nama dari input form
+        'nip'        => $validated['nip'],
+        'jabatan_id' => $validated['jabatan_id'],
+        'bidang_id'  => $validated['bidang_id'],
+    ]);
+
+    return redirect()->route('pegawaiIndex')->with('success', 'Pegawai berhasil diperbarui');
+}
+
+
 
     public function destroy($id)
     {

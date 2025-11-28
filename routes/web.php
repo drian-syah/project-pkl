@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\BidangController;
 use App\Http\Controllers\JabatanController;
+use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\DashboardController;
@@ -14,12 +15,12 @@ use App\Http\Controllers\PembimbingController;
 use App\Http\Controllers\PenempatanController;
 use App\Http\Controllers\AdminUserSiswaController;
 use App\Http\Controllers\AdminTambahSiswaController;
+use App\Http\Controllers\AdminUserPegawaiController;
 use App\Http\Controllers\AdminUserPembimbingController;
 use App\Http\Controllers\AdminPembimbingTugasController;
 use App\Http\Controllers\AdminPenempatanBidangController;
 use App\Http\Controllers\AdminPenempatanJabatanController;
 use App\Http\Controllers\AdminPembimbingPenilaianController;
-use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\IndexPengajuanSiswaAdminController;
 
 Route::get('/', function () {
@@ -91,14 +92,16 @@ Route::middleware('checkLogin')->group(function () {
         Route::resource('users', UserController::class);
 
         // Menu Pegawai
-        // Route::prefix('admin')->middleware(['auth'])->group(function () {
-        Route::get('admin/pegawai/index', [PegawaiController::class, 'index'])->name('pegawaiIndex');
-        Route::get('admin/pegawai/create', [PegawaiController::class, 'create'])->name('pegawaiCreate');
-        Route::post('admin/pegawai/store', [PegawaiController::class, 'store'])->name('pegawaiStore');
-        Route::get('admin/pegawai/{id}/edit', [PegawaiController::class, 'edit'])->name('pegawaiEdit');
-        Route::put('admin/pegawai/{id}/update', [PegawaiController::class, 'update'])->name('pegawaiUpdate');
-        Route::delete('admin/pegawai/{id}/delete', [PegawaiController::class, 'destroy'])->name('pegawaiDestroy');
+
+    Route::get('admin/user/pegawai/index', [PegawaiController::class, 'index'])->name('pegawaiIndex');
+    Route::get('admin/user/pegawai/create', [PegawaiController::class, 'create'])->name('pegawaiCreate');
+    Route::post('admin/user/pegawai/store', [PegawaiController::class, 'store'])->name('pegawaiStore');
+    Route::get('admin/user/pegawai/edit/{id}', [PegawaiController::class, 'edit'])->name('pegawaiEdit');
+    Route::post('admin/user/pegawai/update/{id}', [PegawaiController::class, 'update'])->name('pegawaiUpdate');
+    Route::delete('admin/user/pegawai/delete/{id}', [PegawaiController::class, 'destroy'])->name('pegawaiDestroy');
+
 });
+
 
 
         // pengajuan 

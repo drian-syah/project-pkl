@@ -11,7 +11,7 @@ class UpdateUserPegawaiRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,11 @@ class UpdateUserPegawaiRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'user_id' => ['nullable', 'string', 'exists:users,id'],
+            'nama' => ['required', 'string'],
+            'nip' => ['nullable', 'string', 'unique:pegawai,nip'],
+            'jabatan_id' => ['nullable', 'string', 'exists:jabatans,id'],
+            'bidang_id' => ['nullable', 'string', 'exists:bidangs,id'],
         ];
     }
 }

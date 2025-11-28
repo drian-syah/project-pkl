@@ -24,9 +24,19 @@ class StoreUserPegawaiRequest extends FormRequest
         return [
             'user_id' => ['nullable', 'string', 'exists:users,id'],
             'nama' => ['required', 'string'],
-            'nip' => ['required', 'string'],
-            'jabatan_id' => ['required', 'string'],
-            'bidang_id' => ['required', 'string'],
+            'nip' => ['required', 'string', 'unique:pegawai,nip'],
+            'jabatan_id' => ['required', 'string', 'exists:jabatans,id'],
+            'bidang_id' => ['required', 'string', 'exists:bidangs,id'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return[
+            'nip.required' => 'Nama tidak boleh kosong',
+            'nip.unique' => 'Nama tidak boleh sama',
+            'jabatan_id.required' => 'Jabatan wajib diisi',
+            'bidang_id.required' => 'Bidang wajib diisi',
         ];
     }
 }

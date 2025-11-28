@@ -36,7 +36,7 @@
                         <th>Sekolah</th>
                         <th>Bidang</th>
                         <th>Tanggal Penempatan</th>
-                        <th><i class="fas fa-cog"></i></th>
+                        {{-- <th><i class="fas fa-cog"></i></th> --}}
                     </tr>
                 </thead>
                 <tbody>
@@ -47,7 +47,7 @@
                         <td>{{ $item->pengajuan->sekolah->nama ?? '-' }}</td>
                         <td>{{ $item->bidang->nama_bidang ?? '-' }}</td>
                         <td>{{ $item->created_at}}</td>
-                        <td>
+                        {{-- <td>
                         @php
                                     $countSiswa = \App\Models\SiswaProfil::where('pengajuan_id', $item->id)->count();
                                     @endphp
@@ -58,7 +58,7 @@
                                     data-target="#exampleModalInfo{{ $item->sekolah_id }}">
                                     <i class="fas fa-eye"></i>
                                     </button>
-                        </td>
+                        </td> --}}
                     </tr>
                     @endforeach
                 </tbody>

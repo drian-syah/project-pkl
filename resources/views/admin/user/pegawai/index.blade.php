@@ -1,64 +1,59 @@
-@extends('component.app')
-
+@extends('component/app')
 @section('content')
-
-<div class="card p-4 shadow-sm">
-    <h4>Data Pegawai</h4>
 <div class="card">
     <div class="card-header d-flex flex-wrap justify-content-center justify-content-xl-between">
         <div class="mb-1 mr-2">
             <a href="{{ route('pegawaiCreate') }}" class="btn btn-sm btn-primary">
-                <i class="fas fa-plus mr-2"></i>
-                Tambah Data
+                <i class="fas fa-user-check mr-2"></i>Tambah Data Pegawai
+                
             </a>
         </div>
     </div>
 
-    <table class="table table-bordered table-striped">
-        <thead class="text-center bg-primary text-white">
-            <tr>
-                <th>No</th>
-                <th>Nama</th>
-                <th>Email</th>
-                <th>Jabatan</th>
-                <th>Status</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            @foreach ($pegawai as $key => $row)
-            <tr>
-                <td>{{ $key + 1 }}</td>
-                <td>{{ $row->nama }}</td>
-                <td>{{ $row->email }}</td>
-                <td>{{ $row->jabatan }}</td>
-                <td>
-                    @if ($row->status == 'Aktif')
-                        <span class="badge bg-success">{{ $row->status }}</span>
-                    @else
-                        <span class="badge bg-danger">{{ $row->status }}</span>
-                    @endif
-                </td>
-                <td class="text-center">
-                    <a href="{{ route('pegawai.edit', $row->id) }}" class="btn btn-warning btn-sm">
-                        <i class="fa fa-edit"></i>
-                    </a>
-
-                    <form action="{{ route('pegawai.destroy', $row->id) }}" method="POST" class="d-inline">
-                        @csrf
-                        @method('DELETE')
-
-                        <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin hapus?')">
-                            <i class="fa fa-trash"></i>
-                        </button>
-                    </form>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-
-    </table>
+    <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                    <thead class="bg-primary text-white">
+                        <tr class="text-center">
+                            <th>No</th>
+                            <th>NIP</th>
+                            <th>Nama</th>
+                            <th>Email</th>
+                            <th>Jabatan</th>
+                            <th>Bidang</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($pegawai as $item)
+                            <tr>
+                                <td class="text-center">{{ $loop->iteration }}</td>
+                                <td>{{ $item->nip }}</td>
+                                <td>{{ $item->nama }}</td>
+                                <td class="text-center">{{ $item->user->email ?? '-'}}</td>
+                                <td class="text-center">{{ $item->jabatan->nama_jabatan ?? '-' }}</td>
+                                <td class="text-center">{{ $item->bidang->nama ?? '-' }}</td>
+                                <td class=" text-center justify-content-center mb-3">
+                                    <a href="{{ route('pegawaiEdit', $item->id) }}" class="btn btn-sm btn-warning">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <button class="btn btn-sm btn-info" data-toggle="modal"
+                                        data-target="#exampleModalInfo{{ $item->id }}">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    @if ($item->jabatan_id)
+                                    <button class="btn btn-sm btn-danger " data-toggle="modal"
+                                        data-target="#exampleModal{{ $item->id }}">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                    @endif
+                                    @include('admin.user.pegawai.modal')
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
 </div>
-
 @endsection
