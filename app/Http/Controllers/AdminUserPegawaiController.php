@@ -1,84 +1,63 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\StoreUserPegawaiRequest;
+use App\Http\Controllers\Controller;
 use App\Models\Pegawai;
+use App\Models\Jabatan;
+use App\Models\Bidang;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AdminUserPegawaiController extends Controller
 {
     public function index()
     {
-        $pegawai = Pegawai::with('user')->get();
-
         return view('admin.user.pegawai.index', [
-            'title' => 'Data Pegawai',
-            'pegawai' => $pegawai
+            'title'    => 'Data Pegawai',
+            'pegawai'  => Pegawai::with('jabatan', 'bidang')->get(),
+            'menuPegawai' => 'active'
         ]);
     }
 
     public function create()
     {
         return view('admin.user.pegawai.create', [
-            'title' => 'Tambah Pegawai'
+            'title'   => 'Tambah Pegawai',
+            'jabatan' => Jabatan::all(),
+            'bidang'  => Bidang::all(),
+            'menuPegawai' => 'active'
         ]);
     }
 
-    public function store(StoreUserPegawaiRequest $request)
+    public function store(Request $request)
     {
-        $validated = $request->validated();
+        $request->validate([
+            'nama'        => 'required|string|max:255',
+            'nip'         => 'required|numeric|unique:pegawai,nip',
+            'jabatan_id'  => 'required|exists:jabatan,id',
+            'bidang_id'   => 'required|exists:bidang,id',
+        ]);
 
-        // user_id TIDAK dipakai di sini!
+        // 1. Buat user dulu
+        $user = User::create([
+            'username' => strtolower(str_replace(' ', '', $request->nama)),
+            'nama'     => $request->nama,
+            'email'    => strtolower(str_replace(' ', '', $request->nama)) . '@gmail.com',
+            'password' => Hash::make($request->nip),
+            'role'     => 'pegawai',
+        ]);
+
+        // 2. Simpan data pegawai
         Pegawai::create([
-            'nama'       => $validated['nama'],
-            'nip'        => $validated['nip'],
-            'jabatan_id' => $validated['jabatan_id'],
-            'bidang_id'  => $validated['bidang_id'],
-            'user_id'    => null, // dipastikan null
+            'user_id'     => $user->id,
+            'nama'        => $request->nama,
+            'nip'         => $request->nip,
+            'jabatan_id'  => $request->jabatan_id,
+            'bidang_id'   => $request->bidang_id,
         ]);
 
-        return redirect()->route('pegawaiIndex')->with('success', 'Pegawai berhasil ditambahkan tanpa user');
-    }
-
-    public function edit($id)
-    {
-        $pegawai = Pegawai::findOrFail($id);
-
-        return view('admin.user.pegawai.edit', [
-            'title' => 'Edit Pegawai',
-            'pegawai' => $pegawai
-        ]);
-    }
-
-    public function update(StoreUserPegawaiRequest $request, $id)
-    {
-        $validated = $request->validated();
-
-        $pegawai = Pegawai::findOrFail($id);
-
-        // Tidak menyentuh user_id
-        $pegawai->update([
-            'nama'       => $validated['nama'],
-            'nip'        => $validated['nip'],
-            'jabatan_id' => $validated['jabatan_id'],
-            'bidang_id'  => $validated['bidang_id'],
-        ]);
-
-        return redirect()->route('pegawaiIndex')->with('success', 'Pegawai berhasil diperbarui');
-    }
-
-    public function destroy($id)
-    {
-        $pegawai = Pegawai::findOrFail($id);
-
-        if ($pegawai->user_id !== null) {
-            return redirect()->route('pegawaiIndex')
-                ->with('error', 'Pegawai memiliki akun user, hapus user terlebih dahulu.');
-        }
-
-        $pegawai->delete();
-
-        return redirect()->route('pegawaiIndex')->with('success', 'Pegawai berhasil dihapus');
+        return redirect()->route('pegawaiIndex')->with('success', 'Pegawai berhasil ditambahkan.');
     }
 }

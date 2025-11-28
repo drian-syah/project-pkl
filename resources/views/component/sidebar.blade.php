@@ -40,11 +40,11 @@
                                     <i class="fas fa-user"></i> User
                                 </a>
                             </li>
-                            {{-- <li class="nav-item">
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('pegawaiIndex') }}">
                                     <i class="fas fa-user-tie"></i> Pegawai
                                 </a>
-                            </li> --}}
+                            </li>
                             <li class="nav-item ">
                                 <a class="nav-link" href="{{ route('userSiswa') }}">
                                     <i class="fas fa-user-graduate"></i> Siswa
@@ -169,7 +169,7 @@
                     <a class="nav-link" href="{{ route('pembimbing') }}">
                         <i class="fas fa-fw fa-tasks"></i>
                         <span>Data Tugas</span></a>
-                {{-- </li> --}}
+                </li>
                 {{-- <li class="nav-item {{ $menuSiswaPresensi ?? '' }}">
                         <a class="nav-link" href="{{ route('presensi') }}">
                             <i class="fas fa-user"></i>

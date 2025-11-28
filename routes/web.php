@@ -92,13 +92,22 @@ Route::middleware('checkLogin')->group(function () {
 
         // Menu Pegawai
         // Route::prefix('admin')->middleware(['auth'])->group(function () {
-        Route::get('admin/pegawai/index', [PegawaiController::class, 'index'])->name('pegawaiIndex');
-        Route::get('admin/pegawai/create', [PegawaiController::class, 'create'])->name('pegawaiCreate');
-        Route::post('admin/pegawai/store', [PegawaiController::class, 'store'])->name('pegawaiStore');
-        Route::get('admin/pegawai/{id}/edit', [PegawaiController::class, 'edit'])->name('pegawaiEdit');
-        Route::put('admin/pegawai/{id}/update', [PegawaiController::class, 'update'])->name('pegawaiUpdate');
-        Route::delete('admin/pegawai/{id}/delete', [PegawaiController::class, 'destroy'])->name('pegawaiDestroy');
+        
+
+    Route::get('index', [PegawaiController::class, 'index'])->name('pegawai.index');
+
+    Route::get('create', [PegawaiController::class, 'create'])->name('pegawai.create');
+
+    Route::post('store', [PegawaiController::class, 'store'])->name('pegawai.store');
+
+    Route::get('{id}/edit', [PegawaiController::class, 'edit'])->name('pegawai.edit');
+
+    Route::put('{id}/update', [PegawaiController::class, 'update'])->name('pegawai.update');
+
+    Route::delete('{id}/delete', [PegawaiController::class, 'destroy'])->name('pegawai.destroy');
+
 });
+
 
 
         // pengajuan 
